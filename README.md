@@ -1,1 +1,1 @@
-# Udemy-Like-App
+In collaboration with my colleague STefan Hedesiu we are building a java Application similar to Udemy were clients can buy and attend Courses. All of our Courses have Quizes and Assignments.The clients can rate our courses based on their experience.At first it's going to be a console based aplication with diffrent Types of users like Student and Admin.
