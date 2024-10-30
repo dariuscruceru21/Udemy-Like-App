@@ -4,4 +4,5 @@ One of the main objectives is to lay down the groundwork for all use cases of th
 
 
 
-<img width="1058" alt="Screenshot 2024-10-30 at 08 57 10" src="https://github.com/user-attachments/assets/8a8cc44f-6c59-4c52-b1d4-e15a1578f0aa">
+<img width="1087" alt="Screenshot 2024-10-30 at 09 00 24" src="https://github.com/user-attachments/assets/d1e57cd5-bd8a-4604-afc8-5d8d47ab6b42">
+
