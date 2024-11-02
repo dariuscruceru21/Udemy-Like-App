@@ -1,0 +1,33 @@
+package Models;
+
+public class Forum {
+    private int forumID;
+    private String topic;
+    private String[] topics;
+
+    Forum(int forumID, String topic, String[] topics) {
+        this.forumID = forumID;
+        this.topic = topic;
+        this.topics = topics;
+    }
+
+    public int getForumID() {
+        return this.forumID;
+    }
+
+    public String getTopic() {
+        return this.topic;
+    }
+
+    public String[] getTopics() {
+        return this.topics;
+    }
+
+    public void addPost(Message message){
+        //implementation
+    }
+
+    public void viewMessage(Message message){
+        //implementation
+    }
+}
