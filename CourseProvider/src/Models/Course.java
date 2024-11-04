@@ -1,17 +1,15 @@
 package Models;
 
-import Repository.Identifiable;
-
 import java.text.DateFormat;
 
 public class Course implements Identifiable {
-    private int courseID;
+    private Integer courseID;
     private String courseTitle;
     private String decision;
     private DateFormat startDate;
     private DateFormat endDate;
 
-    Course(int courseID, String courseTitle, String decision, DateFormat startDate, DateFormat endDate) {
+    Course(Integer courseID, String courseTitle, String decision, DateFormat startDate, DateFormat endDate) {
         this.courseID = courseID;
         this.courseTitle = courseTitle;
         this.decision = decision;

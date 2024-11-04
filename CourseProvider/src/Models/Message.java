@@ -1,7 +1,5 @@
 package Models;
 
-import Repository.Identifiable;
-
 public class Message implements Identifiable {
     private int messageID;
     private String message;

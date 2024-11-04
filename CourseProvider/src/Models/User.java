@@ -1,7 +1,5 @@
 package Models;
 
-import Repository.Identifiable;
-
 public abstract class User implements Identifiable {
     private int userID;
     private String userName;
