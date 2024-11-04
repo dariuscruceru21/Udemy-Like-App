@@ -2,42 +2,37 @@ package Repository;
 
 import Models.Identifiable;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
+
 
 public class InMemoryRepository<T extends Identifiable> implements IRepository<T> {
 
     private final Map<Integer, T> dataStore = new HashMap<>();
 
     @Override
-    public T create(T obj) {
-        dataStore.put(obj.getId(), obj);
-        return obj;
+    public void create(T obj) {
+        dataStore.putIfAbsent(obj.getId(), obj);
     }
 
     @Override
-    public Optional<T> read(int id) {
-        return Optional.ofNullable(dataStore.get(id));
+    public T get(Integer id) {
+        return dataStore.get(id);
     }
 
     @Override
-    public Optional<T> update(T obj) {
-        if (dataStore.containsKey(obj.getId())) {
-            dataStore.put(obj.getId(), obj);
-            return Optional.of(obj);
-        }
-        return Optional.empty();
+    public void update(T obj) {
+      dataStore.replace(obj.getId(), obj);
     }
 
     @Override
-    public boolean delete(int id) {
-        return dataStore.remove(id) != null;
+    public void delete(Integer id) {
+        dataStore.remove(id);
     }
 
     @Override
-    public Collection<T> findAll() {
-        return dataStore.values();
+    public List<T> getAll() {
+        return dataStore.values().stream().toList();
     }
 }

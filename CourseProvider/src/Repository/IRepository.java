@@ -14,8 +14,6 @@ public interface IRepository<T extends Identifiable> {
     void create(T obj);
 
 
-
-
     /**
      * Retrieves an object from the repository by its ID.
      *
