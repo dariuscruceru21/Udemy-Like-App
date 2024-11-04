@@ -1,7 +1,5 @@
 package Models;
 
-import Repository.Identifiable;
-
 public class Module implements Identifiable {
     private int moduleID;
     private String moduleTitle;

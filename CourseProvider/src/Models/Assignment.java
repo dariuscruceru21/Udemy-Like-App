@@ -1,7 +1,5 @@
 package Models;
 
-import Repository.Identifiable;
-
 import java.text.DateFormat;
 
 public class Assignment implements Identifiable {

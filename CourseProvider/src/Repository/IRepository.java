@@ -1,40 +1,48 @@
 package Repository;
 
-import java.util.Collection;
-import java.util.Optional;
+import Models.Identifiable;
 
-public interface IRepository<T> {
+import java.util.List;
+
+
+public interface IRepository<T extends Identifiable> {
     /**
      * Adds a new entity to the repository.
      * @param obj The entity to add.
      * @return The added entity.
      */
-    T create(T obj);
+    void create(T obj);
+
+
+
 
     /**
-     * Retrieves an entity by its ID.
-     * @param id The ID of the entity to retrieve.
-     * @return An Optional containing the entity if found, or empty if not found.
+     * Retrieves an object from the repository by its ID.
+     *
+     * @param id The unique identifier of the object to retrieve.
+     * @return The object with the specified ID, or null if not found.
      */
-    Optional<T> read(int id);
+    T get(Integer id);
+
 
     /**
      * Updates an existing entity.
      * @param obj The entity with updated values.
      * @return The updated entity if the update was successful, or empty if not found.
      */
-    Optional<T> update(T obj);
+    void update(T obj);
 
     /**
      * Deletes an entity by its ID.
      * @param id The ID of the entity to delete.
      * @return True if the entity was deleted, false if not found.
      */
-    boolean delete(int id);
+    void delete(Integer id);
 
     /**
-     * Returns all entities in the repository.
-     * @return A Collection of all entities.
+     * Retrieves all objects from the repository.
+     *
+     * @return A list of all objects in the repository.
      */
-    Collection<T> findAll();
+    List<T> getAll();
 }

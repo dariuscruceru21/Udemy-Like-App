@@ -1,7 +1,5 @@
 package Models;
 
-import Repository.Identifiable;
-
 public class Forum implements Identifiable {
     private int forumID;
     private String topic;
