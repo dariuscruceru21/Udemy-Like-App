@@ -1,8 +1,10 @@
 package Models;
 
+import Repository.Identifiable;
+
 import java.text.DateFormat;
 
-public class Assignment {
+public class Assignment implements Identifiable {
     private int assignmentID;
     private String description;
     private DateFormat dueDate;
@@ -13,9 +15,7 @@ public class Assignment {
         this.dueDate = dueDate;
     }
 
-    public int getAssignmentID() {
-        return this.assignmentID;
-    }
+
 
     public String getDescription() {
         return this.description;
@@ -25,4 +25,8 @@ public class Assignment {
         return this.dueDate;
     }
 
+    @Override
+    public int getId() {
+        return this.assignmentID;
+    }
 }

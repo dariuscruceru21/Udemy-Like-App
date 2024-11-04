@@ -1,6 +1,8 @@
 package Models;
 
-public class Forum {
+import Repository.Identifiable;
+
+public class Forum implements Identifiable {
     private int forumID;
     private String topic;
     private String[] topics;
@@ -29,5 +31,10 @@ public class Forum {
 
     public void viewMessage(Message message){
         //implementation
+    }
+
+    @Override
+    public int getId() {
+        return this.forumID;
     }
 }

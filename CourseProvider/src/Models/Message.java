@@ -1,6 +1,8 @@
 package Models;
 
-public class Message {
+import Repository.Identifiable;
+
+public class Message implements Identifiable {
     private int messageID;
     private String message;
     private User sender;
@@ -11,10 +13,6 @@ public class Message {
         this.message = message;
         this.sender = sender;
         this.receiver = receiver;
-    }
-
-    public int getMessageID() {
-        return this.messageID;
     }
 
     public String getMessage() {
@@ -29,4 +27,8 @@ public class Message {
         return this.receiver;
     }
 
+    @Override
+    public int getId() {
+        return this.messageID;
+    }
 }

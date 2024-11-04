@@ -1,8 +1,10 @@
 package Models;
 
+import Repository.Identifiable;
+
 import java.text.DateFormat;
 
-public class Course {
+public class Course implements Identifiable {
     private int courseID;
     private String courseTitle;
     private String decision;
@@ -17,9 +19,7 @@ public class Course {
         this.endDate = endDate;
     }
 
-    public int getCourseID() {
-        return this.courseID;
-    }
+
     public String getCourseTitle() {
         return this.courseTitle;
     }
@@ -33,4 +33,8 @@ public class Course {
         return this.endDate;
     }
 
+    @Override
+    public int getId() {
+        return this.courseID;
+    }
 }

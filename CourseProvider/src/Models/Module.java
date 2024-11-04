@@ -1,6 +1,8 @@
 package Models;
 
-public class Module {
+import Repository.Identifiable;
+
+public class Module implements Identifiable {
     private int moduleID;
     private String moduleTitle;
     private String moduleContent;
@@ -11,9 +13,6 @@ public class Module {
         this.moduleContent = moduleContent;
     }
 
-    public int getModuleID() {
-        return this.moduleID;
-    }
 
     public String getModuleTitle() {
         return this.moduleTitle;
@@ -23,11 +22,16 @@ public class Module {
         return this.moduleContent;
     }
 
-    public void updateModule(){
+    public void updateModule() {
         //implementation
     }
 
-    public void enrollStudent(Student student){
+    public void enrollStudent(Student student) {
         //implementation
+    }
+
+    @Override
+    public int getId() {
+        return this.moduleID;
     }
 }
