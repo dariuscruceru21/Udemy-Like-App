@@ -17,8 +17,8 @@ public class Main {
         studentRepository.create(s2);
 
         // Read
-        studentRepository.read(1).ifPresent(System.out::println);
-        studentRepository.read(2).ifPresent(System.out::println);
+        System.out.println(studentRepository.getAll());
+//        studentRepository.read(2).ifPresent(System.out::println);
 
 
         // Update
@@ -29,6 +29,6 @@ public class Main {
         studentRepository.delete(2);
 
         // List all students
-        studentRepository.findAll().forEach(System.out::println);
+//        studentRepository.findAll().forEach(System.out::println);
     }
 }
