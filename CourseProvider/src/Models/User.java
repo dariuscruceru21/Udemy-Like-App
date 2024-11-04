@@ -1,6 +1,8 @@
 package Models;
 
-public abstract class User {
+import Repository.Identifiable;
+
+public abstract class User implements Identifiable {
     private int userID;
     private String userName;
     private String password;
@@ -13,7 +15,9 @@ public abstract class User {
         this.email = email;
     }
 
-    public int getUserID() {
+
+    @Override
+    public int getId() {
         return this.userID;
     }
 

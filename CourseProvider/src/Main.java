@@ -1,15 +1,34 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import Models.Student;
+import Models.User;
+import Repository.IRepository;
+import Repository.InMemoryRepository;
+
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        IRepository<User> studentRepository = new InMemoryRepository<>();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Student s1 = new Student(1, "Robert", "abc", "@gmail", true);
+        Student s2 = new Student(2, "Paul", "def", "@yahoo", false);
+
+
+        // Create
+        studentRepository.create(s1);
+        studentRepository.create(s2);
+
+        // Read
+        studentRepository.read(1).ifPresent(System.out::println);
+        studentRepository.read(2).ifPresent(System.out::println);
+
+
+        // Update
+        s1 = new Student(1, "Alice Smith", "ghi", "@yahoo", false);
+        studentRepository.update(s1);
+
+        // Delete
+        studentRepository.delete(2);
+
+        // List all students
+        studentRepository.findAll().forEach(System.out::println);
     }
 }
