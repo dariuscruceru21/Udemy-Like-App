@@ -29,7 +29,7 @@ public class Module implements Identifiable {
     }
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return this.moduleID;
     }
 }

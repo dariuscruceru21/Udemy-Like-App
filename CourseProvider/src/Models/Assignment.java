@@ -24,7 +24,7 @@ public class Assignment implements Identifiable {
     }
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return this.assignmentID;
     }
 }

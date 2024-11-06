@@ -15,7 +15,7 @@ public abstract class User implements Identifiable {
 
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return this.userID;
     }
 
