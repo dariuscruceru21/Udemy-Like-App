@@ -8,11 +8,11 @@ public class Course implements Identifiable {
     private String courseTitle;
     private String decision;
     private Integer availableSpots;
-    private DateFormat startDate;
-    private DateFormat endDate;
+    private String  startDate;
+    private String  endDate;
     private List<Student> enrolledStudents;
 
-    Course(Integer courseID, String courseTitle, String decision,Integer availableSpots, DateFormat startDate, DateFormat endDate) {
+    public Course(Integer courseID, String courseTitle, String decision,Integer availableSpots, String  startDate, String  endDate) {
         this.courseID = courseID;
         this.courseTitle = courseTitle;
         this.decision = decision;
@@ -22,20 +22,25 @@ public class Course implements Identifiable {
     }
 
 
+
     public String getCourseTitle() {
         return this.courseTitle;
     }
     public String getDecision() {
         return this.decision;
     }
-    public DateFormat getStartDate() {
+    public String  getStartDate() {
         return this.startDate;
     }
-    public DateFormat getEndDate() {
+    public String  getEndDate() {
         return this.endDate;
     }
     public Integer getAvailableSpots(){return this.availableSpots;}
     public List<Student> getEnrolledStudents(){return this.enrolledStudents;}
+
+    public void setEnrolledStudents(List<Student> enrolledStudents) {
+        this.enrolledStudents = enrolledStudents;
+    }
 
     @Override
     public Integer getId() {
