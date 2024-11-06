@@ -59,10 +59,16 @@ public class Service {
     }
 
     /**
-     * Removes a course from the repository.
+     * Removes a course from the repository and unenrolls every student from the course
      * @param courseId The ID of the course to remove.
      */
     public void removeCourse(Integer courseId) {
+
+        courseIRepository.get(courseId).getEnrolledStudents().forEach(student -> {
+            student.getCourses().removeIf(course -> course.getId().equals(courseId));
+            studentIRepository.update(student);
+        });
+        courseIRepository.delete(courseId);
 
     }
 
