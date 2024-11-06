@@ -16,23 +16,14 @@ public class Enrolled implements Identifiable {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
-    }
 
     public Integer getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
-    }
 }
