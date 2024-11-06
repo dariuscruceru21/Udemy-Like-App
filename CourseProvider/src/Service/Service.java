@@ -73,11 +73,16 @@ public class Service {
     }
 
     /**
-     * Removes a student from the repository.
+     * Removes a student from the repository and unenrolls him from all courses
      * @param studentId The ID of the student to remove.
      */
     public void removeStudent(Integer studentId) {
 
+        studentIRepository.get(studentId).getCourses().forEach(course -> {
+            course.getEnrolledStudents().removeIf(student -> student.getId().equals(studentId));
+            courseIRepository.update(course);
+        });
+        studentIRepository.delete(studentId);
     }
 
     /**
@@ -85,7 +90,7 @@ public class Service {
      * @return A list of all courses.
      */
     public List<Course> getAllCourses() {
-        return null;
+        return courseIRepository.getAll();
     }
 
     /**
@@ -93,7 +98,7 @@ public class Service {
      * @return A list of all students.
      */
     public List<Student> getAllStudents() {
-        return null;
+        return studentIRepository.getAll();
     }
 
     /**
