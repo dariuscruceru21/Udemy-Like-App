@@ -32,7 +32,7 @@ public class Forum implements Identifiable {
     }
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return this.forumID;
     }
 }
