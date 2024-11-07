@@ -157,7 +157,12 @@ public class Service {
      * @return The course object with detailed information.
      */
     public Course getCourseInfo(Integer courseId) {
-        return null;
+        Course course = courseIRepository.get(courseId);
+
+        if(course != null)
+            return course;
+        else
+            return null;
     }
 
     /**
