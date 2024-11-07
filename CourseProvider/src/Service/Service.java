@@ -36,9 +36,9 @@ public class Service {
      * @param courseId The ID of the course.
      * @return A list of students enrolled in the specified course.
      */
-    public List<Student> getAssignedInstructor(Integer courseId) {
+    public Instructor getAssignedInstructor(Integer courseId) {
         Course course = courseIRepository.get(courseId);
-        return null; //implementation needed
+        return course.getInstructor();
     }
 
     /**
@@ -69,7 +69,11 @@ public class Service {
         Instructor instructor = instructorIRepository.get(instructorId);
         Course course = courseIRepository.get(courseId);
 
-        //implementation lacking, the course class must be changed so it keeps account of the instructor that teaches
+        course.setInstructor(instructor);
+        instructor.getCourses().add(course);
+
+        instructorIRepository.update(instructor);
+        courseIRepository.update(course);
     }
 
     /**
@@ -205,6 +209,17 @@ public class Service {
 
         //check if the instructor is assigned to the course
         //needs implementation after the update of the course class
+        if (course.getInstructor() == instructor) {
+            //remove instructor from course
+            course.setInstructor(null);
+
+            //remove course from students list
+            instructor.getCourses().remove(course);
+
+            //update the repositories
+            courseIRepository.update(course);
+            instructorIRepository.update(instructor);
+        }
     }
 
     /**

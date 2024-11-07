@@ -11,14 +11,16 @@ public class Course implements Identifiable {
     private String  startDate;
     private String  endDate;
     private List<Student> enrolledStudents;
+    private Instructor instructor;
 
-    public Course(Integer courseID, String courseTitle, String decision,Integer availableSpots, String  startDate, String  endDate) {
+    public Course(Integer courseID, String courseTitle, String decision,Integer availableSpots, String  startDate, String  endDate, Instructor instructor) {
         this.courseID = courseID;
         this.courseTitle = courseTitle;
         this.decision = decision;
         this.availableSpots = availableSpots;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.instructor = instructor;
     }
 
 
@@ -38,8 +40,16 @@ public class Course implements Identifiable {
     public Integer getAvailableSpots(){return this.availableSpots;}
     public List<Student> getEnrolledStudents(){return this.enrolledStudents;}
 
+    public Instructor getInstructor() {
+        return this.instructor;
+    }
+
     public void setEnrolledStudents(List<Student> enrolledStudents) {
         this.enrolledStudents = enrolledStudents;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 
     @Override
