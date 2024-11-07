@@ -18,6 +18,7 @@ public class Service {
 
     /**
      * Retrieves a list of all students enrolled in a specific course.
+     *
      * @param courseId The ID of the course.
      * @return A list of students enrolled in the specified course.
      */
@@ -28,7 +29,8 @@ public class Service {
 
     /**
      * Enrolls a student in a course if there are available spots.
-     * @param studId The ID of the student to enroll.
+     *
+     * @param studId   The ID of the student to enroll.
      * @param courseId The ID of the course.
      */
     public void enroll(Integer studId, Integer courseId) {
@@ -45,6 +47,7 @@ public class Service {
 
     /**
      * Adds a new course to the repository.
+     *
      * @param course The course to add.
      */
     public void addCourse(Course course) {
@@ -53,6 +56,7 @@ public class Service {
 
     /**
      * Adds a new student to the repository.
+     *
      * @param student The student to add.
      */
     public void addStudent(Student student) {
@@ -61,6 +65,7 @@ public class Service {
 
     /**
      * Removes a course from the repository and unenrolls every student from the course
+     *
      * @param courseId The ID of the course to remove.
      */
     public void removeCourse(Integer courseId) {
@@ -75,6 +80,7 @@ public class Service {
 
     /**
      * Removes a student from the repository and unenrolls him from all courses
+     *
      * @param studentId The ID of the student to remove.
      */
     public void removeStudent(Integer studentId) {
@@ -88,6 +94,7 @@ public class Service {
 
     /**
      * Retrieves a list of all courses.
+     *
      * @return A list of all courses.
      */
     public List<Course> getAllCourses() {
@@ -96,6 +103,7 @@ public class Service {
 
     /**
      * Retrieves a list of all students.
+     *
      * @return A list of all students.
      */
     public List<Student> getAllStudents() {
@@ -104,15 +112,16 @@ public class Service {
 
     /**
      * Unenrolls a student from a specific course.
+     *
      * @param studentId The ID of the student to unenroll.
-     * @param courseId The ID of the course.
+     * @param courseId  The ID of the course.
      */
     public void unenroll(Integer studentId, Integer courseId) {
         Student student = studentIRepository.get(studentId);
         Course course = courseIRepository.get(courseId);
 
         //check if the student is enrolled in the course
-        if(course.getEnrolledStudents().contains(student)){
+        if (course.getEnrolledStudents().contains(student)) {
             //remove student from course
             course.getEnrolledStudents().remove(student);
 
@@ -127,14 +136,15 @@ public class Service {
 
     /**
      * Retrieves all courses a student is enrolled in.
+     *
      * @param studentId The ID of the student.
      * @return A list of courses the student is enrolled in.
      */
     public List<Course> getCoursesByStudent(Integer studentId) {
-            Student student = studentIRepository.get(studentId);
+        Student student = studentIRepository.get(studentId);
 
-            //check if student exists
-        if(student != null)
+        //check if student exists
+        if (student != null)
             return student.getCourses();
         else
             return new ArrayList<>();
@@ -142,6 +152,7 @@ public class Service {
 
     /**
      * Retrieves detailed information about a course.
+     *
      * @param courseId The ID of the course.
      * @return The course object with detailed information.
      */
@@ -151,18 +162,32 @@ public class Service {
 
     /**
      * Retrieves detailed information about a student.
+     *
      * @param studentId The ID of the student.
      * @return The student object with detailed information.
      */
     public Student getStudentInfo(Integer studentId) {
-        return null;
+
+        Student student = studentIRepository.get(studentId);
+
+        //check for students existence
+        if(student != null)
+            return student;
+        else
+            return null;
     }
 
     /**
      * Updates information for an already existing student.
+     *
      * @param student the instance of the student.
      */
     public void updateStudent(Student student) {
 
+        //check if student exists
+        if(studentIRepository.get(student.getId()) != null)
+            studentIRepository.update(student);
+        else
+            throw new IllegalArgumentException("Student with id " + student.getId() + " does not exist");
     }
 }
