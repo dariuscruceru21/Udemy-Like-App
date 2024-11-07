@@ -4,6 +4,7 @@ import Models.Course;
 import Models.Student;
 import Repository.IRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Service {
@@ -107,7 +108,21 @@ public class Service {
      * @param courseId The ID of the course.
      */
     public void unenroll(Integer studentId, Integer courseId) {
+        Student student = studentIRepository.get(studentId);
+        Course course = courseIRepository.get(courseId);
 
+        //check if the student is enrolled in the course
+        if(course.getEnrolledStudents().contains(student)){
+            //remove student from course
+            course.getEnrolledStudents().remove(student);
+
+            //remove course from students list
+            student.getCourses().remove(course);
+
+            //update the repositories
+            courseIRepository.update(course);
+            studentIRepository.update(student);
+        }
     }
 
     /**
@@ -116,7 +131,13 @@ public class Service {
      * @return A list of courses the student is enrolled in.
      */
     public List<Course> getCoursesByStudent(Integer studentId) {
-        return null;
+            Student student = studentIRepository.get(studentId);
+
+            //check if student exists
+        if(student != null)
+            return student.getCourses();
+        else
+            return new ArrayList<>();
     }
 
     /**
