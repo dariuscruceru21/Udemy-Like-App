@@ -1,6 +1,7 @@
 package Service;
 
 import Models.Course;
+import Models.Instructor;
 import Models.Student;
 import Repository.IRepository;
 
@@ -10,10 +11,12 @@ import java.util.List;
 public class Service {
     private final IRepository<Course> courseIRepository;
     private final IRepository<Student> studentIRepository;
+    private final IRepository<Instructor> instructorIRepository;
 
-    public Service(IRepository<Course> courseIRepository, IRepository<Student> studentIRepository) {
+    public Service(IRepository<Course> courseIRepository, IRepository<Student> studentIRepository, IRepository<Instructor> instructorIRepository) {
         this.courseIRepository = courseIRepository;
         this.studentIRepository = studentIRepository;
+        this.instructorIRepository = instructorIRepository;
     }
 
     /**
@@ -25,6 +28,17 @@ public class Service {
     public List<Student> getEnrolledStudents(Integer courseId) {
         Course course = courseIRepository.get(courseId);
         return course.getEnrolledStudents();
+    }
+
+    /**
+     * Retrieves the instructor that teaches a specific course.
+     *
+     * @param courseId The ID of the course.
+     * @return A list of students enrolled in the specified course.
+     */
+    public List<Student> getAssignedInstructor(Integer courseId) {
+        Course course = courseIRepository.get(courseId);
+        return null; //implementation needed
     }
 
     /**
@@ -46,6 +60,19 @@ public class Service {
     }
 
     /**
+     * Assigns a instructor to teach a course, only possible if the course doesn't have a teacher.
+     *
+     * @param instructorId   The ID of the student to enroll.
+     * @param courseId The ID of the course.
+     */
+    public void assignInstructor(Integer instructorId, Integer courseId) {
+        Instructor instructor = instructorIRepository.get(instructorId);
+        Course course = courseIRepository.get(courseId);
+
+        //implementation lacking, the course class must be changed so it keeps account of the instructor that teaches
+    }
+
+    /**
      * Adds a new course to the repository.
      *
      * @param course The course to add.
@@ -61,6 +88,15 @@ public class Service {
      */
     public void addStudent(Student student) {
         studentIRepository.create(student);
+    }
+
+    /**
+     * Adds a new instructor to the repository.
+     *
+     * @param instructor The instructor to add.
+     */
+    public void addInstructor(Instructor instructor) {
+        instructorIRepository.create(instructor);
     }
 
     /**
@@ -93,6 +129,20 @@ public class Service {
     }
 
     /**
+     * Removes a instructor from the repository and unenrolls him from all courses
+     *
+     * @param instructorId The ID of the instructor to remove.
+     */
+    public void removeInstructor(Integer instructorId) {
+
+        studentIRepository.get(instructorId).getCourses().forEach(course -> {
+            course.getEnrolledStudents().removeIf(student -> student.getId().equals(instructorId));  //aici am dubii
+            courseIRepository.update(course);
+        });
+        studentIRepository.delete(instructorId);
+    }
+
+    /**
      * Retrieves a list of all courses.
      *
      * @return A list of all courses.
@@ -108,6 +158,15 @@ public class Service {
      */
     public List<Student> getAllStudents() {
         return studentIRepository.getAll();
+    }
+
+    /**
+     * Retrieves a list of all instructors.
+     *
+     * @return A list of all instructors.
+     */
+    public List<Instructor> getAllInstructors() {
+        return instructorIRepository.getAll();
     }
 
     /**
@@ -135,6 +194,20 @@ public class Service {
     }
 
     /**
+     * Unassign a instructor from a specific course.
+     *
+     * @param instructorId The ID of the student to unenroll.
+     * @param courseId  The ID of the course.
+     */
+    public void unAssignInstructor(Integer instructorId, Integer courseId) {
+        Instructor instructor = instructorIRepository.get(instructorId);
+        Course course = courseIRepository.get(courseId);
+
+        //check if the instructor is assigned to the course
+        //needs implementation after the update of the course class
+    }
+
+    /**
      * Retrieves all courses a student is enrolled in.
      *
      * @param studentId The ID of the student.
@@ -146,6 +219,22 @@ public class Service {
         //check if student exists
         if (student != null)
             return student.getCourses();
+        else
+            return new ArrayList<>();
+    }
+
+    /**
+     * Retrieves all courses a instructor teaches in.
+     *
+     * @param instructorId The ID of the instructor.
+     * @return A list of courses the instructor teaches in.
+     */
+    public List<Course> getCoursesByInstructor(Integer instructorId) {
+        Instructor instructor = instructorIRepository.get(instructorId);
+
+        //check if instructor exists
+        if (instructor != null)
+            return instructor.getCourses();
         else
             return new ArrayList<>();
     }
@@ -183,6 +272,23 @@ public class Service {
     }
 
     /**
+     * Retrieves detailed information about a student.
+     *
+     * @param instructorId The ID of the student.
+     * @return The student object with detailed information.
+     */
+    public Instructor getInstructorInfo(Integer instructorId) {
+
+        Instructor instructor = instructorIRepository.get(instructorId);
+
+        //check for students existence
+        if(instructor != null)
+            return instructor;
+        else
+            return null;
+    }
+
+    /**
      * Updates information for an already existing student.
      *
      * @param student the instance of the student.
@@ -194,5 +300,19 @@ public class Service {
             studentIRepository.update(student);
         else
             throw new IllegalArgumentException("Student with id " + student.getId() + " does not exist");
+    }
+
+    /**
+     * Updates information for an already existing instructor.
+     *
+     * @param instructor the instance of the student.
+     */
+    public void updateInstructor(Instructor instructor) {
+
+        //check if student exists
+        if(instructorIRepository.get(instructor.getId()) != null)
+            instructorIRepository.update(instructor);
+        else
+            throw new IllegalArgumentException("Student with id " + instructor.getId() + " does not exist");
     }
 }

@@ -1,8 +1,11 @@
 package Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Instructor extends User {
     private String department;
-    private Course[] courses;
+    private List<Course> courses;
 
     Instructor(int userID, String userName, String password, String email) {
         super(userID, userName, password, email);
@@ -12,7 +15,7 @@ public class Instructor extends User {
         return this.department;
     }
 
-    public Course[] getCourses() {
+    public List<Course> getCourses() {
         return this.courses;
     }
 
