@@ -28,6 +28,7 @@ public class Assignment implements Identifiable {
     }
 
 
+
     public void setAssignmentID(int assignmentID) {
         this.assignmentID = assignmentID;
     }
@@ -59,5 +60,16 @@ public class Assignment implements Identifiable {
     @Override
     public Integer getId() {
         return this.assignmentID;
+    }
+
+    @Override
+    public String toString() {
+        return "Assignment{" +
+                "assignmentID=" + assignmentID +
+                ", description='" + description + '\'' +
+                ", dueDate='" + dueDate + '\'' +
+                ", quizzes=" + quizzes +
+                ", score=" + score +
+                '}';
     }
 }

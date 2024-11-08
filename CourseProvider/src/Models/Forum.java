@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.Arrays;
+
 public class Forum implements Identifiable {
     private int forumID;
     private String topic;
@@ -34,5 +36,14 @@ public class Forum implements Identifiable {
     @Override
     public Integer getId() {
         return this.forumID;
+    }
+
+    @Override
+    public String toString() {
+        return "Forum{" +
+                "forumID=" + forumID +
+                ", topic='" + topic + '\'' +
+                ", topics=" + Arrays.toString(topics) +
+                '}';
     }
 }

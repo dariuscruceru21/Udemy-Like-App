@@ -6,11 +6,13 @@ public class Admin extends User{
         super(userID, userName, password, email);
     }
 
-    public void manageUsers(){
-        //implementation
-    }
 
-    public void manageCourses(){
-        //implementation
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "userID=" + getId()+
+                ", userName='" + getUserName() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                '}';
     }
 }
