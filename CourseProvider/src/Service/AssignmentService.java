@@ -141,5 +141,19 @@ public class AssignmentService {
         scanner.close();
     }
 
+    public List<Module> getModulesFromCourse(Integer courseId){
+        Course course = courseIRepository.get(courseId);
+        return course.getModules();
+    }
+
+    public List<Assignment> getAssignmentsFromModule(Integer moduleId){
+        Module module = moduleIRepository.get(moduleId);
+        return module.getAssignments();
+    }
+
+    public List<Quiz> getQuizFromAssignment(Integer assignmentId){
+        Assignment assignment = assignmentIRepository.get(assignmentId);
+        return assignment.getQuizzes();
+    }
 
 }

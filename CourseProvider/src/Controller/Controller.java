@@ -1,6 +1,7 @@
 package Controller;
 
 import Models.Course;
+import Models.Instructor;
 import Models.Student;
 import Service.CoursesUserService;
 
@@ -38,6 +39,36 @@ public class Controller {
     }
 
     /**
+     * Assigns an instructor to a specified course.
+     * @param instructorId The ID of the instructor.
+     * @param courseId The ID of the course.
+     * @return A success message if the assignment is successful.
+     */
+    public String assignInstructorToCourse(Integer instructorId, Integer courseId) {
+        try {
+            coursesUserService.assignInstructor(instructorId, courseId);
+            return "Instructor assigned successfully.";
+        } catch (Exception e) {
+            return "Instructor assignment failed: " + e.getMessage();
+        }
+    }
+
+    /**
+     * Unassigns an instructor from a specific course.
+     * @param instructorId The ID of the instructor.
+     * @param courseId The ID of the course.
+     * @return A success message if unassignment is successful.
+     */
+    public String unassignInstructorFromCourse(Integer instructorId, Integer courseId) {
+        try {
+            coursesUserService.unAssignInstructor(instructorId, courseId);
+            return "Instructor unassigned successfully.";
+        } catch (Exception e) {
+            return "Instructor unassignment failed: " + e.getMessage();
+        }
+    }
+
+    /**
      * Adds a new course to the system.
      * @param course The course to add.
      * @return A success message after adding the course.
@@ -55,6 +86,16 @@ public class Controller {
     public String addStudent(Student student) {
         coursesUserService.addStudent(student);
         return "Student added successfully.";
+    }
+
+    /**
+     * Adds a new instructor to the system.
+     * @param instructor The instructor to add.
+     * @return A success message after adding the instructor.
+     */
+    public String addInstructor(Instructor instructor) {
+        coursesUserService.addInstructor(instructor);
+        return "Instructor added successfully.";
     }
 
     /**
@@ -78,6 +119,16 @@ public class Controller {
     }
 
     /**
+     * Removes an instructor and unassigns them from all courses.
+     * @param instructorId The ID of the instructor to remove.
+     * @return A success message after removing the instructor.
+     */
+    public String removeInstructor(Integer instructorId) {
+        coursesUserService.removeInstructor(instructorId);
+        return "Instructor removed successfully.";
+    }
+
+    /**
      * Retrieves a list of all courses in the system.
      * @return A list of all courses.
      */
@@ -91,6 +142,14 @@ public class Controller {
      */
     public List<Student> getAllStudents() {
         return coursesUserService.getAllStudents();
+    }
+
+    /**
+     * Retrieves a list of all instructors in the system.
+     * @return A list of all instructors.
+     */
+    public List<Instructor> getAllInstructors() {
+        return coursesUserService.getAllInstructors();
     }
 
     /**
@@ -114,6 +173,15 @@ public class Controller {
     }
 
     /**
+     * Retrieves all courses an instructor teaches.
+     * @param instructorId The ID of the instructor.
+     * @return A list of courses the instructor teaches.
+     */
+    public List<Course> getCoursesByInstructor(Integer instructorId) {
+        return coursesUserService.getCoursesByInstructor(instructorId);
+    }
+
+    /**
      * Retrieves detailed information about a specific course.
      * @param courseId The ID of the course.
      * @return The course object containing detailed information.
@@ -132,6 +200,15 @@ public class Controller {
     }
 
     /**
+     * Retrieves detailed information about a specific instructor.
+     * @param instructorId The ID of the instructor.
+     * @return The instructor object containing detailed information.
+     */
+    public Instructor getInstructorInfo(Integer instructorId) {
+        return coursesUserService.getInstructorInfo(instructorId);
+    }
+
+    /**
      * Updates information for an existing student.
      * @param student The student object with updated information.
      * @return A success message if the update is successful.
@@ -144,5 +221,27 @@ public class Controller {
             return "Update failed: " + e.getMessage();
         }
     }
-}
 
+    /**
+     * Updates information for an existing instructor.
+     * @param instructor The instructor object with updated information.
+     * @return A success message if the update is successful.
+     */
+    public String updateInstructor(Instructor instructor) {
+        try {
+            coursesUserService.updateInstructor(instructor);
+            return "Instructor updated successfully.";
+        } catch (IllegalArgumentException e) {
+            return "Update failed: " + e.getMessage();
+        }
+    }
+
+    /**
+     * Retrieves the instructor assigned to a specific course.
+     * @param courseId The ID of the course.
+     * @return The instructor assigned to the course.
+     */
+    public Instructor getAssignedInstructor(Integer courseId) {
+        return coursesUserService.getAssignedInstructor(courseId);
+    }
+}
