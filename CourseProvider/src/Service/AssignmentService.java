@@ -69,5 +69,50 @@ public class AssignmentService {
             throw new IllegalArgumentException("Assignment with id " + assignment.getId() + " does not exist");
     }
 
+    /**
+     * Removes a module from a specific course.
+     * @param courseId ID of the course.
+     * @param moduleId The id of the module to remove.
+     */
+    public void removeModuleFromCourse(Integer courseId, Integer moduleId){
+        Course course =courseIRepository.get(courseId);
+        Module moduleToRemove = moduleIRepository.get(moduleId);
+        if(course != null && moduleToRemove != null){
+            course.getModules().remove(moduleToRemove);
+            courseIRepository.update(course);
+        }else
+            throw new IllegalArgumentException("Course with id " + course.getId() + " does not exist");
+    }
+
+    /**
+     * Removes a assignment from a specific module.
+     * @param moduleId ID of the module.
+     * @param assignmentId The id of the assignment to remove.
+     */
+    public void removeAssignmentFromModule(Integer moduleId, Integer assignmentId){
+        Module module =moduleIRepository.get(moduleId);
+        Assignment assignmentToRemove = assignmentIRepository.get(assignmentId);
+        if(module != null && assignmentToRemove != null){
+            module.getAssignments().remove(assignmentToRemove);
+            moduleIRepository.update(module);
+        }else
+            throw new IllegalArgumentException("Module with id " + module.getId() + " does not exist");
+    }
+
+    /**
+     * Removes a quiz from a specific assignment.
+     * @param assignmentId ID of the assignment.
+     * @param quizId The id of the quiz to remove.
+     */
+    public void removeQuizFromAssignment(Integer assignmentId, Integer quizId){
+        Assignment assignment = assignmentIRepository.get(assignmentId);
+        Quiz quizToRemove = quizIRepository.get(quizId);
+        if(assignment != null && quizToRemove != null){
+            assignment.getQuizzes().remove(quizToRemove);
+            assignmentIRepository.update(assignment);
+        }else
+            throw new IllegalArgumentException("Assignment with id " + assignment.getId() + " does not exist");
+    }
+
 
 }
