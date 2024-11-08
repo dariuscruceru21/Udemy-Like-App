@@ -87,8 +87,25 @@ public class Course implements Identifiable {
         this.modules = modules;
     }
 
+
+
     @Override
     public Integer getId() {
         return this.courseID;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseID=" + courseID +
+                ", courseTitle='" + courseTitle + '\'' +
+                ", decision='" + decision + '\'' +
+                ", availableSpots=" + availableSpots +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", enrolledStudents=" + enrolledStudents +
+                ", modules=" + modules +
+                ", instructor=" + instructor +
+                '}';
     }
 }
