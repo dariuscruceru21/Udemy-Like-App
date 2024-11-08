@@ -25,9 +25,6 @@ public class Assignment implements Identifiable {
         return this.dueDate;
     }
 
-    public int getAssignmentID() {
-        return assignmentID;
-    }
 
     public void setAssignmentID(int assignmentID) {
         this.assignmentID = assignmentID;
