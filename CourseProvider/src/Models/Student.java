@@ -24,4 +24,15 @@ public class Student extends User {
         return assignment;
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "StudentId=" + getId() +
+                "StudentName=" + getUserName() +
+                "StudentPassword=" + getPassword() +
+                "StudentEmail=" + getEmail() +
+                "enrolledCourse=" + enrolledCourse +
+                ", courses=" + courses +
+                '}';
+    }
 }

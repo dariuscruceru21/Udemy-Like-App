@@ -29,4 +29,14 @@ public class Message implements Identifiable {
     public Integer getId() {
         return this.messageID;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "messageID=" + messageID +
+                ", message='" + message + '\'' +
+                ", sender=" + sender +
+                ", receiver=" + receiver +
+                '}';
+    }
 }

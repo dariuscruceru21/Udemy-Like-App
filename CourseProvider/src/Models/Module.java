@@ -59,4 +59,14 @@ public class Module implements Identifiable {
     public Integer getId() {
         return this.moduleID;
     }
+
+    @Override
+    public String toString() {
+        return "Module{" +
+                "moduleID=" + moduleID +
+                ", moduleTitle='" + moduleTitle + '\'' +
+                ", moduleContent='" + moduleContent + '\'' +
+                ", assignments=" + assignments +
+                '}';
+    }
 }

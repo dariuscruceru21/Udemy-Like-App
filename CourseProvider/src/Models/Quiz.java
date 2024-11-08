@@ -42,5 +42,13 @@ public class Quiz implements Identifiable{
         return this.correctAnswear;
     }
 
-
+    @Override
+    public String toString() {
+        return "Quiz{" +
+                "quizId=" + quizId +
+                ", title='" + title + '\'' +
+                ", contents='" + contents + '\'' +
+                ", correctAnswear=" + correctAnswear +
+                '}';
+    }
 }
