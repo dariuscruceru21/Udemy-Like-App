@@ -7,10 +7,10 @@ import Service.CoursesUserService;
 
 import java.util.List;
 
-public class Controller {
+public class ControllerCoursesUser {
     private final CoursesUserService coursesUserService;
 
-    public Controller(CoursesUserService coursesUserService) {
+    public ControllerCoursesUser(CoursesUserService coursesUserService) {
         this.coursesUserService = coursesUserService;
     }
 
