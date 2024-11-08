@@ -6,13 +6,15 @@ import java.util.List;
 public class Assignment implements Identifiable {
     private int assignmentID;
     private String description;
-    private DateFormat dueDate;
+    private String dueDate;
     private List<Quiz> quizzes;
+    private Integer score;
 
-    Assignment(int assignmentID, String description, DateFormat dueDate) {
+    public Assignment(int assignmentID, String description, String  dueDate,Integer score) {
         this.assignmentID = assignmentID;
         this.description = description;
         this.dueDate = dueDate;
+        this.score = score;
     }
 
 
@@ -21,7 +23,7 @@ public class Assignment implements Identifiable {
         return this.description;
     }
 
-    public DateFormat getDueDate() {
+    public String getDueDate() {
         return this.dueDate;
     }
 
@@ -34,7 +36,7 @@ public class Assignment implements Identifiable {
         this.description = description;
     }
 
-    public void setDueDate(DateFormat dueDate) {
+    public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -44,6 +46,14 @@ public class Assignment implements Identifiable {
 
     public void setQuizzes(List<Quiz> quizzes) {
         this.quizzes = quizzes;
+    }
+
+    public Integer getScore(){
+        return this.score;
+    }
+
+    public void setScore(Integer score){
+        this.score = score;
     }
 
     @Override

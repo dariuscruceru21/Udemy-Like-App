@@ -6,6 +6,8 @@ import Repository.IRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 
 public class AssignmentService {
     private final IRepository<Course> courseIRepository;
@@ -112,6 +114,31 @@ public class AssignmentService {
             assignmentIRepository.update(assignment);
         }else
             throw new IllegalArgumentException("Assignment with id " + assignment.getId() + " does not exist");
+    }
+
+
+
+    public void takeAssignmentQuizz(Integer assignmentId){
+        Assignment assignment = assignmentIRepository.get(assignmentId);
+        Scanner scanner = new Scanner(System.in);
+
+
+        //Itterate over Quizes
+        for(Quiz quiz : assignment.getQuizzes()){
+            System.out.println(quiz.getContents());
+            System.out.println("Your answer:");
+            int answer = scanner.nextInt();
+
+            if(answer == quiz.getAnswer()){
+                System.out.println("Correct!\n");
+                assignment.setScore(assignment.getScore() + 1);
+            }else
+                System.out.println("Wrong answer! The answer was" + quiz.getAnswer() + "\n");
+
+        }
+
+        System.out.println("You scored " + assignment.getScore());
+        scanner.close();
     }
 
 

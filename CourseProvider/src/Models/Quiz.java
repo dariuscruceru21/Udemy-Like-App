@@ -4,15 +4,15 @@ public class Quiz implements Identifiable{
     private Integer quizId;
     private String title;
     private String contents;
-    private Double grade;
-    private boolean status;
+    private Integer correctAnswear;
 
-    public Quiz(Integer quizId, String title, String contents, Double grade, boolean status) {
+
+    public Quiz(Integer quizId, String title, String contents,Integer correctAnswear) {
         this.quizId = quizId;
         this.title = title;
         this.contents = contents;
-        this.grade = grade;
-        this.status = status;
+        this.correctAnswear = correctAnswear;
+
     }
 
     @Override
@@ -36,20 +36,10 @@ public class Quiz implements Identifiable{
         this.contents = contents;
     }
 
-    public Double getGrade() {
-        return grade;
-    }
 
-    public void setGrade(Double grade) {
-        this.grade = grade;
-    }
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public Integer getAnswer(){
+        return this.correctAnswear;
     }
 
 

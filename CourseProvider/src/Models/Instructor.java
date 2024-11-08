@@ -7,7 +7,7 @@ public class Instructor extends User {
     private String department;
     private List<Course> courses;
 
-    Instructor(int userID, String userName, String password, String email) {
+    public Instructor(int userID, String userName, String password, String email) {
         super(userID, userName, password, email);
     }
 
