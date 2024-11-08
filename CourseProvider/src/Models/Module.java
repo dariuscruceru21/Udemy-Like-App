@@ -1,9 +1,12 @@
 package Models;
 
+import java.util.List;
+
 public class Module implements Identifiable {
     private int moduleID;
     private String moduleTitle;
     private String moduleContent;
+    private List<Assignment> assignments;
 
     Module(int moduleID, String moduleTitle, String moduleContent) {
         this.moduleID = moduleID;
@@ -26,6 +29,30 @@ public class Module implements Identifiable {
 
     public void enrollStudent(Student student) {
         //implementation
+    }
+
+    public int getModuleID() {
+        return moduleID;
+    }
+
+    public void setModuleID(int moduleID) {
+        this.moduleID = moduleID;
+    }
+
+    public void setModuleTitle(String moduleTitle) {
+        this.moduleTitle = moduleTitle;
+    }
+
+    public void setModuleContent(String moduleContent) {
+        this.moduleContent = moduleContent;
+    }
+
+    public List<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(List<Assignment> assignments) {
+        this.assignments = assignments;
     }
 
     @Override

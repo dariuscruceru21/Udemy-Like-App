@@ -8,12 +8,12 @@ import Repository.IRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Service {
+public class CoursesUserService {
     private final IRepository<Course> courseIRepository;
     private final IRepository<Student> studentIRepository;
     private final IRepository<Instructor> instructorIRepository;
 
-    public Service(IRepository<Course> courseIRepository, IRepository<Student> studentIRepository, IRepository<Instructor> instructorIRepository) {
+    public CoursesUserService(IRepository<Course> courseIRepository, IRepository<Student> studentIRepository, IRepository<Instructor> instructorIRepository) {
         this.courseIRepository = courseIRepository;
         this.studentIRepository = studentIRepository;
         this.instructorIRepository = instructorIRepository;

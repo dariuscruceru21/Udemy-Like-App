@@ -2,15 +2,15 @@ package Controller;
 
 import Models.Course;
 import Models.Student;
-import Service.Service;
+import Service.CoursesUserService;
 
 import java.util.List;
 
 public class Controller {
-    private final Service service;
+    private final CoursesUserService coursesUserService;
 
-    public Controller(Service service) {
-        this.service = service;
+    public Controller(CoursesUserService coursesUserService) {
+        this.coursesUserService = coursesUserService;
     }
 
     /**
@@ -19,7 +19,7 @@ public class Controller {
      * @return A list of students enrolled in the course.
      */
     public List<Student> getEnrolledStudents(Integer courseId) {
-        return service.getEnrolledStudents(courseId);
+        return coursesUserService.getEnrolledStudents(courseId);
     }
 
     /**
@@ -30,7 +30,7 @@ public class Controller {
      */
     public String enrollStudentInCourse(Integer studentId, Integer courseId) {
         try {
-            service.enroll(studentId, courseId);
+            coursesUserService.enroll(studentId, courseId);
             return "Student enrolled successfully.";
         } catch (Exception e) {
             return "Enrollment failed: " + e.getMessage();
@@ -43,7 +43,7 @@ public class Controller {
      * @return A success message after adding the course.
      */
     public String addCourse(Course course) {
-        service.addCourse(course);
+        coursesUserService.addCourse(course);
         return "Course added successfully.";
     }
 
@@ -53,7 +53,7 @@ public class Controller {
      * @return A success message after adding the student.
      */
     public String addStudent(Student student) {
-        service.addStudent(student);
+        coursesUserService.addStudent(student);
         return "Student added successfully.";
     }
 
@@ -63,7 +63,7 @@ public class Controller {
      * @return A success message after removing the course.
      */
     public String removeCourse(Integer courseId) {
-        service.removeCourse(courseId);
+        coursesUserService.removeCourse(courseId);
         return "Course removed successfully.";
     }
 
@@ -73,7 +73,7 @@ public class Controller {
      * @return A success message after removing the student.
      */
     public String removeStudent(Integer studentId) {
-        service.removeStudent(studentId);
+        coursesUserService.removeStudent(studentId);
         return "Student removed successfully.";
     }
 
@@ -82,7 +82,7 @@ public class Controller {
      * @return A list of all courses.
      */
     public List<Course> getAllCourses() {
-        return service.getAllCourses();
+        return coursesUserService.getAllCourses();
     }
 
     /**
@@ -90,7 +90,7 @@ public class Controller {
      * @return A list of all students.
      */
     public List<Student> getAllStudents() {
-        return service.getAllStudents();
+        return coursesUserService.getAllStudents();
     }
 
     /**
@@ -100,7 +100,7 @@ public class Controller {
      * @return A success message if unenrollment is successful.
      */
     public String unenrollStudentFromCourse(Integer studentId, Integer courseId) {
-        service.unenroll(studentId, courseId);
+        coursesUserService.unenroll(studentId, courseId);
         return "Student unenrolled successfully.";
     }
 
@@ -110,7 +110,7 @@ public class Controller {
      * @return A list of courses the student is enrolled in.
      */
     public List<Course> getCoursesByStudent(Integer studentId) {
-        return service.getCoursesByStudent(studentId);
+        return coursesUserService.getCoursesByStudent(studentId);
     }
 
     /**
@@ -119,7 +119,7 @@ public class Controller {
      * @return The course object containing detailed information.
      */
     public Course getCourseInfo(Integer courseId) {
-        return service.getCourseInfo(courseId);
+        return coursesUserService.getCourseInfo(courseId);
     }
 
     /**
@@ -128,7 +128,7 @@ public class Controller {
      * @return The student object containing detailed information.
      */
     public Student getStudentInfo(Integer studentId) {
-        return service.getStudentInfo(studentId);
+        return coursesUserService.getStudentInfo(studentId);
     }
 
     /**
@@ -138,7 +138,7 @@ public class Controller {
      */
     public String updateStudent(Student student) {
         try {
-            service.updateStudent(student);
+            coursesUserService.updateStudent(student);
             return "Student updated successfully.";
         } catch (IllegalArgumentException e) {
             return "Update failed: " + e.getMessage();
