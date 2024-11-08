@@ -1,5 +1,6 @@
 package Service;
 
+import Models.Admin;
 import Models.Course;
 import Models.Instructor;
 import Models.Student;
@@ -7,17 +8,22 @@ import Repository.IRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CoursesUserService {
     private final IRepository<Course> courseIRepository;
     private final IRepository<Student> studentIRepository;
     private final IRepository<Instructor> instructorIRepository;
+    private final IRepository<Admin> adminIRepository;
 
-    public CoursesUserService(IRepository<Course> courseIRepository, IRepository<Student> studentIRepository, IRepository<Instructor> instructorIRepository) {
+    public CoursesUserService(IRepository<Course> courseIRepository, IRepository<Student> studentIRepository, IRepository<Instructor> instructorIRepository, IRepository<Admin> adminIRepository) {
         this.courseIRepository = courseIRepository;
         this.studentIRepository = studentIRepository;
         this.instructorIRepository = instructorIRepository;
+        this.adminIRepository = adminIRepository;
     }
+
+
 
     /**
      * Retrieves a list of all students enrolled in a specific course.
@@ -330,4 +336,34 @@ public class CoursesUserService {
         else
             throw new IllegalArgumentException("Student with id " + instructor.getId() + " does not exist");
     }
+
+
+
+
+    public boolean login(String email, String password) {
+        for (Student student : studentIRepository.getAll()) {
+            if (student.getEmail().equals(email) && student.getPassword().equals(password)) {
+                System.out.println("You logged in as a Stdent");
+                return true;
+
+            }
+        }
+
+        for (Admin admin : adminIRepository.getAll()) {
+            if (admin.getEmail().equals(email) && admin.getPassword().equals(password)) {
+                System.out.println("You logged in as an Admin");
+                return true;
+            }
+        }
+
+        for (Instructor instructor : instructorIRepository.getAll()) {
+            if (instructor.getEmail().equals(email) && instructor.getPassword().equals(password)) {
+                System.out.println("You logged in as an Instructor");
+                return true;
+            }
+        }
+
+        throw new IllegalArgumentException("User not found");
+    }
+
 }
