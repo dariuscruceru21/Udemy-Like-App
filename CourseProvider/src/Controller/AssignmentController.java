@@ -112,7 +112,7 @@ public class AssignmentController {
      */
     public String takeAssignmentQuiz(Integer assignmentId) {
         try {
-            assignmentService.takeAssignmentQuizz(assignmentId);
+            assignmentService.takeAssignmentQuiz(assignmentId);
             return "Quiz completed. Check console for your score!";
         } catch (Exception e) {
             return "Failed to take quiz: " + e.getMessage();

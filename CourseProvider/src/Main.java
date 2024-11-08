@@ -34,7 +34,7 @@ public class Main {
 
         AssignmentService service = new AssignmentService(courseIRepository, moduleIRepository, assignmentIRepository,quizIRepository);
 
-        service.takeAssignmentQuizz(1);
+        service.takeAssignmentQuiz(1);
 
 
 

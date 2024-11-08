@@ -139,7 +139,7 @@ public class CoursesUserService {
      */
     public void removeInstructor(Integer instructorId) {
 
-        studentIRepository.get(instructorId).getCourses().forEach(course -> {
+        instructorIRepository.get(instructorId).getCourses().forEach(course -> {
             course.getEnrolledStudents().removeIf(student -> student.getId().equals(instructorId));  //aici am dubii
             courseIRepository.update(course);
         });

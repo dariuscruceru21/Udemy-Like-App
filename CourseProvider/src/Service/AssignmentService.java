@@ -118,7 +118,7 @@ public class AssignmentService {
 
 
 
-    public void takeAssignmentQuizz(Integer assignmentId){
+    public void takeAssignmentQuiz(Integer assignmentId){
         Assignment assignment = assignmentIRepository.get(assignmentId);
         Scanner scanner = new Scanner(System.in);
 
