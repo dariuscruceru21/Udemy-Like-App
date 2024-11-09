@@ -8,7 +8,7 @@ public class Module implements Identifiable {
     private String moduleContent;
     private List<Assignment> assignments;
 
-    Module(int moduleID, String moduleTitle, String moduleContent) {
+    public Module(int moduleID, String moduleTitle, String moduleContent) {
         this.moduleID = moduleID;
         this.moduleTitle = moduleTitle;
         this.moduleContent = moduleContent;
