@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class CoursesUserService {
-    private final IRepository<Course> courseIRepository ;
+    private final IRepository<Course> courseIRepository;
     private final IRepository<Student> studentIRepository;
     private final IRepository<Instructor> instructorIRepository;
     private final IRepository<Admin> adminIRepository;
@@ -22,7 +22,6 @@ public class CoursesUserService {
         this.instructorIRepository = instructorIRepository;
         this.adminIRepository = adminIRepository;
     }
-
 
 
     /**
@@ -68,8 +67,8 @@ public class CoursesUserService {
     /**
      * Assigns a instructor to teach a course, only possible if the course doesn't have a teacher.
      *
-     * @param instructorId   The ID of the student to enroll.
-     * @param courseId The ID of the course.
+     * @param instructorId The ID of the student to enroll.
+     * @param courseId     The ID of the course.
      */
     public void assignInstructor(Integer instructorId, Integer courseId) {
         Instructor instructor = instructorIRepository.get(instructorId);
@@ -207,7 +206,7 @@ public class CoursesUserService {
      * Unassign a instructor from a specific course.
      *
      * @param instructorId The ID of the student to unenroll.
-     * @param courseId  The ID of the course.
+     * @param courseId     The ID of the course.
      */
     public void unAssignInstructor(Integer instructorId, Integer courseId) {
         Instructor instructor = instructorIRepository.get(instructorId);
@@ -269,7 +268,7 @@ public class CoursesUserService {
     public Course getCourseInfo(Integer courseId) {
         Course course = courseIRepository.get(courseId);
 
-        if(course != null)
+        if (course != null)
             return course;
         else
             return null;
@@ -286,7 +285,7 @@ public class CoursesUserService {
         Student student = studentIRepository.get(studentId);
 
         //check for students existence
-        if(student != null)
+        if (student != null)
             return student;
         else
             return null;
@@ -303,7 +302,7 @@ public class CoursesUserService {
         Instructor instructor = instructorIRepository.get(instructorId);
 
         //check for students existence
-        if(instructor != null)
+        if (instructor != null)
             return instructor;
         else
             return null;
@@ -317,7 +316,7 @@ public class CoursesUserService {
     public void updateStudent(Student student) {
 
         //check if student exists
-        if(studentIRepository.get(student.getId()) != null)
+        if (studentIRepository.get(student.getId()) != null)
             studentIRepository.update(student);
         else
             throw new IllegalArgumentException("Student with id " + student.getId() + " does not exist");
@@ -331,13 +330,11 @@ public class CoursesUserService {
     public void updateInstructor(Instructor instructor) {
 
         //check if student exists
-        if(instructorIRepository.get(instructor.getId()) != null)
+        if (instructorIRepository.get(instructor.getId()) != null)
             instructorIRepository.update(instructor);
         else
             throw new IllegalArgumentException("Student with id " + instructor.getId() + " does not exist");
     }
-
-
 
 
     public boolean login(String email, String password) {

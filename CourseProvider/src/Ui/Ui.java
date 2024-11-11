@@ -19,7 +19,7 @@ public class Ui {
     private static IRepository<Assignment> assignments = new InMemoryRepository<>();
     private static IRepository<Quiz> quiz = new InMemoryRepository<>();
     private static IRepository<Student> students = new InMemoryRepository<>();
-    private static IRepository<Instructor> instructors= new InMemoryRepository<>();
+    private static IRepository<Instructor> instructors = new InMemoryRepository<>();
     private static IRepository<Admin> admins = new InMemoryRepository<>();
 
     private static AuthenticationService authService = new AuthenticationService();
@@ -156,7 +156,8 @@ public class Ui {
         System.out.println("1. Manage users");
         System.out.println("2. Manage courses");
         System.out.println("3. View all courses");
-        System.out.println("4. Logout");
+        System.out.println("4. View all students");
+        System.out.println("5. Logout");
 
         int choice = scanner.nextInt();
         scanner.nextLine();  // Consume newline character
@@ -172,6 +173,11 @@ public class Ui {
                 System.out.println("All courses: " + allCourses);
                 break;
             case 4:
+                for (Student listedStudent : coursesUserController.getAllStudents()){
+                    System.out.println(listedStudent.toString());
+                }
+                break;
+            case 5:
                 System.out.println("Logging out...");
                 return;
             default:
