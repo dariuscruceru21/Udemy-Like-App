@@ -4,14 +4,14 @@ public class Quiz implements Identifiable{
     private Integer quizId;
     private String title;
     private String contents;
-    private Integer correctAnswear;
+    private Integer correctAnswer;
 
 
-    public Quiz(Integer quizId, String title, String contents,Integer correctAnswear) {
+    public Quiz(Integer quizId, String title, String contents,Integer correctAnswer) {
         this.quizId = quizId;
         this.title = title;
         this.contents = contents;
-        this.correctAnswear = correctAnswear;
+        this.correctAnswer = correctAnswer;
 
     }
 
@@ -39,7 +39,7 @@ public class Quiz implements Identifiable{
 
 
     public Integer getAnswer(){
-        return this.correctAnswear;
+        return this.correctAnswer;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Quiz implements Identifiable{
                 "quizId=" + quizId +
                 ", title='" + title + '\'' +
                 ", contents='" + contents + '\'' +
-                ", correctAnswear=" + correctAnswear +
+                ", correctAnswer=" + correctAnswer +
                 '}';
     }
 }

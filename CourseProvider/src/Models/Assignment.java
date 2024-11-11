@@ -1,13 +1,14 @@
 package Models;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Assignment implements Identifiable {
     private int assignmentID;
     private String description;
     private String dueDate;
-    private List<Quiz> quizzes;
+    private List<Quiz> quizzes = new ArrayList<Quiz>();
     private Integer score;
 
     public Assignment(int assignmentID, String description, String  dueDate,Integer score) {

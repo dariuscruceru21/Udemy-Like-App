@@ -8,11 +8,10 @@ import Repository.IRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+
 
 public class CoursesUserService {
-    private final IRepository<Course> courseIRepository;
+    private final IRepository<Course> courseIRepository ;
     private final IRepository<Student> studentIRepository;
     private final IRepository<Instructor> instructorIRepository;
     private final IRepository<Admin> adminIRepository;
@@ -344,7 +343,7 @@ public class CoursesUserService {
     public boolean login(String email, String password) {
         for (Student student : studentIRepository.getAll()) {
             if (student.getEmail().equals(email) && student.getPassword().equals(password)) {
-                System.out.println("You logged in as a Stdent");
+                System.out.println("You logged in as a Student");
                 return true;
 
             }

@@ -1,6 +1,7 @@
 package Models;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Course implements Identifiable {
@@ -10,8 +11,8 @@ public class Course implements Identifiable {
     private Integer availableSpots;
     private String  startDate;
     private String  endDate;
-    private List<Student> enrolledStudents;
-    private List<Module> modules;
+    private List<Student> enrolledStudents = new ArrayList<Student>();
+    private List<Module> modules = new ArrayList<Module>();
     private Instructor instructor;
 
     public Course(Integer courseID, String courseTitle, String decision,Integer availableSpots, String  startDate, String  endDate, Instructor instructor) {

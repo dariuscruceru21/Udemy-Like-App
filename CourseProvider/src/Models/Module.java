@@ -1,12 +1,13 @@
 package Models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Module implements Identifiable {
     private int moduleID;
     private String moduleTitle;
     private String moduleContent;
-    private List<Assignment> assignments;
+    private List<Assignment> assignments = new ArrayList<Assignment>();
 
     public Module(int moduleID, String moduleTitle, String moduleContent) {
         this.moduleID = moduleID;

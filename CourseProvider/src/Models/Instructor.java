@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Instructor extends User {
-    private List<Course> courses;
+    private List<Course> courses = new ArrayList<>();
 
     public Instructor(int userID, String userName, String password, String email) {
         super(userID, userName, password, email);

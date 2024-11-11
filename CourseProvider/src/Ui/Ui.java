@@ -5,6 +5,7 @@ import Controller.ControllerCoursesUser;
 import Models.*;
 import Models.Module;
 import Repository.IRepository;
+import Repository.InMemoryRepository;
 import Service.AssignmentService;
 import Service.AuthenticationService;
 import Service.CoursesUserService;
@@ -13,13 +14,13 @@ import java.util.Scanner;
 import java.util.List;
 
 public class Ui {
-    private static IRepository<Course> courses;
-    private static IRepository<Module> modules;
-    private static IRepository<Assignment> assignments;
-    private static IRepository<Quiz> quiz;
-    private static IRepository<Student> students;
-    private static IRepository<Instructor> instructors;
-    private static IRepository<Admin> admins;
+    private static IRepository<Course> courses = new InMemoryRepository<>();
+    private static IRepository<Module> modules = new InMemoryRepository<>();
+    private static IRepository<Assignment> assignments = new InMemoryRepository<>();
+    private static IRepository<Quiz> quiz = new InMemoryRepository<>();
+    private static IRepository<Student> students = new InMemoryRepository<>();
+    private static IRepository<Instructor> instructors= new InMemoryRepository<>();
+    private static IRepository<Admin> admins = new InMemoryRepository<>();
 
     private static AuthenticationService authService = new AuthenticationService();
     private static AssignmentController assignmentController = new AssignmentController(new AssignmentService(courses, modules, assignments, quiz));
