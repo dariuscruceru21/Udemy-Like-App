@@ -21,7 +21,7 @@ public class Main {
 
 
         Instructor i1 = new Instructor(1,"darius","da","da@gmail.com");
-        Course c1 = new Course(1,"Mate","decision",10,"21-20-1200","21-09-09",i1);
+        //Course c1 = new Course(1,"Mate","decision",10,"21-20-1200","21-09-09",i1);
 
 
         Assignment assignment = new Assignment(1,"Mate ass","21-20-2004",0);

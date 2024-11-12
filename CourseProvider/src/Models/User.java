@@ -48,6 +48,7 @@ public abstract class User implements Identifiable {
     }
 
 
-
-
+    public void setName(String newUserName) {
+        this.userName = newUserName;
+    }
 }

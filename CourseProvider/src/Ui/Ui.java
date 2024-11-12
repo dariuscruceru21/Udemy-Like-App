@@ -63,7 +63,9 @@ public class Ui {
         System.out.println("3. View grades");
         System.out.println("4. Enroll in a course");
         System.out.println("5. Unenroll from a course");
-        System.out.println("6. Logout");
+        System.out.println("6. View course details");
+        System.out.println("7. View assigned instructor for a course");
+        System.out.println("8. Logout");
 
         int choice = scanner.nextInt();
         scanner.nextLine();  // Consume newline character
@@ -92,6 +94,20 @@ public class Ui {
                 System.out.println(coursesUserController.unenrollStudentFromCourse(student.getId(), courseIdToUnenroll));
                 break;
             case 6:
+                System.out.println("Enter course ID to view details: ");
+                int courseToViewId = scanner.nextInt();
+                scanner.nextLine();
+                Course courseDetails = coursesUserController.getCourseInfo(courseToViewId);
+                System.out.println("Course details: " + courseDetails);
+                break;
+            case 7:
+                System.out.println("Enter course ID to view assigned instructor: ");
+                int courseAssignedInstructorsId = scanner.nextInt();
+                scanner.nextLine();
+                Instructor instructor = coursesUserController.getAssignedInstructor(courseAssignedInstructorsId);
+                System.out.println("Assigned Instructor: " + instructor);
+                break;
+            case 8:
                 System.out.println("Logging out...");
                 return;
             default:
@@ -105,7 +121,9 @@ public class Ui {
         System.out.println("1. Add assignment to module");
         System.out.println("2. Add module to course");
         System.out.println("3. View courses you teach");
-        System.out.println("4. Logout");
+        System.out.println("4. View course details");
+        System.out.println("5. Get all enrolled students from a course.");
+        System.out.println("6. Logout");
 
         int choice = scanner.nextInt();
         scanner.nextLine();  // Consume newline character
@@ -126,7 +144,7 @@ public class Ui {
                 break;
             case 2:
                 System.out.print("Enter course ID to add module: ");
-                int courseId = scanner.nextInt();
+                int courseToAddId = scanner.nextInt();
                 scanner.nextLine();
                 System.out.print("Enter module id: ");
                 int innerModuleId = scanner.nextInt();
@@ -136,13 +154,25 @@ public class Ui {
                 System.out.println("Enter module description: ");
                 String moduleDescription = scanner.nextLine();
                 Module module = new Module(innerModuleId, moduleTitle, moduleDescription);
-                System.out.println(assignmentController.addModuleToCourse(courseId, module));
+                System.out.println(assignmentController.addModuleToCourse(courseToAddId, module));
                 break;
             case 3:
                 List<Course> instructorCourses = coursesUserController.getCoursesByInstructor(instructor.getId());
                 System.out.println("Courses you teach: " + instructorCourses);
                 break;
             case 4:
+                System.out.println("Enter course ID to view details: ");
+                int courseToViewId = scanner.nextInt();
+                scanner.nextLine();
+                Course courseDetails = coursesUserController.getCourseInfo(courseToViewId);
+                System.out.println("Course details: " + courseDetails);
+                break;
+            case 5:
+                System.out.println("Enter courseId of the course whose enrolled students you want to see: ");
+                int courseEnrolledStudentsId = scanner.nextInt();
+                scanner.nextLine();
+                List<Student> enrolledStudents = coursesUserController.getEnrolledStudents(courseEnrolledStudentsId);
+            case 6:
                 System.out.println("Logging out...");
                 return;
             default:
@@ -157,7 +187,13 @@ public class Ui {
         System.out.println("2. Manage courses");
         System.out.println("3. View all courses");
         System.out.println("4. View all students");
-        System.out.println("5. Logout");
+        System.out.println("5. View all instructors.");
+        System.out.println("6. View specific course details");
+        System.out.println("7. View specific student details");
+        System.out.println("8. View specific instructor details");
+        System.out.println("9. Update student information");
+        System.out.println("10. Update instructor information");
+        System.out.println("11. Logout");
 
         int choice = scanner.nextInt();
         scanner.nextLine();  // Consume newline character
@@ -178,6 +214,60 @@ public class Ui {
                 }
                 break;
             case 5:
+                for (Instructor listedInstructor : coursesUserController.getAllInstructors()){
+                    System.out.println(listedInstructor.toString());
+                }
+                break;
+            case 6:
+                System.out.println("Enter course ID to view details: ");
+                int courseToViewId = scanner.nextInt();
+                scanner.nextLine();
+                Course course = coursesUserController.getCourseInfo(courseToViewId);
+                System.out.println("Course details: " + course);
+                break;
+
+            case 7:
+                System.out.println("Enter student ID to view details: ");
+                int studentToViewId = scanner.nextInt();
+                scanner.nextLine();
+                Student student = coursesUserController.getStudentInfo(studentToViewId);
+                System.out.println("Student details: " + student);
+                break;
+
+            case 8:
+                System.out.println("Enter instructor ID to view details: ");
+                int instructorToViewId = scanner.nextInt();
+                scanner.nextLine();
+                Instructor instructor = coursesUserController.getInstructorInfo(instructorToViewId);
+                System.out.println("Instructor details: " + instructor);
+                break;
+
+            case 9:
+                System.out.println("Enter student ID to update: ");
+                int studentToUpdateId = scanner.nextInt();
+                scanner.nextLine();
+                student = coursesUserController.getStudentInfo(studentToUpdateId);
+                System.out.println("Enter new name for student: ");
+                String newStudentName = scanner.nextLine();
+                student.setName(newStudentName);
+                //all atributes that could be updated should be inserted in this functionality
+                String updateStudentMsg = coursesUserController.updateStudent(student);
+                System.out.println(updateStudentMsg);
+                break;
+
+            case 10:
+                System.out.println("Enter instructor ID to update: ");
+                int instructorToUpdateId = scanner.nextInt();
+                scanner.nextLine();
+                instructor = coursesUserController.getInstructorInfo(instructorToUpdateId);
+                System.out.println("Enter new name for instructor: ");
+                String newInstructorName = scanner.nextLine();
+                instructor.setName(newInstructorName);
+                //all atributes that could be updated should be inserted in this functionality
+                String updateInstructorMsg = coursesUserController.updateInstructor(instructor);
+                System.out.println(updateInstructorMsg);
+                break;
+            case 11:
                 System.out.println("Logging out...");
                 return;
             default:
@@ -192,6 +282,7 @@ public class Ui {
         System.out.println("2. Add instructor");
         System.out.println("3. Remove student");
         System.out.println("4. Remove instructor");
+        System.out.println("5. Unassign instructor from course.");
 
         int choice = scanner.nextInt();
         scanner.nextLine();  // Consume newline character
@@ -232,6 +323,14 @@ public class Ui {
                 int instructorToRemoveId = scanner.nextInt();
                 System.out.println(coursesUserController.removeInstructor(instructorToRemoveId));
                 break;
+            case 5:
+                System.out.println("Enter Id of the instructor you want to unassign: ");
+                int instructorToUnassignId = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Enter Id of the course you want to unassign from: ");
+                int courseToUnassignId = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println(coursesUserController.unassignInstructorFromCourse(courseToUnassignId, instructorToUnassignId));
             default:
                 System.out.println("Invalid choice.");
         }
