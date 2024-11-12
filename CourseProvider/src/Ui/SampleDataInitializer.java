@@ -35,6 +35,7 @@ public class SampleDataInitializer {
         Course course1 = new Course(101, "Intro to Programming", "Hard", 30, "2023-01-01", "2023-05-15", instructor1);
         Course course2 = new Course(102, "Data Structures", "Harder", 25, "2023-06-01", "2023-10-01", instructor1);
 
+
         // Add courses to repository
         courseRepository.create(course1);
         courseRepository.create(course2);

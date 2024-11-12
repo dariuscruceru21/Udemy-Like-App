@@ -66,6 +66,7 @@ public class Ui {
 
             User loggedInUser = authService.authenticate(username, password);
 
+
             if (loggedInUser != null) {
                 System.out.println("Login successful! Welcome, " + loggedInUser.getUserName());
                 showMenu(loggedInUser);  // Call your menu based on the logged-in user
@@ -107,7 +108,6 @@ public class Ui {
             case 2:
                 System.out.print("Enter assignment ID to take quiz: ");
                 int assignmentId = scanner.nextInt();
-                scanner.nextLine();
                 System.out.println(assignmentController.takeAssignmentQuiz(assignmentId));
                 break;
             case 3:
@@ -209,8 +209,9 @@ public class Ui {
             case 5:
                 System.out.println("Enter courseId of the course whose enrolled students you want to see: ");
                 int courseEnrolledStudentsId = scanner.nextInt();
-                scanner.nextLine();
                 List<Student> enrolledStudents = coursesUserController.getEnrolledStudents(courseEnrolledStudentsId);
+                System.out.println("Enrolled student in Course with id: " + courseEnrolledStudentsId + " are" + enrolledStudents);
+                break;
             case 6: // Add quiz to assignment
                 System.out.println("Enter assignment ID to add quiz: ");
                 int assignmentId = scanner.nextInt();
@@ -468,7 +469,6 @@ public class Ui {
 
         int choice = scanner.nextInt();
         scanner.nextLine();
-        scanner.nextLine();  // Consume newline character
         switch (choice) {
             case 1:
                 System.out.print("Enter course title: ");

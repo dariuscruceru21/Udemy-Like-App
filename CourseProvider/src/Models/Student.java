@@ -30,8 +30,8 @@ public class Student extends User {
                 "StudentId = " + getId() + "\n" +
                 "StudentName = " + getUserName() + "\n" +
                 "StudentPassword = " + getPassword() + "\n" +
-                "StudentEmail = " + getEmail() + "\n" +
-                "enrolledCourse = " + enrolledCourse + "\n" +
-                "courses = " + courses;
+                "StudentEmail = " + getEmail() + "\n" ;
+
+
     }
 }

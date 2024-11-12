@@ -56,6 +56,10 @@ public class Module implements Identifiable {
         this.assignments = assignments;
     }
 
+    public void addAssignment(Assignment assignment){
+        this.assignments.add(assignment);
+    }
+
     @Override
     public Integer getId() {
         return this.moduleID;
@@ -66,7 +70,7 @@ public class Module implements Identifiable {
         return  "\n" +
                 "moduleID = " + moduleID + "\n" +
                 "moduleTitle = " + moduleTitle + "\n" +
-                "moduleContent = " + moduleContent + "\n" +
-                "assignments = " + assignments;
+                "moduleContent = " + moduleContent + "\n";
+
     }
 }

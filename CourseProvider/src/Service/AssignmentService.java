@@ -32,6 +32,9 @@ public class AssignmentService {
     public void addModuleToCourse(Integer courseId, Module module){
         Course course = courseIRepository.get(courseId);
         if(course != null){
+
+            if(moduleIRepository.get(module.getModuleID()) == null)
+                moduleIRepository.create(module);
             course.getModules().add(module);
             courseIRepository.update(course);
         }else
@@ -48,11 +51,14 @@ public class AssignmentService {
     public void addAssignmentToModule(Integer moduleId, Assignment assignment){
         Module module = moduleIRepository.get(moduleId);
         if(module != null){
+
+            if(assignmentIRepository.get(assignment.getId()) == null)
+                assignmentIRepository.create(assignment);
             module.getAssignments().add(assignment);
             moduleIRepository.update(module);
 
         }else {
-            throw new IllegalArgumentException("Module with id " + module.getModuleID() + " does not exist");
+            throw new IllegalArgumentException("Module with id " + moduleId + " does not exist");
         }
     }
 
@@ -65,6 +71,9 @@ public class AssignmentService {
     public void addQuizToAssignment(Integer assignmentId, Quiz quiz){
         Assignment assignment = assignmentIRepository.get(assignmentId);
         if(assignment != null){
+
+            if(quizIRepository.get(quiz.getId()) == null)
+                quizIRepository.create(quiz);
             assignment.getQuizzes().add(quiz);
             assignmentIRepository.update(assignment);
         }else
@@ -125,6 +134,7 @@ public class AssignmentService {
 
         //Itterate over Quizes
         for(Quiz quiz : assignment.getQuizzes()){
+
             System.out.println(quiz.getContents());
             System.out.println("Your answer:");
             int answer = scanner.nextInt();
@@ -132,8 +142,11 @@ public class AssignmentService {
             if(answer == quiz.getAnswer()){
                 System.out.println("Correct!\n");
                 assignment.setScore(assignment.getScore() + 1);
-            }else
+                return;
+            }else{
                 System.out.println("Wrong answer! The answer was" + quiz.getAnswer() + "\n");
+                return;
+            }
 
         }
 

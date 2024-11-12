@@ -1,10 +1,8 @@
 package Service;
 
-import Models.Admin;
-import Models.Course;
-import Models.Instructor;
-import Models.Student;
+import Models.*;
 import Repository.IRepository;
+import Ui.SampleDataInitializer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -362,5 +360,9 @@ public class CoursesUserService {
 
         throw new IllegalArgumentException("User not found");
     }
+
+
+
+
 
 }

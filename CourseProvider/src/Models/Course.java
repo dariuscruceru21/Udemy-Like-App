@@ -87,6 +87,10 @@ public class Course implements Identifiable {
         this.modules = modules;
     }
 
+    public void addModule(Module module) {
+        this.modules.add(module);
+    }
+
 
 
     @Override
@@ -103,8 +107,6 @@ public class Course implements Identifiable {
                 "availableSpots = " + availableSpots + '\n' +
                 "startDate = " + startDate + '\n' +
                 "endDate = " + endDate + '\n' +
-                "enrolledStudents = " + enrolledStudents + '\n' +
-                "modules = " + modules + '\n' +
                 "instructor = " + instructor.getUserName();
     }
 }

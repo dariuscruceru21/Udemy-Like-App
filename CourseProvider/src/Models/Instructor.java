@@ -21,8 +21,7 @@ public class Instructor extends User {
         return "\n" +
                 "userID = " + getId() + "\n" +
                 "userName = " + getUserName() + "\n" +
-                "email = " + getEmail() + "\n" +
-                "courses = " + courses.toString();
+                "email = " + getEmail() + "\n";
     }
 
 }
