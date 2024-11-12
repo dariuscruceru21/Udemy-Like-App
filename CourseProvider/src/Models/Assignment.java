@@ -65,12 +65,11 @@ public class Assignment implements Identifiable {
 
     @Override
     public String toString() {
-        return "Assignment{" +
-                "assignmentID=" + assignmentID +
-                ", description='" + description + '\'' +
-                ", dueDate='" + dueDate + '\'' +
-                ", quizzes=" + quizzes +
-                ", score=" + score +
-                '}';
+        return "\n" +
+                "assignmentID = " + assignmentID + "\n" +
+                "description = " + description + "\n" +
+                "dueDate = " + dueDate + "\n" +
+                "quizzes = " + quizzes.toString() + "\n" +
+                "score = " + score;
     }
 }

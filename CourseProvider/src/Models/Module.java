@@ -63,11 +63,10 @@ public class Module implements Identifiable {
 
     @Override
     public String toString() {
-        return "Module{" +
-                "moduleID=" + moduleID +
-                ", moduleTitle='" + moduleTitle + '\'' +
-                ", moduleContent='" + moduleContent + '\'' +
-                ", assignments=" + assignments +
-                '}';
+        return  "\n" +
+                "moduleID = " + moduleID + "\n" +
+                "moduleTitle = " + moduleTitle + "\n" +
+                "moduleContent = " + moduleContent + "\n" +
+                "assignments = " + assignments;
     }
 }

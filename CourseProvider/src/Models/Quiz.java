@@ -44,11 +44,10 @@ public class Quiz implements Identifiable{
 
     @Override
     public String toString() {
-        return "Quiz{" +
-                "quizId=" + quizId +
-                ", title='" + title + '\'' +
-                ", contents='" + contents + '\'' +
-                ", correctAnswer=" + correctAnswer +
-                '}';
+        return  "\n" +
+                "quizId = " + quizId + "\n" +
+                "title = " + title + "\n" +
+                "contents = " + contents + "\n" +
+                "correctAnswer = " + correctAnswer + "\n";
     }
 }

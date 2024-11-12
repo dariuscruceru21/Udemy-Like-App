@@ -26,13 +26,12 @@ public class Student extends User {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "StudentId=" + getId() +
-                "StudentName=" + getUserName() +
-                "StudentPassword=" + getPassword() +
-                "StudentEmail=" + getEmail() +
-                "enrolledCourse=" + enrolledCourse +
-                ", courses=" + courses +
-                '}';
+        return  "\n" +
+                "StudentId = " + getId() + "\n" +
+                "StudentName = " + getUserName() + "\n" +
+                "StudentPassword = " + getPassword() + "\n" +
+                "StudentEmail = " + getEmail() + "\n" +
+                "enrolledCourse = " + enrolledCourse + "\n" +
+                "courses = " + courses.toString();
     }
 }

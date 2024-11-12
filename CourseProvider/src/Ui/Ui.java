@@ -5,8 +5,8 @@ import Controller.ControllerCoursesUser;
 import Models.*;
 import Models.Module;
 import Repository.IRepository;
-import Repository.InMemoryRepository;
 import Service.AssignmentService;
+import Ui.SampleDataInitializer;
 import Service.AuthenticationService;
 import Service.CoursesUserService;
 
@@ -24,7 +24,6 @@ public class Ui {
     private final IRepository<Forum> forums;
     private final IRepository<Message> messages;
 
-    private final AuthenticationService authService;
     private final AssignmentController assignmentController;
     private final ControllerCoursesUser coursesUserController;
     private final Scanner scanner;
@@ -45,14 +44,19 @@ public class Ui {
         this.forums = forumRepository;
         this.messages = messageRepository;
 
-        this.authService = new AuthenticationService();
+        //this.authService = new AuthenticationService();
         this.assignmentController = new AssignmentController(new AssignmentService(courses, modules, assignments, quiz));
         this.coursesUserController = new ControllerCoursesUser(new CoursesUserService(courses, students, instructors, admins));
         this.scanner = new Scanner(System.in);
     }
 
 
-    public void runUi(){
+    public void runUi() {
+        SampleDataInitializer sampleDataInitializer = new SampleDataInitializer();
+        sampleDataInitializer.initializeSampleData(); // Initialize sample data with users
+
+        AuthenticationService authService = new AuthenticationService(sampleDataInitializer);
+
         while (true) {
             System.out.println("Welcome to the System!");
             System.out.print("Enter username: ");
@@ -64,12 +68,13 @@ public class Ui {
 
             if (loggedInUser != null) {
                 System.out.println("Login successful! Welcome, " + loggedInUser.getUserName());
-                showMenu(loggedInUser);
+                showMenu(loggedInUser);  // Call your menu based on the logged-in user
             } else {
                 System.out.println("Login failed! Incorrect username or password.");
             }
         }
     }
+
 
     public void showMenu(User user) {
         if (user instanceof Student) {
@@ -106,7 +111,6 @@ public class Ui {
                 System.out.println(assignmentController.takeAssignmentQuiz(assignmentId));
                 break;
             case 3:
-                // Example implementation, modify if grade retrieval is in another controller
                 System.out.println("Your grades are not implemented in this sample.");
                 break;
             case 4:
@@ -311,7 +315,6 @@ public class Ui {
         System.out.println("11. Logout");
 
         int choice = scanner.nextInt();
-        scanner.nextLine();
         scanner.nextLine();  // Consume newline character
         switch (choice) {
             case 1:
@@ -322,7 +325,10 @@ public class Ui {
                 break;
             case 3:
                 List<Course> allCourses = coursesUserController.getAllCourses();
-                System.out.println("All courses: " + allCourses);
+                System.out.println("All courses: \n");
+                for(Course course:allCourses){
+                    System.out.println(course.toString());
+                }
                 break;
             case 4:
                 for (Student listedStudent : coursesUserController.getAllStudents()){

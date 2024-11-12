@@ -9,10 +9,9 @@ public class Admin extends User{
 
     @Override
     public String toString() {
-        return "Admin{" +
-                "userID=" + getId()+
-                ", userName='" + getUserName() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                '}';
+        return "\n" +
+                "adminID = " + getId() + '\n' +
+                "userName = " + getUserName() + '\n' +
+                "email = " + getEmail();
     }
 }

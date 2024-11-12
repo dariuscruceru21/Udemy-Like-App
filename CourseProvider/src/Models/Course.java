@@ -1,13 +1,12 @@
 package Models;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Course implements Identifiable {
     private Integer courseID;
     private String courseTitle;
-    private String decision;
+    private String description;
     private Integer availableSpots;
     private String  startDate;
     private String  endDate;
@@ -15,10 +14,10 @@ public class Course implements Identifiable {
     private List<Module> modules = new ArrayList<Module>();
     private Instructor instructor;
 
-    public Course(Integer courseID, String courseTitle, String decision,Integer availableSpots, String  startDate, String  endDate, Instructor instructor) {
+    public Course(Integer courseID, String courseTitle, String description,Integer availableSpots, String  startDate, String  endDate, Instructor instructor) {
         this.courseID = courseID;
         this.courseTitle = courseTitle;
-        this.decision = decision;
+        this.description = description;
         this.availableSpots = availableSpots;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -30,8 +29,8 @@ public class Course implements Identifiable {
     public String getCourseTitle() {
         return this.courseTitle;
     }
-    public String getDecision() {
-        return this.decision;
+    public String getDescription() {
+        return this.description;
     }
     public String  getStartDate() {
         return this.startDate;
@@ -64,8 +63,8 @@ public class Course implements Identifiable {
         this.courseTitle = courseTitle;
     }
 
-    public void setDecision(String decision) {
-        this.decision = decision;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setAvailableSpots(Integer availableSpots) {
@@ -97,16 +96,15 @@ public class Course implements Identifiable {
 
     @Override
     public String toString() {
-        return "Course{" +
-                "courseID=" + courseID +
-                ", courseTitle='" + courseTitle + '\'' +
-                ", decision='" + decision + '\'' +
-                ", availableSpots=" + availableSpots +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", enrolledStudents=" + enrolledStudents +
-                ", modules=" + modules +
-                ", instructor=" + instructor +
-                '}';
+        return  '\n' +
+                "courseID = " + courseID + '\n' +
+                "courseTitle = " + courseTitle + '\n' +
+                "description = " + description + '\n' +
+                "availableSpots = " + availableSpots + '\n' +
+                "startDate = " + startDate + '\n' +
+                "endDate = " + endDate + '\n' +
+                "enrolledStudents = " + enrolledStudents.toString() + '\n' +
+                "modules = " + modules.toString() + '\n' +
+                "instructor = " + instructor.getUserName();
     }
 }

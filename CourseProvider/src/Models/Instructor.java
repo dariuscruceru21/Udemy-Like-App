@@ -18,12 +18,11 @@ public class Instructor extends User {
 
     @Override
     public String toString() {
-        return "Instructor{" +
-                "userID=" + getId() +
-                ", userName='" + getUserName() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", courses=" + courses +
-                '}';
+        return "\n" +
+                "userID = " + getId() + "\n" +
+                "userName = " + getUserName() + "\n" +
+                "email = " + getEmail() + "\n" +
+                "courses = " + courses.toString();
     }
 
 }
