@@ -103,8 +103,8 @@ public class Course implements Identifiable {
                 "availableSpots = " + availableSpots + '\n' +
                 "startDate = " + startDate + '\n' +
                 "endDate = " + endDate + '\n' +
-                "enrolledStudents = " + enrolledStudents.toString() + '\n' +
-                "modules = " + modules.toString() + '\n' +
+                "enrolledStudents = " + enrolledStudents + '\n' +
+                "modules = " + modules + '\n' +
                 "instructor = " + instructor.getUserName();
     }
 }

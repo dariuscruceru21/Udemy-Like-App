@@ -289,7 +289,7 @@ public class Ui {
 
             case 13:
                 System.out.println("Logging out...");
-                break;
+                return;
 
             default:
                 System.out.println("Invalid choice. Try again.");

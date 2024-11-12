@@ -32,6 +32,6 @@ public class Student extends User {
                 "StudentPassword = " + getPassword() + "\n" +
                 "StudentEmail = " + getEmail() + "\n" +
                 "enrolledCourse = " + enrolledCourse + "\n" +
-                "courses = " + courses.toString();
+                "courses = " + courses;
     }
 }
