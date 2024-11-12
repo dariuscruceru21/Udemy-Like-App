@@ -14,6 +14,16 @@ public class CoursesUserService {
     private final IRepository<Instructor> instructorIRepository;
     private final IRepository<Admin> adminIRepository;
 
+    /**
+     * Constructs a new {@code CoursesUserService} with the specified repositories.
+     * This service manages the interactions between courses, students, instructors, and admins.
+     * The constructor allows dependency injection for the repositories that handle course, student, instructor, and admin data.
+     *
+     * @param courseIRepository The repository interface for course data, used to fetch and manage course-related information.
+     * @param studentIRepository The repository interface for student data, used to fetch and manage student-related information.
+     * @param instructorIRepository The repository interface for instructor data, used to fetch and manage instructor-related information.
+     * @param adminIRepository The repository interface for admin data, used to fetch and manage admin-related information.
+     */
     public CoursesUserService(IRepository<Course> courseIRepository, IRepository<Student> studentIRepository, IRepository<Instructor> instructorIRepository, IRepository<Admin> adminIRepository) {
         this.courseIRepository = courseIRepository;
         this.studentIRepository = studentIRepository;

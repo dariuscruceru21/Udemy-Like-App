@@ -5,6 +5,11 @@ import Models.Module;
 import Repository.IRepository;
 import Repository.InMemoryRepository;
 
+/**
+ * This class is responsible for initializing sample data for the application.
+ * It creates and populates repositories for various entities such as students, instructors, courses, assignments, quizzes, and more.
+ * The initialized data is used for testing and demonstration purposes within the application.
+ */
 public class SampleDataInitializer {
 
     // Initialize repositories for different model types
@@ -18,6 +23,11 @@ public class SampleDataInitializer {
     private final IRepository<Forum> forumRepository = new InMemoryRepository<>();
     private final IRepository<Message> messageRepository = new InMemoryRepository<>();
 
+    /**
+     * Initializes sample data for various entities including users, courses, modules, assignments, quizzes, forums, and messages.
+     * This method creates instances of all entities and adds them to the corresponding repositories.
+     * The data initialized includes students, instructors, admins, courses, assignments, quizzes, forums, and messages.
+     */
     public void initializeSampleData() {
         // Sample data for User, Student, Instructor, Admin
         Admin admin1 = new Admin(1, "admin1", "password123", "admin1@example.com");
@@ -34,7 +44,6 @@ public class SampleDataInitializer {
         // Create courses
         Course course1 = new Course(101, "Intro to Programming", "Hard", 30, "2023-01-01", "2023-05-15", instructor1);
         Course course2 = new Course(102, "Data Structures", "Harder", 25, "2023-06-01", "2023-10-01", instructor1);
-
 
         // Add courses to repository
         courseRepository.create(course1);
@@ -93,41 +102,85 @@ public class SampleDataInitializer {
         messageRepository.create(message2);
     }
 
-
-    // Getter methods for repositories
+    /**
+     * Retrieves the repository for student data.
+     *
+     * @return The student repository.
+     */
     public IRepository<Student> getStudentRepository() {
         return studentRepository;
     }
 
+    /**
+     * Retrieves the repository for instructor data.
+     *
+     * @return The instructor repository.
+     */
     public IRepository<Instructor> getInstructorRepository() {
         return instructorRepository;
     }
 
+    /**
+     * Retrieves the repository for admin data.
+     *
+     * @return The admin repository.
+     */
     public IRepository<Admin> getAdminRepository() {
         return adminRepository;
     }
 
+    /**
+     * Retrieves the repository for course data.
+     *
+     * @return The course repository.
+     */
     public IRepository<Course> getCourseRepository() {
         return courseRepository;
     }
 
+    /**
+     * Retrieves the repository for module data.
+     *
+     * @return The module repository.
+     */
     public IRepository<Module> getModuleRepository() {
         return moduleRepository;
     }
 
+    /**
+     * Retrieves the repository for assignment data.
+     *
+     * @return The assignment repository.
+     */
     public IRepository<Assignment> getAssignmentRepository() {
         return assignmentRepository;
     }
 
+    /**
+     * Retrieves the repository for quiz data.
+     *
+     * @return The quiz repository.
+     */
     public IRepository<Quiz> getQuizRepository() {
         return quizRepository;
     }
 
+    /**
+     * Retrieves the repository for forum data.
+     *
+     * @return The forum repository.
+     */
     public IRepository<Forum> getForumRepository() {
         return forumRepository;
     }
 
+    /**
+     * Retrieves the repository for message data.
+     *
+     * @return The message repository.
+     */
     public IRepository<Message> getMessageRepository() {
         return messageRepository;
     }
 }
+

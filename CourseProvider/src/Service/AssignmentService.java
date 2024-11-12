@@ -15,6 +15,14 @@ public class AssignmentService {
     private final IRepository<Assignment> assignmentIRepository;
     private final IRepository<Quiz> quizIRepository;
 
+    /**
+     * Constructs an {@code AssignmentService} with the specified repositories.
+     *
+     * @param courseIRepository The repository for course data.
+     * @param moduleIRepository The repository for module data.
+     * @param assignmentIRepository The repository for assignment data.
+     * @param quizIRepository The repository for quiz data.
+     */
     public AssignmentService(IRepository<Course> courseIRepository, IRepository<Module> moduleIRepository, IRepository<Assignment> assignmentIRepository, IRepository<Quiz> quizIRepository) {
         this.courseIRepository = courseIRepository;
         this.moduleIRepository = moduleIRepository;
@@ -127,46 +135,99 @@ public class AssignmentService {
 
 
 
+    /**
+     * This method allows a student to take a quiz associated with an assignment.
+     * The user is prompted with each quiz question, and they are asked to provide an answer.
+     * The method compares the user's input to the correct answer and updates the score accordingly.
+     *
+     * @param assignmentId The ID of the assignment that the student is taking the quiz for.
+     *                     The assignment should contain quizzes that the student will answer.
+     */
     public void takeAssignmentQuiz(Integer assignmentId){
+        // Fetch the assignment object from the repository using its ID
         Assignment assignment = assignmentIRepository.get(assignmentId);
+
+        // Create a Scanner object to capture user input from the console
         Scanner scanner = new Scanner(System.in);
 
-
-        //Itterate over Quizes
+        // Iterate over each quiz in the assignment
         for(Quiz quiz : assignment.getQuizzes()){
 
+            // Display the quiz question (contents) to the user
             System.out.println(quiz.getContents());
-            System.out.println("Your answer:");
-            int answer = scanner.nextInt();
 
+            // Prompt the user for their answer to the quiz
+            System.out.println("Your answer:");
+            int answer = scanner.nextInt();  // Capture the user's answer
+
+            // Check if the user's answer is correct
             if(answer == quiz.getAnswer()){
+                // If correct, inform the user and increment the score
                 System.out.println("Correct!\n");
-                assignment.setScore(assignment.getScore() + 1);
-                return;
+                assignment.setScore(assignment.getScore() + 1);  // Update score
+                return;  // Exit after one correct answer (can be changed based on behavior)
             }else{
-                System.out.println("Wrong answer! The answer was" + quiz.getAnswer() + "\n");
-                return;
+                // If wrong, inform the user and reveal the correct answer
+                System.out.println("Wrong answer! The answer was " + quiz.getAnswer() + "\n");
+                return;  // Exit after one wrong answer (can be changed based on behavior)
             }
 
         }
 
+        // Print the user's total score at the end of the quiz
         System.out.println("You scored " + assignment.getScore());
+
+        // Close the scanner object after use (good practice)
         scanner.close();
     }
 
+
+    /**
+     * Retrieves all modules associated with a specific course.
+     * This is useful for accessing and displaying the list of modules for a given course.
+     *
+     * @param courseId The ID of the course whose modules are to be fetched.
+     * @return A list of modules associated with the specified course.
+     */
     public List<Module> getModulesFromCourse(Integer courseId){
+        // Get the course object by its ID
         Course course = courseIRepository.get(courseId);
+
+        // Return the list of modules associated with the course
         return course.getModules();
     }
 
+
+    /**
+     * Retrieves all assignments associated with a specific module.
+     * This method is useful for displaying assignments to users within a particular module.
+     *
+     * @param moduleId The ID of the module whose assignments are to be fetched.
+     * @return A list of assignments associated with the specified module.
+     */
     public List<Assignment> getAssignmentsFromModule(Integer moduleId){
+        // Get the module object by its ID
         Module module = moduleIRepository.get(moduleId);
+
+        // Return the list of assignments associated with the module
         return module.getAssignments();
     }
 
+
+    /**
+     * Retrieves all quizzes associated with a specific assignment.
+     * This method provides access to all quizzes linked to a particular assignment.
+     *
+     * @param assignmentId The ID of the assignment whose quizzes are to be fetched.
+     * @return A list of quizzes associated with the specified assignment.
+     */
     public List<Quiz> getQuizFromAssignment(Integer assignmentId){
+        // Get the assignment object by its ID
         Assignment assignment = assignmentIRepository.get(assignmentId);
+
+        // Return the list of quizzes associated with the assignment
         return assignment.getQuizzes();
     }
+
 
 }
