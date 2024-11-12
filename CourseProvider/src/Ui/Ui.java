@@ -14,20 +14,45 @@ import java.util.Scanner;
 import java.util.List;
 
 public class Ui {
-    private static IRepository<Course> courses = new InMemoryRepository<>();
-    private static IRepository<Module> modules = new InMemoryRepository<>();
-    private static IRepository<Assignment> assignments = new InMemoryRepository<>();
-    private static IRepository<Quiz> quiz = new InMemoryRepository<>();
-    private static IRepository<Student> students = new InMemoryRepository<>();
-    private static IRepository<Instructor> instructors = new InMemoryRepository<>();
-    private static IRepository<Admin> admins = new InMemoryRepository<>();
+    private final IRepository<Course> courses;
+    private final IRepository<Module> modules;
+    private final IRepository<Assignment> assignments;
+    private final IRepository<Quiz> quiz;
+    private final IRepository<Student> students;
+    private final IRepository<Instructor> instructors;
+    private final IRepository<Admin> admins;
+    private final IRepository<Forum> forums;
+    private final IRepository<Message> messages;
 
-    private static AuthenticationService authService = new AuthenticationService();
-    private static AssignmentController assignmentController = new AssignmentController(new AssignmentService(courses, modules, assignments, quiz));
-    private static ControllerCoursesUser coursesUserController = new ControllerCoursesUser(new CoursesUserService(courses, students, instructors, admins));
-    private static Scanner scanner = new Scanner(System.in);
+    private final AuthenticationService authService;
+    private final AssignmentController assignmentController;
+    private final ControllerCoursesUser coursesUserController;
+    private final Scanner scanner;
 
-    public static void main(String[] args) {
+    // Constructor that takes repositories as parameters
+    public Ui(IRepository<Course> courseRepository, IRepository<Module> moduleRepository,
+              IRepository<Assignment> assignmentRepository, IRepository<Quiz> quizRepository,
+              IRepository<Student> studentRepository, IRepository<Instructor> instructorRepository,
+              IRepository<Admin> adminRepository, IRepository<Forum> forumRepository, IRepository<Message> messageRepository) {
+
+        this.courses = courseRepository;
+        this.modules = moduleRepository;
+        this.assignments = assignmentRepository;
+        this.quiz = quizRepository;
+        this.students = studentRepository;
+        this.instructors = instructorRepository;
+        this.admins = adminRepository;
+        this.forums = forumRepository;
+        this.messages = messageRepository;
+
+        this.authService = new AuthenticationService();
+        this.assignmentController = new AssignmentController(new AssignmentService(courses, modules, assignments, quiz));
+        this.coursesUserController = new ControllerCoursesUser(new CoursesUserService(courses, students, instructors, admins));
+        this.scanner = new Scanner(System.in);
+    }
+
+
+    public void runUi(){
         while (true) {
             System.out.println("Welcome to the System!");
             System.out.print("Enter username: ");
@@ -46,7 +71,7 @@ public class Ui {
         }
     }
 
-    private static void showMenu(User user) {
+    public void showMenu(User user) {
         if (user instanceof Student) {
             showStudentMenu((Student) user);
         } else if (user instanceof Instructor) {
@@ -56,7 +81,7 @@ public class Ui {
         }
     }
 
-    private static void showStudentMenu(Student student) {
+    public void showStudentMenu(Student student) {
         System.out.println("\nStudent Menu:");
         System.out.println("1. View enrolled courses");
         System.out.println("2. Take quizzes");
@@ -77,6 +102,7 @@ public class Ui {
             case 2:
                 System.out.print("Enter assignment ID to take quiz: ");
                 int assignmentId = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println(assignmentController.takeAssignmentQuiz(assignmentId));
                 break;
             case 3:
@@ -86,11 +112,13 @@ public class Ui {
             case 4:
                 System.out.print("Enter course ID to enroll: ");
                 int courseId = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println(coursesUserController.enrollStudentInCourse(student.getId(), courseId));
                 break;
             case 5:
                 System.out.print("Enter course ID to unenroll: ");
                 int courseIdToUnenroll = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println(coursesUserController.unenrollStudentFromCourse(student.getId(), courseIdToUnenroll));
                 break;
             case 6:
@@ -116,7 +144,7 @@ public class Ui {
         showStudentMenu(student);
     }
 
-    private static void showInstructorMenu(Instructor instructor) {
+    public void showInstructorMenu(Instructor instructor) {
         System.out.println("\nInstructor Menu:");
         System.out.println("1. Add assignment to module");
         System.out.println("2. Add module to course");
@@ -182,15 +210,17 @@ public class Ui {
             case 6: // Add quiz to assignment
                 System.out.println("Enter assignment ID to add quiz: ");
                 int assignmentId = scanner.nextInt();
-
+                scanner.nextLine();
                 System.out.println("Enter quiz Id: ");
                 int quizId = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println("Add the title of the Quiz: ");
                 String titel = scanner.nextLine();
                 System.out.println("Add the contents of the quiz and the options: ");
                 String contents = scanner.nextLine();
                 System.out.println("Enter the correct answer: ");
                 int correctAnswer = scanner.nextInt();
+                scanner.nextLine();
                 Quiz quiz = new Quiz(quizId,titel,contents,correctAnswer); // Assuming a method to create/initialize Quiz
                 String addQuizMessage = assignmentController.addQuizToAssignment(assignmentId, quiz);
                 System.out.println(addQuizMessage);
@@ -199,8 +229,10 @@ public class Ui {
             case 7: // Remove module from course
                 System.out.println("Enter course ID: ");
                 int courseId = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println("Enter module ID to remove: ");
                 int moduleId2 = scanner.nextInt();
+                scanner.nextLine();
                 String removeModuleMessage = assignmentController.removeModuleFromCourse(courseId, moduleId2);
                 System.out.println(removeModuleMessage);
                 break;
@@ -208,8 +240,10 @@ public class Ui {
             case 8: // Remove assignment from module
                 System.out.println("Enter the module ID: ");
                 int moduleID = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println("Enter assignment ID to remove: ");
                 int assignmentID = scanner.nextInt();
+                scanner.nextLine();
                 String removeAssignmentMessage = assignmentController.removeAssignmentFromModule(moduleID, assignmentID);
                 System.out.println(removeAssignmentMessage);
                 break;
@@ -217,8 +251,10 @@ public class Ui {
             case 9: // Remove quiz from assignment
                 System.out.println("Enter assignment ID: ");
                 int assignmentI = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println("Enter the quiz ID to remove");
                 int quizI = scanner.nextInt();
+                scanner.nextLine();
                 String removeQuizMessage = assignmentController.removeQuizFromAssignment(assignmentI, quizI);
                 System.out.println(removeQuizMessage);
                 break;
@@ -226,6 +262,7 @@ public class Ui {
             case 10: // View all modules in course
                 System.out.println("Enter the course ID to view modules: ");
                 courseId = scanner.nextInt();
+                scanner.nextLine();
                 List<Module> modules = assignmentController.getModulesFromCourse(courseId);
                 System.out.println("Modules in course: " + modules);
                 break;
@@ -233,6 +270,7 @@ public class Ui {
             case 11: // View all assignments in module
                 System.out.println("Enter module ID to view assignments: ");
                 int moduleI = scanner.nextInt();
+                scanner.nextLine();
                 List<Assignment> assignments = assignmentController.getAssignmentsFromModule(moduleI);
                 System.out.println("Assignments in module: " + assignments);
                 break;
@@ -240,6 +278,7 @@ public class Ui {
             case 12: // View all quizzes in assignment
                 System.out.println("Enter the assignment ID to view the quizzes: ");
                 int assignmentId2 = scanner.nextInt();
+                scanner.nextLine();
                 List<Quiz> quizzes = assignmentController.getQuizFromAssignment(assignmentId2);
                 System.out.println("Quizzes in assignment: " + quizzes);
                 break;
@@ -257,7 +296,7 @@ public class Ui {
 
 
 
-    private static void showAdminMenu(Admin admin) {
+    public void showAdminMenu(Admin admin) {
         System.out.println("\nAdmin Menu:");
         System.out.println("1. Manage users");
         System.out.println("2. Manage courses");
@@ -272,6 +311,7 @@ public class Ui {
         System.out.println("11. Logout");
 
         int choice = scanner.nextInt();
+        scanner.nextLine();
         scanner.nextLine();  // Consume newline character
         switch (choice) {
             case 1:
@@ -306,28 +346,28 @@ public class Ui {
                 System.out.println("Enter student ID to view details: ");
                 int studentToViewId = scanner.nextInt();
                 scanner.nextLine();
-                Student student = coursesUserController.getStudentInfo(studentToViewId);
-                System.out.println("Student details: " + student);
+                Student studentToView = coursesUserController.getStudentInfo(studentToViewId);
+                System.out.println("Student details: " + studentToView);
                 break;
 
             case 8:
                 System.out.println("Enter instructor ID to view details: ");
                 int instructorToViewId = scanner.nextInt();
                 scanner.nextLine();
-                Instructor instructor = coursesUserController.getInstructorInfo(instructorToViewId);
-                System.out.println("Instructor details: " + instructor);
+                Instructor instructorToView = coursesUserController.getInstructorInfo(instructorToViewId);
+                System.out.println("Instructor details: " + instructorToView);
                 break;
 
             case 9:
                 System.out.println("Enter student ID to update: ");
                 int studentToUpdateId = scanner.nextInt();
                 scanner.nextLine();
-                student = coursesUserController.getStudentInfo(studentToUpdateId);
+                Student studentToUpdate = coursesUserController.getStudentInfo(studentToUpdateId);
                 System.out.println("Enter new name for student: ");
                 String newStudentName = scanner.nextLine();
-                student.setName(newStudentName);
+                studentToUpdate.setName(newStudentName);
                 //all atributes that could be updated should be inserted in this functionality
-                String updateStudentMsg = coursesUserController.updateStudent(student);
+                String updateStudentMsg = coursesUserController.updateStudent(studentToUpdate);
                 System.out.println(updateStudentMsg);
                 break;
 
@@ -335,12 +375,12 @@ public class Ui {
                 System.out.println("Enter instructor ID to update: ");
                 int instructorToUpdateId = scanner.nextInt();
                 scanner.nextLine();
-                instructor = coursesUserController.getInstructorInfo(instructorToUpdateId);
+                Instructor instructorToUpdate = coursesUserController.getInstructorInfo(instructorToUpdateId);
                 System.out.println("Enter new name for instructor: ");
                 String newInstructorName = scanner.nextLine();
-                instructor.setName(newInstructorName);
+                instructorToUpdate.setName(newInstructorName);
                 //all atributes that could be updated should be inserted in this functionality
-                String updateInstructorMsg = coursesUserController.updateInstructor(instructor);
+                String updateInstructorMsg = coursesUserController.updateInstructor(instructorToUpdate);
                 System.out.println(updateInstructorMsg);
                 break;
             case 11:
@@ -352,7 +392,7 @@ public class Ui {
         showAdminMenu(admin);
     }
 
-    private static void manageUsers() {
+    public void manageUsers() {
         System.out.println("Manage Users:");
         System.out.println("1. Add student");
         System.out.println("2. Add instructor");
@@ -392,11 +432,13 @@ public class Ui {
             case 3:
                 System.out.print("Enter student ID to remove: ");
                 int studentToRemoveId = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println(coursesUserController.removeStudent(studentToRemoveId));
                 break;
             case 4:
                 System.out.print("Enter instructor ID to remove: ");
                 int instructorToRemoveId = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println(coursesUserController.removeInstructor(instructorToRemoveId));
                 break;
             case 5:
@@ -412,13 +454,14 @@ public class Ui {
         }
     }
 
-    private static void manageCourses() {
+    public void manageCourses() {
         System.out.println("Manage Courses:");
         System.out.println("1. Add new course");
         System.out.println("2. Remove course");
         System.out.println("3. Assign instructor to course");
 
         int choice = scanner.nextInt();
+        scanner.nextLine();
         scanner.nextLine();  // Consume newline character
         switch (choice) {
             case 1:
@@ -445,13 +488,16 @@ public class Ui {
             case 2:
                 System.out.print("Enter course ID to remove: ");
                 int courseToRemoveId = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println(coursesUserController.removeCourse(courseToRemoveId));
                 break;
             case 3:
                 System.out.print("Enter course ID: ");
                 int assignCourseId = scanner.nextInt();
+                scanner.nextLine();
                 System.out.print("Enter instructor ID: ");
                 int assignInstructorId = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println(coursesUserController.assignInstructorToCourse(assignInstructorId, assignCourseId));
                 break;
             default:

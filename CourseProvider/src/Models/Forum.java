@@ -7,7 +7,7 @@ public class Forum implements Identifiable {
     private String topic;
     private String[] topics;
 
-    Forum(int forumID, String topic, String[] topics) {
+    public Forum(int forumID, String topic, String[] topics) {
         this.forumID = forumID;
         this.topic = topic;
         this.topics = topics;
