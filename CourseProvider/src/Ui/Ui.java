@@ -382,4 +382,103 @@ public class Ui {
                 System.out.println("Invalid choice.");
         }
     }
+
+    private static void instructorMenu(Instructor instructor) {
+        boolean continueMenu = true;
+        while (continueMenu) {
+            System.out.println("\nInstructor Menu:");
+            System.out.println("1. Add assignment to module");
+            System.out.println("2. Add module to course");
+            System.out.println("3. View courses you teach");
+            System.out.println("4. View course details");
+            System.out.println("5. Add quiz to an assignment"); // New option to add quiz
+            System.out.println("6. Remove module from a course"); // New option to remove module
+            System.out.println("7. Remove assignment from a module"); // New option to remove assignment
+            System.out.println("8. Remove quiz from an assignment"); // New option to remove quiz
+            System.out.println("9. View all modules in a course"); // New option to view modules in course
+            System.out.println("10. View all assignments in a module"); // New option to view assignments in module
+            System.out.println("11. View all quizzes in an assignment"); // New option to view quizzes in assignment
+            System.out.println("12. Logout");
+
+            System.out.println("\"Enter your choice: \"");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                // Existing options omitted for brevity...
+
+                case 5: // Add quiz to assignment
+                    System.out.println("Enter assignment ID to add quiz: ");
+                    int assignmentId = scanner.nextInt();
+
+                    System.out.println("Enter quiz Id: ");
+                    int quizId = scanner.nextInt();
+                    System.out.println("Add the title of the Quiz: ");
+                    String titel = scanner.nextLine();
+                    System.out.println("Add the contents of the quiz and the options: ");
+                    String contents = scanner.nextLine();
+                    System.out.println("Enter the correct answer: ");
+                    int correctAnswer = scanner.nextInt();
+                    Quiz quiz = new Quiz(quizId,titel,contents,correctAnswer); // Assuming a method to create/initialize Quiz
+                    String addQuizMessage = assignmentController.addQuizToAssignment(assignmentId, quiz);
+                    System.out.println(addQuizMessage);
+                    break;
+
+                case 6: // Remove module from course
+                    System.out.println("Enter course ID: ");
+                    int courseId = scanner.nextInt();
+                    System.out.println("Enter module ID to remove: ");
+                    int moduleId = scanner.nextInt();
+                    String removeModuleMessage = assignmentController.removeModuleFromCourse(courseId, moduleId);
+                    System.out.println(removeModuleMessage);
+                    break;
+
+                case 7: // Remove assignment from module
+                    System.out.println("Enter the module ID: ");
+                    int moduleID = scanner.nextInt();
+                    System.out.println("Enter assignment ID to remove: ");
+                    int assignmentID = scanner.nextInt();
+                    String removeAssignmentMessage = assignmentController.removeAssignmentFromModule(moduleID, assignmentID);
+                    System.out.println(removeAssignmentMessage);
+                    break;
+
+                case 8: // Remove quiz from assignment
+                    System.out.println("Enter assignment ID: ");
+                    int assignmentI = scanner.nextInt();
+                    System.out.println("Enter the quiz ID to remove");
+                    int quizI = scanner.nextInt();
+                    String removeQuizMessage = assignmentController.removeQuizFromAssignment(assignmentI, quizI);
+                    System.out.println(removeQuizMessage);
+                    break;
+
+                case 9: // View all modules in course
+                    System.out.println("Enter the course ID to view modules: ");
+                    courseId = scanner.nextInt();
+                    List<Module> modules = assignmentController.getModulesFromCourse(courseId);
+                    System.out.println("Modules in course: " + modules);
+                    break;
+
+                case 10: // View all assignments in module
+                    System.out.println("Enter module ID to view assignments: ");
+                    int moduleI = scanner.nextInt();
+                    List<Assignment> assignments = assignmentController.getAssignmentsFromModule(moduleI);
+                    System.out.println("Assignments in module: " + assignments);
+                    break;
+
+                case 11: // View all quizzes in assignment
+                    System.out.println("Enter the assignment ID to view the quizzes: ");
+                    int assignment = scanner.nextInt();
+                    List<Quiz> quizzes = assignmentController.getQuizFromAssignment(assignment);
+                    System.out.println("Quizzes in assignment: " + quizzes);
+                    break;
+
+                case 12:
+                    System.out.println("Logging out...");
+                    continueMenu = false;
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
 }
