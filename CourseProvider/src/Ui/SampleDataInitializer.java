@@ -74,8 +74,8 @@ public class SampleDataInitializer {
         module2.getAssignments().add(assignment2);
 
         // Create quizzes
-        Quiz quiz1 = new Quiz(401, "Intro Quiz", "What is a variable?", 1);
-        Quiz quiz2 = new Quiz(402, "Data Structures Quiz", "Explain Stack and Queue", 2);
+        Quiz quiz1 = new Quiz(401, "Intro Quiz", "What is 1 + 1  Options: 1.) 2  2.) 1?", 1);
+        Quiz quiz2 = new Quiz(402, "Data Structures Quiz", "What is 2 + 2 Options: 1.)3  2.)4", 2);
 
         // Add quizzes to repository
         quizRepository.create(quiz1);

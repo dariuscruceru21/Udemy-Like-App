@@ -82,6 +82,7 @@ public class CoursesUserService {
         Instructor instructor = instructorIRepository.get(instructorId);
         Course course = courseIRepository.get(courseId);
 
+
         course.setInstructor(instructor);
         instructor.getCourses().add(course);
 
@@ -153,7 +154,7 @@ public class CoursesUserService {
     public void removeInstructor(Integer instructorId) {
 
         instructorIRepository.get(instructorId).getCourses().forEach(course -> {
-            course.getEnrolledStudents().removeIf(student -> student.getId().equals(instructorId));  //aici am dubii
+            course.getEnrolledStudents().removeIf(student -> student.getId().equals(instructorId));
             courseIRepository.update(course);
         });
         studentIRepository.delete(instructorId);
