@@ -124,7 +124,9 @@ public class ControllerCoursesUser {
      * @return A success message after removing the instructor.
      */
     public String removeInstructor(Integer instructorId) {
-        coursesUserService.unAssignInstructor(instructorId, coursesUserService.getCourseInfo(instructorId).getId());
+        if (coursesUserService.getCourseInfo(instructorId) != null) {
+            coursesUserService.unAssignInstructor(instructorId, coursesUserService.getCourseInfo(instructorId).getId());
+        }
         coursesUserService.removeInstructor(instructorId);
         return "Instructor removed successfully.";
     }

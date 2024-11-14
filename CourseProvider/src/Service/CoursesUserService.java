@@ -157,7 +157,7 @@ public class CoursesUserService {
             course.getEnrolledStudents().removeIf(student -> student.getId().equals(instructorId));
             courseIRepository.update(course);
         });
-        studentIRepository.delete(instructorId);
+        instructorIRepository.delete(instructorId);
     }
 
     /**
@@ -221,19 +221,30 @@ public class CoursesUserService {
         Instructor instructor = instructorIRepository.get(instructorId);
         Course course = courseIRepository.get(courseId);
 
-        //check if the instructor is assigned to the course
-        //needs implementation after the update of the course class
-        if (course.getInstructor() == instructor) {
-            //remove instructor from course
-            course.setInstructor(null);
+        if (instructor.getCourses().contains(course)) {
+            if (course.getInstructor() == instructor) {
+                //remove instructor from course
+                course.setInstructor(null);
 
-            //remove course from students list
-            instructor.getCourses().remove(course);
+                //remove course from instructors list
+                instructor.getCourses().remove(course);
 
-            //update the repositories
-            courseIRepository.update(course);
-            instructorIRepository.update(instructor);
+                //update the repositories
+                courseIRepository.update(course);
+                instructorIRepository.update(instructor);
+            }
         }
+//        if (course.getInstructor() == instructor) {
+//            //remove instructor from course
+//            course.setInstructor(null);
+//
+//            //remove course from instructors list
+//            instructor.getCourses().remove(course);
+//
+//            //update the repositories
+//            courseIRepository.update(course);
+//            instructorIRepository.update(instructor);
+//        }
     }
 
     /**

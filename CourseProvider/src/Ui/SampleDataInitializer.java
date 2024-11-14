@@ -32,18 +32,24 @@ public class SampleDataInitializer {
         // Sample data for User, Student, Instructor, Admin
         Admin admin1 = new Admin(1, "admin1", "password123", "admin1@example.com");
         Instructor instructor1 = new Instructor(2, "instructor1", "password123", "instructor1@example.com");
-        Student student1 = new Student(3, "student1", "password123", "student1@example.com", true);
-        Student student2 = new Student(4, "student2", "password123", "student2@example.com", false);
+        Instructor instructor2 = new Instructor(3, "instructor2", "password123", "instructor2@example.com");
+        Student student1 = new Student(4, "student1", "password123", "student1@example.com", true);
+        Student student2 = new Student(5, "student2", "password123", "student2@example.com", false);
 
         // Add users to the repository
         adminRepository.create(admin1);
         instructorRepository.create(instructor1);
+        instructorRepository.create(instructor2);
         studentRepository.create(student1);
         studentRepository.create(student2);
 
         // Create courses
         Course course1 = new Course(101, "Intro to Programming", "Hard", 30, "2023-01-01", "2023-05-15", instructor1);
+        instructor1.getCourses().add(course1);
+        instructorRepository.update(instructor1);
         Course course2 = new Course(102, "Data Structures", "Harder", 25, "2023-06-01", "2023-10-01", instructor1);
+        instructor1.getCourses().add(course1);
+        instructorRepository.update(instructor1);
 
         // Add courses to repository
         courseRepository.create(course1);

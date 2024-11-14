@@ -455,7 +455,7 @@ public class Ui {
                 System.out.println("Enter Id of the course you want to unassign from: ");
                 int courseToUnassignId = scanner.nextInt();
                 scanner.nextLine();
-                System.out.println(coursesUserController.unassignInstructorFromCourse(courseToUnassignId, instructorToUnassignId));
+                System.out.println(coursesUserController.unassignInstructorFromCourse(instructorToUnassignId, courseToUnassignId));
             default:
                 System.out.println("Invalid choice.");
         }
