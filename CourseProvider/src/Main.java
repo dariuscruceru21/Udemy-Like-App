@@ -1,8 +1,9 @@
 import Models.*;
 import Models.Module;
 import Repository.FileRepository;
-import Ui.SampleDataInitializer;
-import Ui.Ui;
+import SerializersAndDeserializers.AdminSerializer;
+import SerializersAndDeserializers.CourseSerializer;
+import SerializersAndDeserializers.InstructorSerializer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,28 +11,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-//        // Initialize repositories and sample data
-//        SampleDataInitializer dataInitializer = new SampleDataInitializer();
-//        dataInitializer.initializeSampleData(); // Populate repositories with sample data
-//
-//        // Create UI instance and pass repositories or services
-//        // Assuming you have a UI class that uses the repositories
-//        Ui ui = new Ui(
-//                dataInitializer.getCourseRepository(),
-//                dataInitializer.getModuleRepository(),
-//                dataInitializer.getAssignmentRepository(),
-//                dataInitializer.getQuizRepository(),
-//                dataInitializer.getStudentRepository(),
-//                dataInitializer.getInstructorRepository(),
-//                dataInitializer.getAdminRepository(),
-//                dataInitializer.getForumRepository(),
-//                dataInitializer.getMessageRepository()
-//        );
-//
-//        // Start the UI
-//        ui.runUi(); // Assuming your UI has a `run()` method for initialization
 
-        // Create some sample students
         Student student1 = new Student(1, "Alice", "alice@example","da@gmail","student");
         Student student2 = new Student(2, "Bob", "bob@exampl","bow","student");
 
@@ -56,10 +36,23 @@ public class Main {
 
         // Retrieve the course from the file
         Course retrievedCourse = courseRepo.get(1);
-        System.out.println("Retrieved Course: " + retrievedCourse.getCourseTitle());
-        System.out.println("Instructor: " + retrievedCourse.getInstructor().getUserName());
-        System.out.println(retrievedCourse.getEnrolledStudents());
-        System.out.println(retrievedCourse.getModules());
+//        System.out.println("Retrieved Course: " + retrievedCourse.getCourseTitle());
+//        System.out.println("Instructor: " + retrievedCourse.getInstructor().getUserName());
+//        System.out.println(retrievedCourse.getEnrolledStudents());
+//        System.out.println(retrievedCourse.getModules());
+        //System.out.println(retrievedCourse);
+        //System.out.println(courseRepo.getAll());
+
+//        List<Course> courses = new ArrayList<>();
+//        courses.add(retrievedCourse);
+//        instructor.setCourses(courses);
+        InstructorSerializer instructorSerializer = new InstructorSerializer();
+        FileRepository<Instructor> instructorFileRepository = new FileRepository<>("instructor.csv",instructorSerializer);
+//        instructorFileRepository.create(instructor);
+//        System.out.println(instructor.getCourses());
+
+        Instructor retrievedInstructor = instructorFileRepository.get(1);
+        System.out.println(retrievedInstructor);
     }
 
 }

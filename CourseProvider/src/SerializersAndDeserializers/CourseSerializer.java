@@ -1,10 +1,16 @@
-package Models;
+package SerializersAndDeserializers;
+
+import Models.Course;
+import Models.IEntitySerializer;
+import Models.Instructor;
+import Models.Module;
+import Models.Student;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CourseSerializer implements IEntitySerializer<Course>{
+public class CourseSerializer implements IEntitySerializer<Course> {
 
     @Override
     public String serialize(Course course) {
@@ -27,7 +33,7 @@ public class CourseSerializer implements IEntitySerializer<Course>{
 
         // Serialize the modules list
         StringBuilder modulesData = new StringBuilder();
-        for (Module module : course.getModules()) {
+        for (Models.Module module : course.getModules()) {
             modulesData.append(module.getId()).append(",")
                     .append(module.getModuleTitle()).append(",")
                     .append(module.getModuleContent()).append(";");
@@ -75,7 +81,7 @@ public class CourseSerializer implements IEntitySerializer<Course>{
             instructorData = instructorData.substring(0, instructorData.length() - 1); // Remove trailing comma
         }
 
-        System.out.println("Instructor Data: " + instructorData);  // Debugging line to see the raw input
+
 
         // Check if instructor data is not "null"
         Instructor instructor = null;
@@ -95,7 +101,7 @@ public class CourseSerializer implements IEntitySerializer<Course>{
             String[] instructorParts = instructorData.split(",");
 
             // Debugging: Print out the instructor parts to see the structure
-            System.out.println("Instructor Parts: " + Arrays.toString(instructorParts));
+
 
             if (instructorParts.length == 5) {
                 // Extract the instructor data correctly
@@ -123,7 +129,7 @@ public class CourseSerializer implements IEntitySerializer<Course>{
             studentsData = studentsData.substring(0, studentsData.length() - 1); // Remove trailing comma
         }
 
-        System.out.println("Students Data: " + studentsData);  // Debugging line to see the raw input
+
 
         // Deserialize the students list
         List<Student> students = new ArrayList<>();
@@ -163,10 +169,10 @@ public class CourseSerializer implements IEntitySerializer<Course>{
             modulesData = modulesData.substring(0, modulesData.length() - 1); // Remove trailing comma
         }
 
-        System.out.println("Modules Data: " + modulesData);  // Debugging line to see the raw input
+
 
         // Deserialize the modules list
-        List<Module> modules = new ArrayList<>();
+        List<Models.Module> modules = new ArrayList<>();
         if (!modulesData.isEmpty()) {
             // Remove the square brackets
             if (modulesData.startsWith("[") && modulesData.endsWith("]")) {

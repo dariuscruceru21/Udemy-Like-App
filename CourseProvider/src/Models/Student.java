@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Student extends User {
     /** List of courses that the student is enrolled in */
-    private final List<Course> courses = new ArrayList<>();
+    private  List<Course> courses = new ArrayList<>();
 
     /**
      * Constructs a Student object with specified attributes.
@@ -53,6 +53,10 @@ public class Student extends User {
         // Currently returns the provided assignment; in a real system, this might
         // involve marking it as submitted and associating it with the student.
         return assignment;
+    }
+
+    public void setCourses(List<Course> courses){
+        this.courses = courses;
     }
 
     /**

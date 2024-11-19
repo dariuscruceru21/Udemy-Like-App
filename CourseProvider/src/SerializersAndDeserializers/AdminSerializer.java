@@ -1,6 +1,8 @@
-package Models;
+package SerializersAndDeserializers;
 
-public class UserSerializer implements IEntitySerializer<User> {
+import Models.*;
+
+public class AdminSerializer implements IEntitySerializer<User> {
 
     @Override
     public String serialize(User user) {
@@ -15,13 +17,8 @@ public class UserSerializer implements IEntitySerializer<User> {
         String password = parts[2];
         String email = parts[3];
         String type = parts[4];
-        if(type == "student"){
-            return new Student(id,name,password,email,type);
-        }else if(type == "admin"){
-            return new Admin(id,name,password,email,type);
-        }else
-            return new Instructor(id, name, password, email, type);
-        
+        return new Admin(id,name,password,email,type);
     }
+
 }
 
