@@ -51,7 +51,7 @@ public class Main {
 
         // Serialize the course to a file
         CourseSerializer courseSerializer = new CourseSerializer();
-        FileRepository<Course> courseRepo = new FileRepository<>("courses.txt", courseSerializer);
+        FileRepository<Course> courseRepo = new FileRepository<>("courses.csv", courseSerializer);
         courseRepo.create(course);
 
         // Retrieve the course from the file
