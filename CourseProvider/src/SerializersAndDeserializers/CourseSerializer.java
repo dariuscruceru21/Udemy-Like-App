@@ -137,7 +137,8 @@ public class CourseSerializer implements IEntitySerializer<Course> {
 
         // Deserialize the students list
         List<Student> students = new ArrayList<>();
-        if (!studentsData.isEmpty()) {
+        if (!studentsData.isEmpty() && !studentsData.equals("[]")) {
+            System.out.println(studentsData);
             // Remove the square brackets
             if (studentsData.startsWith("[") && studentsData.endsWith("]")) {
                 studentsData = studentsData.substring(1, studentsData.length() - 1); // Remove the brackets
@@ -181,7 +182,7 @@ public class CourseSerializer implements IEntitySerializer<Course> {
 
         // Deserialize the modules list
         List<Models.Module> modules = new ArrayList<>();
-        if (!modulesData.isEmpty()) {
+        if (!modulesData.isEmpty() && !modulesData.equals("[]")) {
             // Remove the square brackets
             if (modulesData.startsWith("[") && modulesData.endsWith("]")) {
                 modulesData = modulesData.substring(1, modulesData.length() - 1); // Remove the brackets

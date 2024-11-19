@@ -225,6 +225,16 @@ public class ControllerCoursesUser {
         }
     }
 
+
+    public String updateCourse(Course course){
+        try {
+            coursesUserService.updateCourse(course);
+            return "Course updated successfully.";
+        } catch (IllegalArgumentException e) {
+            return "Update failed: " + e.getMessage();
+        }
+    }
+
     /**
      * Updates information for an existing instructor.
      * @param instructor The instructor object with updated information.
@@ -247,4 +257,54 @@ public class ControllerCoursesUser {
     public Instructor getAssignedInstructor(Integer courseId) {
         return coursesUserService.getAssignedInstructor(courseId);
     }
+
+
+    /**
+     * Retrieves all under-occupied courses.
+     * Under-occupied courses are those where the number of enrolled students is
+     * less than or equal to 20% of the available spots.
+     *
+     * @return A list of under-occupied courses.
+     */
+    public List<Course> getAllUnderOccupiedCourses() {
+        return coursesUserService.getAllUnderOccupiedCourses();
+    }
+
+    /**
+     * Retrieves all courses sorted by the number of enrolled students in descending order.
+     *
+     * @return A list of courses sorted by occupation.
+     */
+    public List<Course> sortAllCoursesByOccupation() {
+        return coursesUserService.sortAllCoursesByOccupation();
+    }
+
+    /**
+     * Retrieves all instructors sorted by the number of courses they teach in descending order.
+     *
+     * @return A list of instructors sorted by the number of courses.
+     */
+    public List<Instructor> sortAllInstructorsByNumberOfCourses() {
+        return coursesUserService.sortAllInstructorsByNumberOfCourses();
+    }
+
+    /**
+     * Retrieves all courses that end before a specified date.
+     *
+     * @param date The cutoff date in the format "yyyy-MM-dd".
+     * @return A list of courses that end before the specified date.
+     */
+    public List<Course> getAllCoursesThatEndBeforeADate(String date) {
+        return coursesUserService.getAllCoursesThatEndBeforeADate(date);
+    }
+
+    /**
+     * Retrieves all instructors sorted by their total number of enrolled students across all courses.
+     *
+     * @return A list of instructors sorted by total enrollment.
+     */
+    public List<Instructor> getInstructorsByTotalEnrollment() {
+        return coursesUserService.getInstructorsByTotalEnrollment();
+    }
+
 }

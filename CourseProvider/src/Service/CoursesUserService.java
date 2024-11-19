@@ -344,6 +344,14 @@ public class CoursesUserService {
             throw new IllegalArgumentException("Student with id " + student.getId() + " does not exist");
     }
 
+    public void updateCourse(Course course){
+        if(courseIRepository.get(course.getId()) != null)
+            courseIRepository.update(course);
+        else
+            throw new IllegalArgumentException("Course with id " + course.getId() + " does not exist");
+    }
+
+
     /**
      * Updates information for an already existing instructor.
      *

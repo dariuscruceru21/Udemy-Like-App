@@ -1,3 +1,4 @@
+import Controller.ControllerCoursesUser;
 import Models.*;
 import Models.Module;
 import Repository.FileRepository;
@@ -7,11 +8,13 @@ import SerializersAndDeserializers.CourseSerializer;
 import SerializersAndDeserializers.InstructorSerializer;
 import SerializersAndDeserializers.StudentSerializer;
 import Service.CoursesUserService;
+import Ui.UiFileRepo;
 
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Main {
@@ -91,9 +94,15 @@ public class Main {
         course2.getEnrolledStudents().add(student2);
         course2.getEnrolledStudents().add(student2);
 
-        courseRepo.update(course2);
+        //courseRepo.update(course2);
 
-        System.out.println(coursesUserService.getInstructorsByTotalEnrollment());
+        ControllerCoursesUser controllerCoursesUser = new ControllerCoursesUser(coursesUserService);
+        Scanner scanner = new Scanner(System.in);
+
+        //System.out.println(coursesUserService.getInstructorsByTotalEnrollment());
+        UiFileRepo Ui = new UiFileRepo(controllerCoursesUser,scanner);
+        Ui.showMenu();
+
 
 
     }
