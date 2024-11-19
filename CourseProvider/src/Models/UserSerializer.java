@@ -21,8 +21,7 @@ public class UserSerializer implements IEntitySerializer<User> {
             return new Admin(id,name,password,email,type);
         }else
             return new Instructor(id, name, password, email, type);
-
-
+        
     }
 }
 

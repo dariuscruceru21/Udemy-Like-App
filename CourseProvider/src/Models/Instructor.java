@@ -10,6 +10,8 @@ import java.util.List;
 public class Instructor extends User {
     private List<Course> courses = new ArrayList<>();
 
+
+
     /**
      * Constructs an Instructor with the specified ID, username, password, and email.
      *
@@ -29,6 +31,10 @@ public class Instructor extends User {
      */
     public List<Course> getCourses() {
         return this.courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 
     /**

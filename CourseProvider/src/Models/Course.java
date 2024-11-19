@@ -236,4 +236,7 @@ public class Course implements Identifiable {
                 "endDate = " + endDate + '\n' +
                 "instructor = " + instructor.getUserName();
     }
+
+
+
 }
