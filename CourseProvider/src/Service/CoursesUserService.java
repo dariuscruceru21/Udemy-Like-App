@@ -383,8 +383,35 @@ public class CoursesUserService {
         throw new IllegalArgumentException("User not found");
     }
 
+    public List<Course> getAllUnderOccupiedCourses(){
+        List<Course> courses = courseIRepository.getAll();
+        List<Course> underOccupiedCourses = new ArrayList<>();
+        for (Course course : courses) {
+            if (course.getEnrolledStudents().size() <= course.getAvailableSpots() * 0.2){
+                underOccupiedCourses.add(course);
+            }
+        }
+        return underOccupiedCourses;
+    }
 
+    public List<Course> sortAllCoursesByOccupation(){
+        List<Course> courses = courseIRepository.getAll();
+        // Sort the courses by the size of the enrolled students list in descending order
+        courses.sort((course1, course2) -> Integer.compare(
+                course2.getEnrolledStudents().size(),
+                course1.getEnrolledStudents().size()
+        ));
+        return courses;
+    }
 
-
+    public List<Instructor> sortAllInstructorsByNumberOfCourses(){
+        List<Instructor> instructors = instructorIRepository.getAll();
+        // Sort the instructors by the size of the courses list in descending order
+        instructors.sort((instructor1, instructor2) -> Integer.compare(
+                instructor1.getCourses().size(),
+                instructor2.getCourses().size()
+        ));
+        return instructors;
+    }
 
 }
