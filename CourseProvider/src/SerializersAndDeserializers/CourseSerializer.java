@@ -57,9 +57,9 @@ public class CourseSerializer implements IEntitySerializer<Course> {
         String[] parts = data.split(",", -1); // Use -1 to preserve empty parts (e.g., in case of empty lists)
 
         // Ensure we have enough parts
-        if (parts.length < 20) {
-            throw new IllegalArgumentException("Invalid course data format, not enough fields");
-        }
+//        if (parts.length < 20) {
+//            throw new IllegalArgumentException("Invalid course data format, not enough fields");
+//        }
 
         // Extract course fields
         Integer courseID = Integer.parseInt(parts[0]);
@@ -117,9 +117,13 @@ public class CourseSerializer implements IEntitySerializer<Course> {
             }
         }
 
+
+        int index = 11;
+        while (index < parts.length && !parts[index].contains("]"))
+            index++;
         // Concatenate parts from 12 to 18 to get the complete students data
         StringBuilder studentsDataBuilder = new StringBuilder();
-        for (int i = 11; i <= 19; i++) {
+        for (int i = 11; i <= index; i++) {
             studentsDataBuilder.append(parts[i]).append(",");
         }
 
@@ -157,9 +161,13 @@ public class CourseSerializer implements IEntitySerializer<Course> {
             }
         }
 
+
+        int index2 = index + 1;
+        while (index2 < parts.length && !parts[index2].contains("]"))
+            index2++;
         // Concatenate parts from 19 to the end to get the complete modules data
         StringBuilder modulesDataBuilder = new StringBuilder();
-        for (int i = 20; i < 25; i++) {
+        for (int i = index + 1; i <= index2; i++) {
             modulesDataBuilder.append(parts[i]).append(",");
         }
 
