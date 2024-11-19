@@ -4,6 +4,7 @@ import Repository.FileRepository;
 import SerializersAndDeserializers.AdminSerializer;
 import SerializersAndDeserializers.CourseSerializer;
 import SerializersAndDeserializers.InstructorSerializer;
+import SerializersAndDeserializers.StudentSerializer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,17 @@ public class Main {
         //courseRepo.create(course);
         //courseRepo.create(course1);
 
-        System.out.println(courseRepo.getAll());
+        instructor.setCourses(courseRepo.getAll());
+
+        InstructorSerializer instructorSerializer = new InstructorSerializer();
+        FileRepository<Instructor> instructorFileRepository = new FileRepository<>("instructors.csv",instructorSerializer);
+//        instructorFileRepository.create(instructor);
+
+
+        student1.addToCourseList(course);
+        StudentSerializer studentSerializer = new StudentSerializer();
+        FileRepository<Student> studentFileRepository = new FileRepository<>("students.csv",studentSerializer);
+        studentFileRepository.create(student1);
 
 
 

@@ -31,10 +31,7 @@ public class AssignmentSerializer implements IEntitySerializer<Assignment> {
         // Split the data by commas
         String[] parts = data.split(",", -1); // Use -1 to preserve empty parts (e.g., empty lists)
 
-        // Ensure we have enough parts
-        if (parts.length < 5) {
-            throw new IllegalArgumentException("Invalid assignment data format, not enough fields");
-        }
+
 
         // Extract assignment fields
         Integer assignmentId = Integer.parseInt(parts[0]);

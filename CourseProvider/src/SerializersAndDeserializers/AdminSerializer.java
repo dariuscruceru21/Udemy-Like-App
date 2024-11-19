@@ -18,6 +18,7 @@ public class AdminSerializer implements IEntitySerializer<User> {
         String email = parts[3];
         String type = parts[4];
         return new Admin(id,name,password,email,type);
+
     }
 
 }
