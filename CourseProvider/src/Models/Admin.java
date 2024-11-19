@@ -14,8 +14,8 @@ public class Admin extends User {
      * @param password  The admin's password.
      * @param email     The admin's email address.
      */
-    public Admin(int userID, String userName, String password, String email) {
-        super(userID, userName, password, email);
+    public Admin(int userID, String userName, String password, String email,String type) {
+        super(userID, userName, password, email,type);
     }
 
     /**

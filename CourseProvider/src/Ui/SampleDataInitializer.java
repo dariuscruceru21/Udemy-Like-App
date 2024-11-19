@@ -30,11 +30,11 @@ public class SampleDataInitializer {
      */
     public void initializeSampleData() {
         // Sample data for User, Student, Instructor, Admin
-        Admin admin1 = new Admin(1, "admin1", "password123", "admin1@example.com");
-        Instructor instructor1 = new Instructor(2, "instructor1", "password123", "instructor1@example.com");
-        Instructor instructor2 = new Instructor(3, "instructor2", "password123", "instructor2@example.com");
-        Student student1 = new Student(4, "student1", "password123", "student1@example.com", true);
-        Student student2 = new Student(5, "student2", "password123", "student2@example.com", false);
+        Admin admin1 = new Admin(1, "admin1", "password123", "admin1@example.com","admin");
+        Instructor instructor1 = new Instructor(2, "instructor1", "password123", "instructor1@example.com","instructor");
+        Instructor instructor2 = new Instructor(3, "instructor2", "password123", "instructor2@example.com","instructor");
+        Student student1 = new Student(4, "student1", "password123", "student1@example.com", "student");
+        Student student2 = new Student(5, "student2", "password123", "student2@example.com", "strudent");
 
         // Add users to the repository
         adminRepository.create(admin1);

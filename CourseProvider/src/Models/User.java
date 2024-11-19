@@ -14,6 +14,12 @@ public abstract class User implements Identifiable {
     /** User email address */
     private String email;
 
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
     /**
      * Constructs a User with the specified ID, username, password, and email.
      *
@@ -22,11 +28,12 @@ public abstract class User implements Identifiable {
      * @param password  The user's password.
      * @param email     The user's email address.
      */
-    User(int userID, String userName, String password, String email) {
+    User(int userID, String userName, String password, String email, String type) {
         this.userID = userID;
         this.userName = userName;
         this.password = password;
         this.email = email;
+        this.type = type;
     }
 
     /**

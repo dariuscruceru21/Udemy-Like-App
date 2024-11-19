@@ -9,8 +9,6 @@ import java.util.List;
  * such as course enrollment and assignment submission.
  */
 public class Student extends User {
-    /** Indicates if the student is enrolled in a course */
-    private boolean enrolledCourse;
     /** List of courses that the student is enrolled in */
     private final List<Course> courses = new ArrayList<>();
 
@@ -21,11 +19,10 @@ public class Student extends User {
      * @param userName       The username of the student.
      * @param password       The password for the student's account.
      * @param email          The student's email address.
-     * @param enrolledCourse A boolean indicating whether the student is enrolled in any course.
+
      */
-    public Student(int userID, String userName, String password, String email, boolean enrolledCourse) {
-        super(userID, userName, password, email);
-        this.enrolledCourse = enrolledCourse;
+    public Student(int userID, String userName, String password, String email,String type) {
+        super(userID, userName, password, email,type);
     }
 
     /**
@@ -33,9 +30,7 @@ public class Student extends User {
      *
      * @return True if the student is enrolled, false otherwise.
      */
-    public boolean isEnrolledCourse() {
-        return this.enrolledCourse;
-    }
+
 
     /**
      * Retrieves the list of courses the student is currently enrolled in.

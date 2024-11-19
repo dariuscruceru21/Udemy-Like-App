@@ -18,8 +18,8 @@ public class Instructor extends User {
      * @param password The password for the instructor's account.
      * @param email    The email address of the instructor.
      */
-    public Instructor(int userID, String userName, String password, String email) {
-        super(userID, userName, password, email);
+    public Instructor(int userID, String userName, String password, String email,String type) {
+        super(userID, userName, password, email,type);
     }
 
     /**

@@ -420,7 +420,7 @@ public class Ui {
                 String studentPassword = scanner.nextLine();
                 System.out.println("Enter student email: ");
                 String studentEmail = scanner.nextLine();
-                Student student = new Student(studentId, studentName, studentPassword, studentEmail, false);
+                Student student = new Student(studentId, studentName, studentPassword, studentEmail, "student");
                 System.out.println(coursesUserController.addStudent(student));
                 break;
             case 2:
@@ -433,7 +433,7 @@ public class Ui {
                 String instructorPassword = scanner.nextLine();
                 System.out.println("Enter instructor email: ");
                 String instructorEmail = scanner.nextLine();
-                Instructor instructor = new Instructor(instructorId, instructorName, instructorPassword, instructorEmail);
+                Instructor instructor = new Instructor(instructorId, instructorName, instructorPassword, instructorEmail,"instructor");
                 System.out.println(coursesUserController.addInstructor(instructor));
                 break;
             case 3:
