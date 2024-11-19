@@ -29,10 +29,18 @@ public class Main {
         course.getModules().add(module1);
         course.getModules().add(module2);
 
+        Course course1= new Course(3, "Intro to Science", "Basic Science Course", 30, "2024-01-10", "2024-05-15", instructor);
+        course1.addModule(module1);
+        course1.getEnrolledStudents().add(student1);
         // Serialize the course to a file
         CourseSerializer courseSerializer = new CourseSerializer();
         FileRepository<Course> courseRepo = new FileRepository<>("courses.csv", courseSerializer);
-        courseRepo.create(course);
+        //courseRepo.create(course);
+        //courseRepo.create(course1);
+
+        System.out.println(courseRepo.getAll());
+
+
 
     }
 
