@@ -1,11 +1,15 @@
 import Models.*;
 import Models.Module;
 import Repository.FileRepository;
+import Repository.IRepository;
 import SerializersAndDeserializers.AdminSerializer;
 import SerializersAndDeserializers.CourseSerializer;
 import SerializersAndDeserializers.InstructorSerializer;
 import SerializersAndDeserializers.StudentSerializer;
+import Service.CoursesUserService;
 
+import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +26,7 @@ public class Main {
 
         // Create an instructor
         Instructor instructor = new Instructor(3, "Dr. Smith", "password123", "dr.smith@example.com", "Instructor");
+        Instructor instructor1 = new Instructor(4,"Dr.Phill","password123","da@gmail.com","Instructor");
 
         // Create a course with students and modules
         Course course = new Course(2, "Intro to Science", "Basic Science Course", 30, "2024-01-10", "2024-05-15", instructor);
@@ -30,7 +35,7 @@ public class Main {
         course.getModules().add(module1);
         course.getModules().add(module2);
 
-        Course course1= new Course(3, "Intro to Science", "Basic Science Course", 30, "2024-01-10", "2024-05-15", instructor);
+        Course course1= new Course(3, "Intro to Science", "Basic Science Course", 30, "2024-01-10", "2023-05-15", instructor);
         course1.addModule(module1);
         course1.getEnrolledStudents().add(student1);
         // Serialize the course to a file
@@ -49,7 +54,26 @@ public class Main {
         student1.addToCourseList(course);
         StudentSerializer studentSerializer = new StudentSerializer();
         FileRepository<Student> studentFileRepository = new FileRepository<>("students.csv",studentSerializer);
-        studentFileRepository.create(student1);
+       // studentFileRepository.create(student1);
+
+
+        IRepository<Course> courses  = new FileRepository<>("courses.csv",courseSerializer);
+
+
+        IRepository<Student> students = new FileRepository<>("students.csv",studentSerializer);
+
+
+        IRepository<Instructor> instructors = new FileRepository<>("instructors.csv",instructorSerializer);
+
+        AdminSerializer adminSerializer = new AdminSerializer();
+        IRepository<Admin> admins = new FileRepository<>("admin.csv",adminSerializer);
+
+//        instructor1.addToCourseList(course);
+//        instructorFileRepository.create(instructor1);
+
+        CoursesUserService coursesUserService = new CoursesUserService(courses,students,instructors,admins);
+
+        System.out.println(coursesUserService.getAllCoursesThatEndBeforeADate("2022-07-21"));
 
 
 

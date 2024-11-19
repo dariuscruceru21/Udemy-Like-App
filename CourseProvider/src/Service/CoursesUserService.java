@@ -4,7 +4,10 @@ import Models.*;
 import Repository.IRepository;
 import Ui.SampleDataInitializer;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -408,10 +411,43 @@ public class CoursesUserService {
         List<Instructor> instructors = instructorIRepository.getAll();
         // Sort the instructors by the size of the courses list in descending order
         instructors.sort((instructor1, instructor2) -> Integer.compare(
-                instructor1.getCourses().size(),
-                instructor2.getCourses().size()
+                instructor2.getCourses().size(),
+                instructor1.getCourses().size()
         ));
         return instructors;
     }
 
+    public List<Course> getAllCoursesThatEndBeforeADate(String date) {
+        List<Course> courses = courseIRepository.getAll();
+        List<Course> courseList = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            //date to parse
+            Date inputDate = dateFormat.parse(date);
+
+            for (Course course : courses) {
+                try {
+
+                    Date courseEndDate = dateFormat.parse(course.getEndDate());
+
+                    if (courseEndDate.before(inputDate))
+                        courseList.add(course);
+                } catch (ParseException e) {
+                    System.err.println("Invalid end date format for course: " + course.getCourseTitle());
+                }
+            }
+
+        } catch (ParseException e) {
+            System.err.println("Invalid input date format. Please use the format yyyy-MM-dd.");
+
+        }
+        return courseList;
+    }
+
+
+
 }
+
+
+
+
