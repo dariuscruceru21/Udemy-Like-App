@@ -28,6 +28,10 @@ public class Main {
         Instructor instructor = new Instructor(3, "Dr. Smith", "password123", "dr.smith@example.com", "Instructor");
         Instructor instructor1 = new Instructor(4,"Dr.Phill","password123","da@gmail.com","Instructor");
 
+
+
+
+
         // Create a course with students and modules
         Course course = new Course(2, "Intro to Science", "Basic Science Course", 30, "2024-01-10", "2024-05-15", instructor);
         course.getEnrolledStudents().add(student1);
@@ -73,8 +77,23 @@ public class Main {
 
         CoursesUserService coursesUserService = new CoursesUserService(courses,students,instructors,admins);
 
-        System.out.println(coursesUserService.getAllCoursesThatEndBeforeADate("2022-07-21"));
+        //System.out.println(coursesUserService.getAllCoursesThatEndBeforeADate("2022-07-21"));
 
+
+        Instructor instructor3 = new Instructor(1, "Dr. Kenedy", "password123", "dr.smith@example.com", "Instructor");
+        Instructor instructor2 = new Instructor(2, "Dr. Johnson", "password456", "dr.johnson@example.com", "Instructor");
+
+
+        Course course2 = new Course(1, "Physics 101", "Basic Physics", 30, "2024-01-10", "2024-05-20", instructor3);
+        course2.addModule(module1);
+        course2.getEnrolledStudents().add(student1);
+        course2.getEnrolledStudents().add(student2);
+        course2.getEnrolledStudents().add(student2);
+        course2.getEnrolledStudents().add(student2);
+
+        courseRepo.update(course2);
+
+        System.out.println(coursesUserService.getInstructorsByTotalEnrollment());
 
 
     }

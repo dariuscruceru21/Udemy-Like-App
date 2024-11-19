@@ -6,9 +6,8 @@ import Ui.SampleDataInitializer;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class CoursesUserService {
@@ -442,6 +441,28 @@ public class CoursesUserService {
 
         }
         return courseList;
+    }
+
+
+    public List<Instructor> getInstructorsByTotalEnrollment(){
+        List<Course> courses = courseIRepository.getAll();
+
+        Map<Instructor,Integer> instructorEnrollMap = new HashMap<>();
+
+        for(Course course : courses){
+            Instructor instructor = course.getInstructor();
+            if(instructor != null){
+                int enrolledSum = course.getEnrolledStudents().size();
+                instructorEnrollMap.put(instructor,instructorEnrollMap.getOrDefault(instructor,0) + enrolledSum);
+
+            }
+        }
+
+        //convert the map to list
+        return instructorEnrollMap.entrySet().stream()
+                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
     }
 
 
