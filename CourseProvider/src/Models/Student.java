@@ -59,6 +59,10 @@ public class Student extends User {
         this.courses = courses;
     }
 
+    public void addToCourseList(Course course){
+        this.courses.add(course);
+    }
+
     /**
      * Provides a string representation of the student with their details.
      *

@@ -220,6 +220,7 @@ public class Course implements Identifiable {
         return this.courseID;
     }
 
+
     /**
      * Returns a string representation of the course.
      *

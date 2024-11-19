@@ -37,6 +37,10 @@ public class Instructor extends User {
         this.courses = courses;
     }
 
+    public void addToCourseList(Course c1){
+        this.courses.add(c1);
+    }
+
     /**
      * Provides a string representation of the instructor's key details,
      * including userID, userName, and email.
