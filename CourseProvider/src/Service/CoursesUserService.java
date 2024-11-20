@@ -393,6 +393,12 @@ public class CoursesUserService {
         throw new IllegalArgumentException("User not found");
     }
 
+    /**
+     * Retrieves a list of courses where the number of enrolled students is less than or equal to
+     * 20% of the available spots.
+     *
+     * @return A list of under-occupied courses.
+     */
     public List<Course> getAllUnderOccupiedCourses(){
         List<Course> courses = courseIRepository.getAll();
         List<Course> underOccupiedCourses = new ArrayList<>();
@@ -404,6 +410,11 @@ public class CoursesUserService {
         return underOccupiedCourses;
     }
 
+    /**
+     * Sorts all courses in descending order based on the number of enrolled students.
+     *
+     * @return A list of courses sorted by student enrollment in descending order.
+     */
     public List<Course> sortAllCoursesByOccupation(){
         List<Course> courses = courseIRepository.getAll();
         // Sort the courses by the size of the enrolled students list in descending order
@@ -414,6 +425,11 @@ public class CoursesUserService {
         return courses;
     }
 
+    /**
+     * Sorts all instructors in descending order based on the number of courses they teach.
+     *
+     * @return A list of instructors sorted by the number of courses they are assigned to in descending order.
+     */
     public List<Instructor> sortAllInstructorsByNumberOfCourses(){
         List<Instructor> instructors = instructorIRepository.getAll();
         // Sort the instructors by the size of the courses list in descending order
@@ -424,6 +440,12 @@ public class CoursesUserService {
         return instructors;
     }
 
+    /**
+     * Retrieves a list of courses that end before a specified date.
+     *
+     * @param date A string representation of the date in the format "yyyy-MM-dd".
+     * @return A list of courses that end before the specified date.
+     */
     public List<Course> getAllCoursesThatEndBeforeADate(String date) {
         List<Course> courses = courseIRepository.getAll();
         List<Course> courseList = new ArrayList<>();
@@ -452,6 +474,11 @@ public class CoursesUserService {
     }
 
 
+    /**
+     * Retrieves a list of instructors sorted by the total number of students enrolled in the courses they teach.
+     *
+     * @return A list of instructors sorted by total enrollment in descending order.
+     */
     public List<Instructor> getInstructorsByTotalEnrollment(){
         List<Course> courses = courseIRepository.getAll();
 

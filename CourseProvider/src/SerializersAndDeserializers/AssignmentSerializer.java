@@ -7,12 +7,33 @@ import Models.Quiz;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Serializer and deserializer for the {@link Assignment} class.
+ * Converts {@link Assignment} objects to and from their string representation for file storage.
+ * The string representation includes the assignment's ID, description, due date, quizzes, and score.
+ */
 public class AssignmentSerializer implements IEntitySerializer<Assignment> {
+
+    /**
+     * Serializes an {@link Assignment} object into a string representation.
+     *
+     * The format of the serialized data is:
+     * <pre>
+     * ID,description,dueDate,[quiz1Data;quiz2Data;...],score
+     * </pre>
+     * where each quiz data is represented as:
+     * <pre>
+     * quizId,quizTitle,quizContents,quizAnswer;
+     * </pre>
+     *
+     * @param assignment the {@link Assignment} object to serialize.
+     * @return a string representation of the {@link Assignment}.
+     */
     @Override
     public String serialize(Assignment assignment) {
-        // Serialize the quiz list
+        // Serialize the list of quizzes
         StringBuilder assignmentData = new StringBuilder();
-        for (Models.Quiz quiz : assignment.getQuizzes()) {
+        for (Quiz quiz : assignment.getQuizzes()) {
             assignmentData.append(quiz.getId()).append(",")
                     .append(quiz.getTitle()).append(",")
                     .append(quiz.getContents()).append(",")
@@ -21,17 +42,32 @@ public class AssignmentSerializer implements IEntitySerializer<Assignment> {
 
         return assignment.getId() + "," +
                 assignment.getDescription() + "," +
-                assignment.getDueDate() + "," + "[" +
-                assignmentData + ']' + "," +
+                assignment.getDueDate() + "," +
+                "[" + assignmentData + "]" + "," +
                 assignment.getScore();
     }
 
+    /**
+     * Deserializes a string representation into an {@link Assignment} object.
+     *
+     * The input string should follow the format:
+     * <pre>
+     * ID,description,dueDate,[quiz1Data;quiz2Data;...],score
+     * </pre>
+     * where each quiz data is represented as:
+     * <pre>
+     * quizId,quizTitle,quizContents,quizAnswer;
+     * </pre>
+     *
+     * @param data the string representation of an {@link Assignment}.
+     * @return an {@link Assignment} object created from the provided data.
+     * @throws IllegalArgumentException if the quiz data is not properly formatted.
+     * @throws NumberFormatException if any numeric value cannot be parsed.
+     */
     @Override
     public Assignment deserialize(String data) {
-        // Split the data by commas
-        String[] parts = data.split(",", -1); // Use -1 to preserve empty parts (e.g., empty lists)
-
-
+        // Split the serialized data by commas
+        String[] parts = data.split(",", -1); // Use -1 to retain empty parts, especially for lists
 
         // Extract assignment fields
         Integer assignmentId = Integer.parseInt(parts[0]);
@@ -54,7 +90,7 @@ public class AssignmentSerializer implements IEntitySerializer<Assignment> {
                     Integer quizId = Integer.parseInt(quizParts[0]);
                     String quizTitle = quizParts[1];
                     String quizContents = quizParts[2];
-                    int quizAnswer = Integer.parseInt(parts[3]);
+                    int quizAnswer = Integer.parseInt(quizParts[3]);
                     quizzes.add(new Quiz(quizId, quizTitle, quizContents, quizAnswer));
                 } else {
                     throw new IllegalArgumentException("Quiz data format is invalid. Expected 4 fields, found: " + quizParts.length);
@@ -67,6 +103,7 @@ public class AssignmentSerializer implements IEntitySerializer<Assignment> {
         // Create and return the Assignment object
         Assignment assignment = new Assignment(assignmentId, description, dueDate, score);
 
+        // Set the quizzes list
         assignment.setQuizzes(quizzes);
 
         return assignment;

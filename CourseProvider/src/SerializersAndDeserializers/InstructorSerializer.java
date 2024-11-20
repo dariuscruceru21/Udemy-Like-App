@@ -7,13 +7,22 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Serializer and deserializer for the {@link Instructor} class.
+ * Converts {@link Instructor} objects to and from their string representation for file storage.
+ */
 public class InstructorSerializer implements IEntitySerializer<Instructor> {
     CourseSerializer courseSerializer = new CourseSerializer();
     FileRepository<Course> courseFileRepository = new FileRepository<>("courses.csv",courseSerializer);
 
 
 
+    /**
+     * Serializes an {@link Instructor} object into a string representation.
+     *
+     * @param instructor the {@link Instructor} object to be serialized.
+     * @return a comma-separated string representing the {@link Instructor} object.
+     */
     @Override
     public String serialize(Instructor instructor) {
 
@@ -30,6 +39,12 @@ public class InstructorSerializer implements IEntitySerializer<Instructor> {
 
     }
 
+    /**
+     * Deserializes a string representation into an {@link Instructor} object.
+     *
+     * @param data the comma-separated string containing {@link Instructor} details.
+     * @return an {@link Instructor} object created from the provided data.
+     */
     @Override
     public Instructor deserialize(String data) {
         String[] parts = data.split(",");
