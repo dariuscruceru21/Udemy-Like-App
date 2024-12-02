@@ -8,42 +8,27 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
-sourceSets {
-    main(({
-        java {
-            srcDirs = ['src']
-        }
-    } as String))
-}
+
 dependencies {
+    // JUnit for testing
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    // PostgreSQL driver for database connection
+    implementation 'org.postgresql:postgresql:42.6.0'
+
+    // Optional: Logging library for better debug messages
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
 }
 
 test {
     useJUnitPlatform()
-}plugins {
-    id 'java'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
 sourceSets {
-    main(({
+    main {
         java {
             srcDirs = ['src']
         }
-    } as String))
-}
-dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
-
-test {
-    useJUnitPlatform()
+    }
 }
