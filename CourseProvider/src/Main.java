@@ -1,9 +1,7 @@
 import Controller.ControllerCoursesUser;
 import Models.*;
 import Models.Module;
-import Repository.DataBaseRepository;
-import Repository.FileRepository;
-import Repository.IRepository;
+import Repository.*;
 import SerializersAndDeserializers.AdminSerializer;
 import SerializersAndDeserializers.CourseSerializer;
 import SerializersAndDeserializers.InstructorSerializer;
@@ -12,6 +10,8 @@ import Service.CoursesUserService;
 import Ui.UiFileRepo;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -102,23 +102,58 @@ public class Main {
 //        UiFileRepo Ui = new UiFileRepo(controllerCoursesUser,scanner);
 //        Ui.showMenu();
 
-        String sql = "Select * from person";
+//        String sql = "Select * from person where id = 2";
+//
+//        String url = System.getenv("DB_URL");
+//        String username = System.getenv("DB_USER");
+//        String password = System.getenv("DB_PASSWORD");
+//
+//        Connection con = DriverManager.getConnection(url,username,password);
+//
+//        Statement statement = con.createStatement();
+//        ResultSet rs = statement.executeQuery(sql);
+//        ResultSetMetaData rsmd = rs.getMetaData();
+//        int columnCount = rsmd.getColumnCount();
+//        while(rs.next()){
+//            for(int i = 1; i <= columnCount;i++)
+//                System.out.println(rsmd.getColumnName(i) + ": " + rs.getString(i) + "\t");
+//            System.out.println();
+//        }
 
-        String url = System.getenv("DB_URL");
-        String username = System.getenv("DB_USER");
-        String password = System.getenv("DB_PASSWORD");
+//          StudentRepository studentRepository = new StudentRepository();
+//          // 1. Test Create Student
+//          Student newStudent = new Student(1,"Darius","password123","dariusaa@gmail.com","student");
+          //System.out.println("Creating student...");
+          //studentRepository.create(newStudent);  // Should insert the student into the database
 
-        Connection con = DriverManager.getConnection(url,username,password);
+//          studentRepository.delete(1);
 
-        Statement statement = con.createStatement();
-        ResultSet rs = statement.executeQuery(sql);
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int columnCount = rsmd.getColumnCount();
-        while(rs.next()){
-            for(int i = 1; i <= columnCount;i++)
-                System.out.println(rsmd.getColumnName(i) + ": " + rs.getString(i) + "\t");
-            System.out.println();
-        }
+//        // Test Get Student by ID
+//        System.out.println("Fetching student with ID: " + newStudent.getId());
+//        Student fetchedStudent = studentRepository.get(newStudent.getId());
+//        System.out.println(fetchedStudent);  // Should print the details of the
+
+        // Create a course repository instance
+        CourseRepository courseRepository = new CourseRepository();
+
+        // 1. Test the "create" method to add a new course
+        Instructor instructor = new Instructor(3, "John Doe", "password", "john.doe@example.com", "instructor"); // Example instructor
+        List<Module> modules = new ArrayList<>();
+        modules.add(new Module(1, "Introduction to Java", "Learn the basics of Java"));
+        modules.add(new Module(2, "Advanced Java", "Deep dive into Java"));
+
+        Course newCourse = new Course(0, "Java Programming", "Learn Java from scratch", 30, "2024-01-01", "2024-05-01", instructor);
+        newCourse.setModules(modules); // Set the course modules
+
+        // Create the course in the database
+        courseRepository.create(newCourse);
+        System.out.println("Course created with ID: " + newCourse.getId());
+
+
+
+
+
+
 
 
     }

@@ -25,6 +25,8 @@ public class Student extends User {
         super(userID, userName, password, email,type);
     }
 
+
+
     /**
      * Checks if the student is enrolled in a course.
      *
