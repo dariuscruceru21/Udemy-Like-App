@@ -15,7 +15,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
     // PostgreSQL driver for database connection
-    implementation 'org.postgresql:postgresql:42.6.0'
+    implementation 'org.postgresql:postgresql:42.7.4'
 
     // Optional: Logging library for better debug messages
     implementation 'org.slf4j:slf4j-simple:2.0.9'
