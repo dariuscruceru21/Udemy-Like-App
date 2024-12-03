@@ -1,17 +1,24 @@
 package SerializersAndDeserializers;
 
-import Models.Course;
-import Models.IEntitySerializer;
-import Models.Instructor;
+import Models.*;
 import Models.Module;
-import Models.Student;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Serializer and deserializer for the {@link Course} class.
+ * Converts {@link Course} objects to and from their string representation for file storage.
+ */
 public class CourseSerializer implements IEntitySerializer<Course> {
 
+    /**
+     * Serializes an {@link Course} object into a string representation.
+     *
+     * @param course the {@link Course} object to be serialized.
+     * @return a comma-separated string representing the {@link Course} object.
+     */
     @Override
     public String serialize(Course course) {
         // Serialize the instructor completely (ID, username, password, email, type)
@@ -51,6 +58,13 @@ public class CourseSerializer implements IEntitySerializer<Course> {
                 modulesData.toString() + ']';
     }
 
+    /**
+     * Deserializes a string representation into an {@link Course} object.
+     *
+     * @param data the comma-separated string containing {@link Course} details.
+     * @return an {@link Course} object created from the provided data.
+     * @throws NumberFormatException if the ID cannot be parsed into an integer.
+     */
     @Override
     public Course deserialize(String data) {
         // Split the data by commas
