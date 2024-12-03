@@ -13,9 +13,9 @@ import java.util.List;
  */
 public abstract class DataBaseRepository<T extends Identifiable> implements IRepository<T> {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/your_database";
-    private static final String USER = "your_username";
-    private static final String PASSWORD = "your_password";
+    private static final String URL = System.getenv("DB_URL");
+    private static final String USER = System.getenv("DB_USER");
+    private static final String PASSWORD = System.getenv("DB_PASSWORD");
 
     /**
      * Establishes a connection to the database.

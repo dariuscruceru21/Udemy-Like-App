@@ -1,6 +1,7 @@
 import Controller.ControllerCoursesUser;
 import Models.*;
 import Models.Module;
+import Repository.DataBaseRepository;
 import Repository.FileRepository;
 import Repository.IRepository;
 import SerializersAndDeserializers.AdminSerializer;
@@ -103,7 +104,7 @@ public class Main {
 
         String sql = "Select * from person";
 
-        String url = "jdbc:postgresql://localhost:5432/test";
+        String url = System.getenv("DB_URL");
         String username = System.getenv("DB_USER");
         String password = System.getenv("DB_PASSWORD");
 
@@ -118,6 +119,8 @@ public class Main {
                 System.out.println(rsmd.getColumnName(i) + ": " + rs.getString(i) + "\t");
             System.out.println();
         }
+
+
     }
 }
 
