@@ -92,6 +92,7 @@ public class Main {
         course2.getEnrolledStudents().add(student1);
         course2.getEnrolledStudents().add(student2);
         course2.getEnrolledStudents().add(student2);
+
         course2.getEnrolledStudents().add(student2);
 
         //courseRepo.update(course2);
