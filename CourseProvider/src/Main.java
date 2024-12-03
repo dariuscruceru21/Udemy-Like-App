@@ -133,21 +133,17 @@ public class Main {
 //        Student fetchedStudent = studentRepository.get(newStudent.getId());
 //        System.out.println(fetchedStudent);  // Should print the details of the
 
-        // Create a course repository instance
-        CourseRepository courseRepository = new CourseRepository();
+        InstructorRepository instructorRepository = new InstructorRepository();
+       Instructor instructor = new Instructor(4,"Maia","maiaParola","maia@kroncsis.com","instructor");
+//        instructorRepository.create(instructor);
 
-        // 1. Test the "create" method to add a new course
-        Instructor instructor = new Instructor(3, "John Doe", "password", "john.doe@example.com", "instructor"); // Example instructor
-        List<Module> modules = new ArrayList<>();
-        modules.add(new Module(1, "Introduction to Java", "Learn the basics of Java"));
-        modules.add(new Module(2, "Advanced Java", "Deep dive into Java"));
+        System.out.println("Fetching");
+        Instructor fetcedInstructor = instructorRepository.get(3);
+        System.out.println(fetcedInstructor);
 
-        Course newCourse = new Course(0, "Java Programming", "Learn Java from scratch", 30, "2024-01-01", "2024-05-01", instructor);
-        newCourse.setModules(modules); // Set the course modules
 
-        // Create the course in the database
-        courseRepository.create(newCourse);
-        System.out.println("Course created with ID: " + newCourse.getId());
+
+
 
 
 
