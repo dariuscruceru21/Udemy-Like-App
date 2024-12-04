@@ -58,7 +58,7 @@ public class Message implements Identifiable {
      * @return The message ID as an Integer.
      */
     @Override
-    public Integer getId() {
+    public Instructor getId() {
         return this.messageID;
     }
 

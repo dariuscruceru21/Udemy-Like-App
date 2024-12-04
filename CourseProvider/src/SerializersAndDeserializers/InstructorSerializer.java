@@ -1,30 +1,30 @@
 package SerializersAndDeserializers;
 
 import Models.*;
-import Models.Integer;
+import Models.Instructor;
 import Repository.FileRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Serializer and deserializer for the {@link Integer} class.
- * Converts {@link Integer} objects to and from their string representation for file storage.
+ * Serializer and deserializer for the {@link Instructor} class.
+ * Converts {@link Instructor} objects to and from their string representation for file storage.
  */
-public class InstructorSerializer implements IEntitySerializer<Integer> {
+public class InstructorSerializer implements IEntitySerializer<Instructor> {
     CourseSerializer courseSerializer = new CourseSerializer();
     FileRepository<Course> courseFileRepository = new FileRepository<>("courses.csv",courseSerializer);
 
 
 
     /**
-     * Serializes an {@link Integer} object into a string representation.
+     * Serializes an {@link Instructor} object into a string representation.
      *
-     * @param instructor the {@link Integer} object to be serialized.
-     * @return a comma-separated string representing the {@link Integer} object.
+     * @param instructor the {@link Instructor} object to be serialized.
+     * @return a comma-separated string representing the {@link Instructor} object.
      */
     @Override
-    public String serialize(Integer instructor) {
+    public String serialize(Instructor instructor) {
 
 
         // Serialize the enrolled students list
@@ -40,20 +40,20 @@ public class InstructorSerializer implements IEntitySerializer<Integer> {
     }
 
     /**
-     * Deserializes a string representation into an {@link Integer} object.
+     * Deserializes a string representation into an {@link Instructor} object.
      *
-     * @param data the comma-separated string containing {@link Integer} details.
-     * @return an {@link Integer} object created from the provided data.
+     * @param data the comma-separated string containing {@link Instructor} details.
+     * @return an {@link Instructor} object created from the provided data.
      */
     @Override
-    public Integer deserialize(String data) {
+    public Instructor deserialize(String data) {
         String[] parts = data.split(",");
         int id = java.lang.Integer.parseInt(parts[0]);
         String name = parts[1];
         String password = parts[2];
         String email = parts[3];
         String type = parts[4];
-        Integer i1 = new Integer(id,name,password,email, type);
+        Instructor i1 = new Instructor(id,name,password,email, type);
         int index = 5;
         while(index < parts.length && !parts[index].contains("]"))
             index++;

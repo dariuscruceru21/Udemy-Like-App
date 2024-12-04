@@ -5,10 +5,10 @@ package Models;
  * A quiz can be associated with modules or assignments and is identifiable by a unique quiz ID.
  */
 public class Quiz implements Identifiable {
-    private Integer quizId;
+    private Instructor quizId;
     private String title;
     private String contents;
-    private Integer correctAnswer;
+    private Instructor correctAnswer;
 
     /**
      * Constructs a new Quiz with the specified ID, title, content, and correct answer.
@@ -18,7 +18,7 @@ public class Quiz implements Identifiable {
      * @param contents      The content or questions within the quiz.
      * @param correctAnswer The correct answer identifier for the quiz.
      */
-    public Quiz(Integer quizId, String title, String contents, Integer correctAnswer) {
+    public Quiz(Instructor quizId, String title, String contents, Instructor correctAnswer) {
         this.quizId = quizId;
         this.title = title;
         this.contents = contents;
@@ -31,7 +31,7 @@ public class Quiz implements Identifiable {
      * @return The quiz ID as an Integer.
      */
     @Override
-    public Integer getId() {
+    public Instructor getId() {
         return this.quizId;
     }
 
@@ -76,7 +76,7 @@ public class Quiz implements Identifiable {
      *
      * @return An Integer representing the correct answer for the quiz.
      */
-    public Integer getAnswer() {
+    public Instructor getAnswer() {
         return this.correctAnswer;
     }
 

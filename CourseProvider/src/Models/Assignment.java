@@ -8,7 +8,7 @@ import java.util.List;
  * Each assignment has a unique ID, description, due date, and score.
  */
 public class Assignment implements Identifiable {
-    private int assignmentID;
+    private Integer assignmentID;
     private String description;
     private String dueDate;
     private List<Quiz> quizzes = new ArrayList<>();
@@ -22,7 +22,7 @@ public class Assignment implements Identifiable {
      * @param dueDate      The due date for the assignment as a string.
      * @param score        The score or weight of the assignment.
      */
-    public Assignment(int assignmentID, String description, String dueDate, Integer score) {
+    public Assignment(Integer assignmentID, String description, String dueDate, Integer score) {
         this.assignmentID = assignmentID;
         this.description = description;
         this.dueDate = dueDate;
@@ -52,7 +52,7 @@ public class Assignment implements Identifiable {
      *
      * @param assignmentID The new ID for the assignment.
      */
-    public void setAssignmentID(int assignmentID) {
+    public void setAssignmentID(Integer assignmentID) {
         this.assignmentID = assignmentID;
     }
 

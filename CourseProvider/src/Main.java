@@ -122,7 +122,7 @@ public class Main {
 //        Student fetchedStudent = studentRepository.get(newStudent.getId());
 //        System.out.println(fetchedStudent);  // Should print the details of the
 
-
+        System.out.println("Salut");
 
 
 
