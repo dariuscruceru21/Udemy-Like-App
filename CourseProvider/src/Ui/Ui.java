@@ -3,10 +3,10 @@ package Ui;
 import Controller.AssignmentController;
 import Controller.ControllerCoursesUser;
 import Models.*;
+import Models.Integer;
 import Models.Module;
 import Repository.IRepository;
 import Service.AssignmentService;
-import Ui.SampleDataInitializer;
 import Service.AuthenticationService;
 import Service.CoursesUserService;
 
@@ -19,7 +19,7 @@ public class Ui {
     private final IRepository<Assignment> assignments;
     private final IRepository<Quiz> quiz;
     private final IRepository<Student> students;
-    private final IRepository<Instructor> instructors;
+    private final IRepository<Integer> instructors;
     private final IRepository<Admin> admins;
     private final IRepository<Forum> forums;
     private final IRepository<Message> messages;
@@ -31,7 +31,7 @@ public class Ui {
     // Constructor that takes repositories as parameters
     public Ui(IRepository<Course> courseRepository, IRepository<Module> moduleRepository,
               IRepository<Assignment> assignmentRepository, IRepository<Quiz> quizRepository,
-              IRepository<Student> studentRepository, IRepository<Instructor> instructorRepository,
+              IRepository<Student> studentRepository, IRepository<Integer> instructorRepository,
               IRepository<Admin> adminRepository, IRepository<Forum> forumRepository, IRepository<Message> messageRepository) {
 
         this.courses = courseRepository;
@@ -80,8 +80,8 @@ public class Ui {
     public void showMenu(User user) {
         if (user instanceof Student) {
             showStudentMenu((Student) user);
-        } else if (user instanceof Instructor) {
-            showInstructorMenu((Instructor) user);
+        } else if (user instanceof Integer) {
+            showInstructorMenu((Integer) user);
         } else if (user instanceof Admin) {
             showAdminMenu((Admin) user);
         }
@@ -136,7 +136,7 @@ public class Ui {
                 System.out.println("Enter course ID to view assigned instructor: ");
                 int courseAssignedInstructorsId = scanner.nextInt();
                 scanner.nextLine();
-                Instructor instructor = coursesUserController.getAssignedInstructor(courseAssignedInstructorsId);
+                Integer instructor = coursesUserController.getAssignedInstructor(courseAssignedInstructorsId);
                 System.out.println("Assigned Instructor: " + instructor);
                 break;
             case 8:
@@ -148,7 +148,7 @@ public class Ui {
         showStudentMenu(student);
     }
 
-    public void showInstructorMenu(Instructor instructor) {
+    public void showInstructorMenu(Integer instructor) {
         System.out.println("\nInstructor Menu:");
         System.out.println("1. Add assignment to module");
         System.out.println("2. Add module to course");
@@ -337,7 +337,7 @@ public class Ui {
                 }
                 break;
             case 5:
-                for (Instructor listedInstructor : coursesUserController.getAllInstructors()){
+                for (Integer listedInstructor : coursesUserController.getAllInstructors()){
                     System.out.println(listedInstructor.toString());
                 }
                 break;
@@ -361,7 +361,7 @@ public class Ui {
                 System.out.println("Enter instructor ID to view details: ");
                 int instructorToViewId = scanner.nextInt();
                 scanner.nextLine();
-                Instructor instructorToView = coursesUserController.getInstructorInfo(instructorToViewId);
+                Integer instructorToView = coursesUserController.getInstructorInfo(instructorToViewId);
                 System.out.println("Instructor details: " + instructorToView);
                 break;
 
@@ -382,7 +382,7 @@ public class Ui {
                 System.out.println("Enter instructor ID to update: ");
                 int instructorToUpdateId = scanner.nextInt();
                 scanner.nextLine();
-                Instructor instructorToUpdate = coursesUserController.getInstructorInfo(instructorToUpdateId);
+                Integer instructorToUpdate = coursesUserController.getInstructorInfo(instructorToUpdateId);
                 System.out.println("Enter new name for instructor: ");
                 String newInstructorName = scanner.nextLine();
                 instructorToUpdate.setName(newInstructorName);
@@ -433,7 +433,7 @@ public class Ui {
                 String instructorPassword = scanner.nextLine();
                 System.out.println("Enter instructor email: ");
                 String instructorEmail = scanner.nextLine();
-                Instructor instructor = new Instructor(instructorId, instructorName, instructorPassword, instructorEmail,"instructor");
+                Integer instructor = new Integer(instructorId, instructorName, instructorPassword, instructorEmail,"instructor");
                 System.out.println(coursesUserController.addInstructor(instructor));
                 break;
             case 3:

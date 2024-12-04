@@ -1,8 +1,7 @@
 package SerializersAndDeserializers;
 
-import Models.Admin;
 import Models.IEntitySerializer;
-import Models.Instructor;
+import Models.Integer;
 import Models.Quiz;
 
 /**

@@ -1,18 +1,7 @@
-import Controller.ControllerCoursesUser;
-import Models.*;
-import Models.Module;
+import Models.Integer;
 import Repository.*;
-import SerializersAndDeserializers.AdminSerializer;
-import SerializersAndDeserializers.CourseSerializer;
-import SerializersAndDeserializers.InstructorSerializer;
-import SerializersAndDeserializers.StudentSerializer;
-import Service.CoursesUserService;
-import Ui.UiFileRepo;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 
 public class Main {
@@ -133,13 +122,6 @@ public class Main {
 //        Student fetchedStudent = studentRepository.get(newStudent.getId());
 //        System.out.println(fetchedStudent);  // Should print the details of the
 
-        InstructorRepository instructorRepository = new InstructorRepository();
-       Instructor instructor = new Instructor(4,"Maia","maiaParola","maia@kroncsis.com","instructor");
-//        instructorRepository.create(instructor);
-
-        System.out.println("Fetching");
-        Instructor fetcedInstructor = instructorRepository.get(3);
-        System.out.println(fetcedInstructor);
 
 
 

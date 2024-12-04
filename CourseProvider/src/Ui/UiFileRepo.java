@@ -2,7 +2,7 @@ package Ui;
 
 import Controller.ControllerCoursesUser;
 import Models.*;
-import Models.Module;
+import Models.Integer;
 import Repository.FileRepository;
 import Repository.IRepository;
 import SerializersAndDeserializers.AdminSerializer;
@@ -47,7 +47,7 @@ public class UiFileRepo {
     /**
      * Repository for managing instructors.
      */
-    private IRepository<Instructor> instructors;
+    private IRepository<Integer> instructors;
 
     /**
      * Serializer for admins.
@@ -143,7 +143,7 @@ public class UiFileRepo {
      */
     public void addCourse() {
         System.out.print("Enter course ID: ");
-        Integer courseID = scanner.nextInt();
+        java.lang.Integer courseID = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
         System.out.print("Enter course title: ");
@@ -153,7 +153,7 @@ public class UiFileRepo {
         String description = scanner.nextLine();
 
         System.out.print("Enter available spots: ");
-        Integer availableSpots = scanner.nextInt();
+        java.lang.Integer availableSpots = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
         System.out.print("Enter start date (yyyy-MM-dd): ");
@@ -163,10 +163,10 @@ public class UiFileRepo {
         String endDate = scanner.nextLine();
 
         System.out.print("Enter instructor ID: ");
-        Integer instructorID = scanner.nextInt();
+        java.lang.Integer instructorID = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
-        Instructor instructor = coursesUserController.getInstructorInfo(instructorID);
+        Integer instructor = coursesUserController.getInstructorInfo(instructorID);
         if (instructor == null) {
             System.out.println("Instructor not found. Course creation aborted.");
             return;
@@ -224,7 +224,7 @@ public class UiFileRepo {
         System.out.print("Enter instructor type (e.g., 'instructor'): ");
         String type = scanner.nextLine();
 
-        Instructor instructor = new Instructor(userID, userName, password, email, type);
+        Integer instructor = new Integer(userID, userName, password, email, type);
         coursesUserController.addInstructor(instructor);
 
         System.out.println("Instructor added successfully.");
@@ -335,7 +335,7 @@ public class UiFileRepo {
         int instructorId = scanner.nextInt();
         scanner.nextLine();
 
-        Instructor instructor = coursesUserController.getInstructorInfo(instructorId);
+        Integer instructor = coursesUserController.getInstructorInfo(instructorId);
 
         if (instructor != null) {
             System.out.print("Enter new instructor name: ");
@@ -374,7 +374,7 @@ public class UiFileRepo {
      * Displays all instructors in the system.
      */
     public void viewAllInstructors() {
-        List<Instructor> instructorsList = coursesUserController.getAllInstructors();
+        List<Integer> instructorsList = coursesUserController.getAllInstructors();
         instructorsList.forEach(instructor -> System.out.println(instructor));
     }
 
@@ -401,7 +401,7 @@ public class UiFileRepo {
      * Displays instructors sorted by the number of courses they teach.
      */
     public void showSortedInstructorsByCourses() {
-        List<Instructor> sortedInstructors = coursesUserController.sortAllInstructorsByNumberOfCourses();
+        List<Integer> sortedInstructors = coursesUserController.sortAllInstructorsByNumberOfCourses();
         sortedInstructors.forEach(instructor -> System.out.println(instructor));
         sortedInstructors.forEach(instructor -> System.out.println(instructor.getCourses().size()));
     }
@@ -421,7 +421,7 @@ public class UiFileRepo {
      * Displays instructors sorted by the total enrollment of their courses.
      */
     public void showInstructorsByTotalEnrollment() {
-        List<Instructor> instructorsByEnrollment = coursesUserController.getInstructorsByTotalEnrollment();
+        List<Integer> instructorsByEnrollment = coursesUserController.getInstructorsByTotalEnrollment();
         instructorsByEnrollment.forEach(instructor -> System.out.println(instructor));
     }
 }

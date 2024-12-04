@@ -1,6 +1,7 @@
 package SerializersAndDeserializers;
 
 import Models.*;
+import Models.Integer;
 import Repository.FileRepository;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class StudentSerializer implements IEntitySerializer<Student> {
     CourseSerializer courseSerializer = new CourseSerializer();
     FileRepository<Course> courseFileRepository = new FileRepository<>("courses.csv",courseSerializer);
     InstructorSerializer instructorSerializer = new InstructorSerializer();
-    FileRepository<Instructor> instructorFileRepository = new FileRepository<>("instructor.csv",instructorSerializer);
+    FileRepository<Integer> instructorFileRepository = new FileRepository<>("instructor.csv",instructorSerializer);
 
 
     /**
@@ -49,7 +50,7 @@ public class StudentSerializer implements IEntitySerializer<Student> {
     @Override
     public Student deserialize(String data) {
         String[] parts = data.split(",");
-        int id = Integer.parseInt(parts[0]);
+        int id = java.lang.Integer.parseInt(parts[0]);
         String name = parts[1];
         String password = parts[2];
         String email = parts[3];
@@ -83,10 +84,10 @@ public class StudentSerializer implements IEntitySerializer<Student> {
                 //now split eac course entry by comma
                 String[] coursesParts = coursesStr.split(",");
                 if(coursesParts.length == 6) {
-                    Integer courseId = Integer.parseInt(coursesParts[0]);
+                    java.lang.Integer courseId = java.lang.Integer.parseInt(coursesParts[0]);
                     String title = coursesParts[1];
                     String description = coursesParts[2];
-                    Integer availableSpots = Integer.parseInt(coursesParts[3]);
+                    java.lang.Integer availableSpots = java.lang.Integer.parseInt(coursesParts[3]);
                     String startDate = coursesParts[4];
                     String endDate = coursesParts[5];
                     courses.add(new Course(courseId,title,description,availableSpots,startDate,endDate,courseFileRepository.get(courseId).getInstructor()));

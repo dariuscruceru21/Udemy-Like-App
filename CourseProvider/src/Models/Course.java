@@ -25,7 +25,7 @@ public class Course implements Identifiable {
     /** List of modules included in the course */
     private List<Module> modules = new ArrayList<>();
     /** The instructor teaching this course */
-    private Instructor instructor;
+    private Integer instructorId;
 
     /**
      * Constructs a Course object with specified attributes.
@@ -38,14 +38,14 @@ public class Course implements Identifiable {
      * @param endDate        The end date of the course.
      * @param instructor     The instructor teaching the course.
      */
-    public Course(Integer courseID, String courseTitle, String description, Integer availableSpots, String startDate, String endDate, Instructor instructor) {
+    public Course(Integer courseID, String courseTitle, String description, Integer availableSpots, String startDate, String endDate, Integer instructor) {
         this.courseID = courseID;
         this.courseTitle = courseTitle;
         this.description = description;
         this.availableSpots = availableSpots;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.instructor = instructor;
+        this.instructorId = instructor;
     }
 
     /**
@@ -102,14 +102,6 @@ public class Course implements Identifiable {
         return this.enrolledStudents;
     }
 
-    /**
-     * Gets the instructor of the course.
-     *
-     * @return The instructor of the course.
-     */
-    public Instructor getInstructor() {
-        return this.instructor;
-    }
 
     /**
      * Sets the list of enrolled students.
@@ -120,14 +112,7 @@ public class Course implements Identifiable {
         this.enrolledStudents = enrolledStudents;
     }
 
-    /**
-     * Sets the instructor for the course.
-     *
-     * @param instructor The instructor to set for this course.
-     */
-    public void setInstructor(Instructor instructor) {
-        this.instructor = instructor;
-    }
+
 
     /**
      * Sets the unique identifier for the course.
@@ -215,10 +200,7 @@ public class Course implements Identifiable {
      *
      * @return The course ID.
      */
-    @Override
-    public Integer getId() {
-        return this.courseID;
-    }
+
 
 
     /**
@@ -235,9 +217,12 @@ public class Course implements Identifiable {
                 "availableSpots = " + availableSpots + '\n' +
                 "startDate = " + startDate + '\n' +
                 "endDate = " + endDate + '\n' +
-                "instructor = " + instructor.getUserName();
+                "instructorId = " + instructorId;
     }
 
 
-
+    @Override
+    public Integer getId() {
+        return this.courseID;
+    }
 }

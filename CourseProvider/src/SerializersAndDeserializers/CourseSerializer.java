@@ -1,10 +1,10 @@
 package SerializersAndDeserializers;
 
 import Models.*;
+import Models.Integer;
 import Models.Module;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -76,10 +76,10 @@ public class CourseSerializer implements IEntitySerializer<Course> {
 //        }
 
         // Extract course fields
-        Integer courseID = Integer.parseInt(parts[0]);
+        java.lang.Integer courseID = java.lang.Integer.parseInt(parts[0]);
         String courseTitle = parts[1];
         String description = parts[2];
-        Integer availableSpots = Integer.parseInt(parts[3]);
+        java.lang.Integer availableSpots = java.lang.Integer.parseInt(parts[3]);
         String startDate = parts[4];
         String endDate = parts[5];
 
@@ -98,7 +98,7 @@ public class CourseSerializer implements IEntitySerializer<Course> {
 
 
         // Check if instructor data is not "null"
-        Instructor instructor = null;
+        Integer instructor = null;
         if (!instructorData.equals("null")) {
             // Trim the spaces and check for proper square brackets at the beginning and end
             instructorData = instructorData.trim();
@@ -119,12 +119,12 @@ public class CourseSerializer implements IEntitySerializer<Course> {
 
             if (instructorParts.length == 5) {
                 // Extract the instructor data correctly
-                Integer instructorId = Integer.parseInt(instructorParts[0]); // Instructor ID
+                java.lang.Integer instructorId = java.lang.Integer.parseInt(instructorParts[0]); // Instructor ID
                 String instructorUserName = instructorParts[1]; // Instructor Username
                 String instructorPassword = instructorParts[2]; // Instructor Password
                 String instructorEmail = instructorParts[3]; // Instructor Email
                 String instructorType = instructorParts[4]; // Instructor Type
-                instructor = new Instructor(instructorId, instructorUserName, instructorPassword, instructorEmail, instructorType);
+                instructor = new Integer(instructorId, instructorUserName, instructorPassword, instructorEmail, instructorType);
             } else {
                 // If there aren't exactly 5 parts, throw an exception
                 throw new IllegalArgumentException("Instructor data format is invalid. Expected 5 fields, found: " + instructorParts.length);
@@ -164,7 +164,7 @@ public class CourseSerializer implements IEntitySerializer<Course> {
                 // Now split each student entry by commas to extract their individual fields
                 String[] studentParts = studentStr.split(",");
                 if (studentParts.length == 5) { // Ensure there are exactly 5 parts for a student
-                    Integer studentId = Integer.parseInt(studentParts[0]);
+                    java.lang.Integer studentId = java.lang.Integer.parseInt(studentParts[0]);
                     String studentName = studentParts[1];
                     String studentPassword = studentParts[2];
                     String studentEmail = studentParts[3];
@@ -208,7 +208,7 @@ public class CourseSerializer implements IEntitySerializer<Course> {
                 // Now split each module entry by commas to extract their individual fields
                 String[] moduleParts = moduleStr.split(",");
                 if (moduleParts.length == 3) { // Ensure there are exactly 3 parts for a module
-                    Integer moduleId = Integer.parseInt(moduleParts[0]);
+                    java.lang.Integer moduleId = java.lang.Integer.parseInt(moduleParts[0]);
                     String moduleTitle = moduleParts[1];
                     String moduleContent = moduleParts[2];
                     modules.add(new Module(moduleId, moduleTitle, moduleContent));

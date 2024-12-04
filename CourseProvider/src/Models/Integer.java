@@ -7,7 +7,7 @@ import java.util.List;
  * Represents an Instructor in the system, extending the User class.
  * An instructor can have a list of courses they are teaching.
  */
-public class Instructor extends User {
+public class Integer extends User {
     private List<Course> courses = new ArrayList<>();
 
 
@@ -20,7 +20,7 @@ public class Instructor extends User {
      * @param password The password for the instructor's account.
      * @param email    The email address of the instructor.
      */
-    public Instructor(int userID, String userName, String password, String email,String type) {
+    public Integer(int userID, String userName, String password, String email, String type) {
         super(userID, userName, password, email,type);
     }
 

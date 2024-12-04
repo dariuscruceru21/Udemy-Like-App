@@ -1,8 +1,8 @@
 package Service;
 
 import Models.*;
+import Models.Integer;
 import Repository.IRepository;
-import Ui.SampleDataInitializer;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class CoursesUserService {
     private final IRepository<Course> courseIRepository;
     private final IRepository<Student> studentIRepository;
-    private final IRepository<Instructor> instructorIRepository;
+    private final IRepository<Integer> instructorIRepository;
     private final IRepository<Admin> adminIRepository;
 
     /**
@@ -26,7 +26,7 @@ public class CoursesUserService {
      * @param instructorIRepository The repository interface for instructor data, used to fetch and manage instructor-related information.
      * @param adminIRepository The repository interface for admin data, used to fetch and manage admin-related information.
      */
-    public CoursesUserService(IRepository<Course> courseIRepository, IRepository<Student> studentIRepository, IRepository<Instructor> instructorIRepository, IRepository<Admin> adminIRepository) {
+    public CoursesUserService(IRepository<Course> courseIRepository, IRepository<Student> studentIRepository, IRepository<Integer> instructorIRepository, IRepository<Admin> adminIRepository) {
         this.courseIRepository = courseIRepository;
         this.studentIRepository = studentIRepository;
         this.instructorIRepository = instructorIRepository;
@@ -40,7 +40,7 @@ public class CoursesUserService {
      * @param courseId The ID of the course.
      * @return A list of students enrolled in the specified course.
      */
-    public List<Student> getEnrolledStudents(Integer courseId) {
+    public List<Student> getEnrolledStudents(java.lang.Integer courseId) {
         Course course = courseIRepository.get(courseId);
         return course.getEnrolledStudents();
     }
@@ -51,7 +51,7 @@ public class CoursesUserService {
      * @param courseId The ID of the course.
      * @return A list of students enrolled in the specified course.
      */
-    public Instructor getAssignedInstructor(Integer courseId) {
+    public Integer getAssignedInstructor(java.lang.Integer courseId) {
         Course course = courseIRepository.get(courseId);
         return course.getInstructor();
     }
@@ -62,7 +62,7 @@ public class CoursesUserService {
      * @param studId   The ID of the student to enroll.
      * @param courseId The ID of the course.
      */
-    public void enroll(Integer studId, Integer courseId) {
+    public void enroll(java.lang.Integer studId, java.lang.Integer courseId) {
         Student student = studentIRepository.get(studId);
         Course course = courseIRepository.get(courseId);
 
@@ -80,8 +80,8 @@ public class CoursesUserService {
      * @param instructorId The ID of the student to enroll.
      * @param courseId     The ID of the course.
      */
-    public void assignInstructor(Integer instructorId, Integer courseId) {
-        Instructor instructor = instructorIRepository.get(instructorId);
+    public void assignInstructor(java.lang.Integer instructorId, java.lang.Integer courseId) {
+        Integer instructor = instructorIRepository.get(instructorId);
         Course course = courseIRepository.get(courseId);
 
 
@@ -115,7 +115,7 @@ public class CoursesUserService {
      *
      * @param instructor The instructor to add.
      */
-    public void addInstructor(Instructor instructor) {
+    public void addInstructor(Integer instructor) {
         instructorIRepository.create(instructor);
     }
 
@@ -124,7 +124,7 @@ public class CoursesUserService {
      *
      * @param courseId The ID of the course to remove.
      */
-    public void removeCourse(Integer courseId) {
+    public void removeCourse(java.lang.Integer courseId) {
 
         courseIRepository.get(courseId).getEnrolledStudents().forEach(student -> {
             student.getCourses().removeIf(course -> course.getId().equals(courseId));
@@ -139,7 +139,7 @@ public class CoursesUserService {
      *
      * @param studentId The ID of the student to remove.
      */
-    public void removeStudent(Integer studentId) {
+    public void removeStudent(java.lang.Integer studentId) {
 
         studentIRepository.get(studentId).getCourses().forEach(course -> {
             course.getEnrolledStudents().removeIf(student -> student.getId().equals(studentId));
@@ -153,7 +153,7 @@ public class CoursesUserService {
      *
      * @param instructorId The ID of the instructor to remove.
      */
-    public void removeInstructor(Integer instructorId) {
+    public void removeInstructor(java.lang.Integer instructorId) {
 
         instructorIRepository.get(instructorId).getCourses().forEach(course -> {
             course.getEnrolledStudents().removeIf(student -> student.getId().equals(instructorId));
@@ -185,7 +185,7 @@ public class CoursesUserService {
      *
      * @return A list of all instructors.
      */
-    public List<Instructor> getAllInstructors() {
+    public List<Integer> getAllInstructors() {
         return instructorIRepository.getAll();
     }
 
@@ -195,7 +195,7 @@ public class CoursesUserService {
      * @param studentId The ID of the student to unenroll.
      * @param courseId  The ID of the course.
      */
-    public void unenroll(Integer studentId, Integer courseId) {
+    public void unenroll(java.lang.Integer studentId, java.lang.Integer courseId) {
         Student student = studentIRepository.get(studentId);
         Course course = courseIRepository.get(courseId);
 
@@ -219,8 +219,8 @@ public class CoursesUserService {
      * @param instructorId The ID of the student to unenroll.
      * @param courseId     The ID of the course.
      */
-    public void unAssignInstructor(Integer instructorId, Integer courseId) {
-        Instructor instructor = instructorIRepository.get(instructorId);
+    public void unAssignInstructor(java.lang.Integer instructorId, java.lang.Integer courseId) {
+        Integer instructor = instructorIRepository.get(instructorId);
         Course course = courseIRepository.get(courseId);
 
         if (instructor.getCourses().contains(course)) {
@@ -255,7 +255,7 @@ public class CoursesUserService {
      * @param studentId The ID of the student.
      * @return A list of courses the student is enrolled in.
      */
-    public List<Course> getCoursesByStudent(Integer studentId) {
+    public List<Course> getCoursesByStudent(java.lang.Integer studentId) {
         Student student = studentIRepository.get(studentId);
 
         //check if student exists
@@ -271,8 +271,8 @@ public class CoursesUserService {
      * @param instructorId The ID of the instructor.
      * @return A list of courses the instructor teaches in.
      */
-    public List<Course> getCoursesByInstructor(Integer instructorId) {
-        Instructor instructor = instructorIRepository.get(instructorId);
+    public List<Course> getCoursesByInstructor(java.lang.Integer instructorId) {
+        Integer instructor = instructorIRepository.get(instructorId);
 
         //check if instructor exists
         if (instructor != null)
@@ -287,7 +287,7 @@ public class CoursesUserService {
      * @param courseId The ID of the course.
      * @return The course object with detailed information.
      */
-    public Course getCourseInfo(Integer courseId) {
+    public Course getCourseInfo(java.lang.Integer courseId) {
         Course course = courseIRepository.get(courseId);
 
         if (course != null)
@@ -302,7 +302,7 @@ public class CoursesUserService {
      * @param studentId The ID of the student.
      * @return The student object with detailed information.
      */
-    public Student getStudentInfo(Integer studentId) {
+    public Student getStudentInfo(java.lang.Integer studentId) {
 
         Student student = studentIRepository.get(studentId);
 
@@ -319,9 +319,9 @@ public class CoursesUserService {
      * @param instructorId The ID of the student.
      * @return The student object with detailed information.
      */
-    public Instructor getInstructorInfo(Integer instructorId) {
+    public Integer getInstructorInfo(java.lang.Integer instructorId) {
 
-        Instructor instructor = instructorIRepository.get(instructorId);
+        Integer instructor = instructorIRepository.get(instructorId);
 
         //check for students existence
         if (instructor != null)
@@ -357,7 +357,7 @@ public class CoursesUserService {
      *
      * @param instructor the instance of the student.
      */
-    public void updateInstructor(Instructor instructor) {
+    public void updateInstructor(Integer instructor) {
 
         //check if student exists
         if (instructorIRepository.get(instructor.getId()) != null)
@@ -383,7 +383,7 @@ public class CoursesUserService {
             }
         }
 
-        for (Instructor instructor : instructorIRepository.getAll()) {
+        for (Integer instructor : instructorIRepository.getAll()) {
             if (instructor.getEmail().equals(email) && instructor.getPassword().equals(password)) {
                 System.out.println("You logged in as an Instructor");
                 return true;
@@ -418,7 +418,7 @@ public class CoursesUserService {
     public List<Course> sortAllCoursesByOccupation(){
         List<Course> courses = courseIRepository.getAll();
         // Sort the courses by the size of the enrolled students list in descending order
-        courses.sort((course1, course2) -> Integer.compare(
+        courses.sort((course1, course2) -> java.lang.Integer.compare(
                 course2.getEnrolledStudents().size(),
                 course1.getEnrolledStudents().size()
         ));
@@ -430,10 +430,10 @@ public class CoursesUserService {
      *
      * @return A list of instructors sorted by the number of courses they are assigned to in descending order.
      */
-    public List<Instructor> sortAllInstructorsByNumberOfCourses(){
-        List<Instructor> instructors = instructorIRepository.getAll();
+    public List<Integer> sortAllInstructorsByNumberOfCourses(){
+        List<Integer> instructors = instructorIRepository.getAll();
         // Sort the instructors by the size of the courses list in descending order
-        instructors.sort((instructor1, instructor2) -> Integer.compare(
+        instructors.sort((instructor1, instructor2) -> java.lang.Integer.compare(
                 instructor2.getCourses().size(),
                 instructor1.getCourses().size()
         ));
@@ -479,13 +479,13 @@ public class CoursesUserService {
      *
      * @return A list of instructors sorted by total enrollment in descending order.
      */
-    public List<Instructor> getInstructorsByTotalEnrollment(){
+    public List<Integer> getInstructorsByTotalEnrollment(){
         List<Course> courses = courseIRepository.getAll();
 
-        Map<Instructor,Integer> instructorEnrollMap = new HashMap<>();
+        Map<Integer, java.lang.Integer> instructorEnrollMap = new HashMap<>();
 
         for(Course course : courses){
-            Instructor instructor = course.getInstructor();
+            Integer instructor = course.getInstructor();
             if(instructor != null){
                 int enrolledSum = course.getEnrolledStudents().size();
                 instructorEnrollMap.put(instructor,instructorEnrollMap.getOrDefault(instructor,0) + enrolledSum);

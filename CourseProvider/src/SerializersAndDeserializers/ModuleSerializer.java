@@ -1,7 +1,6 @@
 package SerializersAndDeserializers;
 
 import Models.IEntitySerializer;
-import Models.Instructor;
 
 /**
  * Serializer and deserializer for the {@link Module} class.

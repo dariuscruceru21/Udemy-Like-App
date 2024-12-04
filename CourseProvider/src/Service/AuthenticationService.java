@@ -1,10 +1,9 @@
 package Service;
 
 import Models.Admin;
-import Models.Instructor;
+import Models.Integer;
 import Models.Student;
 import Models.User;
-import Repository.IRepository;
 import Ui.SampleDataInitializer;
 
 import java.util.List;
@@ -45,8 +44,8 @@ public class AuthenticationService {
         }
 
         // Check instructors repository
-        List<Instructor> instructors = sampleDataInitializer.getInstructorRepository().getAll();
-        for (Instructor instructor : instructors) {
+        List<Integer> instructors = sampleDataInitializer.getInstructorRepository().getAll();
+        for (Integer instructor : instructors) {
             if (instructor.getUserName().equals(username) && instructor.getPassword().equals(password)) {
                 return instructor; // Return instructor if credentials match
             }

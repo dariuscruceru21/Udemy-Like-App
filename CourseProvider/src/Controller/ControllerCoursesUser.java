@@ -1,7 +1,7 @@
 package Controller;
 
 import Models.Course;
-import Models.Instructor;
+import Models.Integer;
 import Models.Student;
 import Service.CoursesUserService;
 
@@ -19,7 +19,7 @@ public class ControllerCoursesUser {
      * @param courseId The ID of the course.
      * @return A list of students enrolled in the course.
      */
-    public List<Student> getEnrolledStudents(Integer courseId) {
+    public List<Student> getEnrolledStudents(java.lang.Integer courseId) {
         return coursesUserService.getEnrolledStudents(courseId);
     }
 
@@ -29,7 +29,7 @@ public class ControllerCoursesUser {
      * @param courseId The ID of the course.
      * @return A success message if enrollment is successful.
      */
-    public String enrollStudentInCourse(Integer studentId, Integer courseId) {
+    public String enrollStudentInCourse(java.lang.Integer studentId, java.lang.Integer courseId) {
         try {
             coursesUserService.enroll(studentId, courseId);
             return "Student enrolled successfully.";
@@ -44,7 +44,7 @@ public class ControllerCoursesUser {
      * @param courseId The ID of the course.
      * @return A success message if the assignment is successful.
      */
-    public String assignInstructorToCourse(Integer instructorId, Integer courseId) {
+    public String assignInstructorToCourse(java.lang.Integer instructorId, java.lang.Integer courseId) {
         try {
             coursesUserService.assignInstructor(instructorId, courseId);
             return "Instructor assigned successfully.";
@@ -59,7 +59,7 @@ public class ControllerCoursesUser {
      * @param courseId The ID of the course.
      * @return A success message if unassignment is successful.
      */
-    public String unassignInstructorFromCourse(Integer instructorId, Integer courseId) {
+    public String unassignInstructorFromCourse(java.lang.Integer instructorId, java.lang.Integer courseId) {
         try {
             coursesUserService.unAssignInstructor(instructorId, courseId);
             return "Instructor unassigned successfully.";
@@ -93,7 +93,7 @@ public class ControllerCoursesUser {
      * @param instructor The instructor to add.
      * @return A success message after adding the instructor.
      */
-    public String addInstructor(Instructor instructor) {
+    public String addInstructor(Integer instructor) {
         coursesUserService.addInstructor(instructor);
         return "Instructor added successfully.";
     }
@@ -103,7 +103,7 @@ public class ControllerCoursesUser {
      * @param courseId The ID of the course to remove.
      * @return A success message after removing the course.
      */
-    public String removeCourse(Integer courseId) {
+    public String removeCourse(java.lang.Integer courseId) {
         coursesUserService.removeCourse(courseId);
         return "Course removed successfully.";
     }
@@ -113,7 +113,7 @@ public class ControllerCoursesUser {
      * @param studentId The ID of the student to remove.
      * @return A success message after removing the student.
      */
-    public String removeStudent(Integer studentId) {
+    public String removeStudent(java.lang.Integer studentId) {
         coursesUserService.removeStudent(studentId);
         return "Student removed successfully.";
     }
@@ -123,7 +123,7 @@ public class ControllerCoursesUser {
      * @param instructorId The ID of the instructor to remove.
      * @return A success message after removing the instructor.
      */
-    public String removeInstructor(Integer instructorId) {
+    public String removeInstructor(java.lang.Integer instructorId) {
         if (coursesUserService.getCourseInfo(instructorId) != null) {
             coursesUserService.unAssignInstructor(instructorId, coursesUserService.getCourseInfo(instructorId).getId());
         }
@@ -151,7 +151,7 @@ public class ControllerCoursesUser {
      * Retrieves a list of all instructors in the system.
      * @return A list of all instructors.
      */
-    public List<Instructor> getAllInstructors() {
+    public List<Integer> getAllInstructors() {
         return coursesUserService.getAllInstructors();
     }
 
@@ -161,7 +161,7 @@ public class ControllerCoursesUser {
      * @param courseId The ID of the course.
      * @return A success message if unenrollment is successful.
      */
-    public String unenrollStudentFromCourse(Integer studentId, Integer courseId) {
+    public String unenrollStudentFromCourse(java.lang.Integer studentId, java.lang.Integer courseId) {
         coursesUserService.unenroll(studentId, courseId);
         return "Student unenrolled successfully.";
     }
@@ -171,7 +171,7 @@ public class ControllerCoursesUser {
      * @param studentId The ID of the student.
      * @return A list of courses the student is enrolled in.
      */
-    public List<Course> getCoursesByStudent(Integer studentId) {
+    public List<Course> getCoursesByStudent(java.lang.Integer studentId) {
         return coursesUserService.getCoursesByStudent(studentId);
     }
 
@@ -180,7 +180,7 @@ public class ControllerCoursesUser {
      * @param instructorId The ID of the instructor.
      * @return A list of courses the instructor teaches.
      */
-    public List<Course> getCoursesByInstructor(Integer instructorId) {
+    public List<Course> getCoursesByInstructor(java.lang.Integer instructorId) {
         return coursesUserService.getCoursesByInstructor(instructorId);
     }
 
@@ -189,7 +189,7 @@ public class ControllerCoursesUser {
      * @param courseId The ID of the course.
      * @return The course object containing detailed information.
      */
-    public Course getCourseInfo(Integer courseId) {
+    public Course getCourseInfo(java.lang.Integer courseId) {
         return coursesUserService.getCourseInfo(courseId);
     }
 
@@ -198,7 +198,7 @@ public class ControllerCoursesUser {
      * @param studentId The ID of the student.
      * @return The student object containing detailed information.
      */
-    public Student getStudentInfo(Integer studentId) {
+    public Student getStudentInfo(java.lang.Integer studentId) {
         return coursesUserService.getStudentInfo(studentId);
     }
 
@@ -207,7 +207,7 @@ public class ControllerCoursesUser {
      * @param instructorId The ID of the instructor.
      * @return The instructor object containing detailed information.
      */
-    public Instructor getInstructorInfo(Integer instructorId) {
+    public Integer getInstructorInfo(java.lang.Integer instructorId) {
         return coursesUserService.getInstructorInfo(instructorId);
     }
 
@@ -240,7 +240,7 @@ public class ControllerCoursesUser {
      * @param instructor The instructor object with updated information.
      * @return A success message if the update is successful.
      */
-    public String updateInstructor(Instructor instructor) {
+    public String updateInstructor(Integer instructor) {
         try {
             coursesUserService.updateInstructor(instructor);
             return "Instructor updated successfully.";
@@ -254,7 +254,7 @@ public class ControllerCoursesUser {
      * @param courseId The ID of the course.
      * @return The instructor assigned to the course.
      */
-    public Instructor getAssignedInstructor(Integer courseId) {
+    public Integer getAssignedInstructor(java.lang.Integer courseId) {
         return coursesUserService.getAssignedInstructor(courseId);
     }
 
@@ -284,7 +284,7 @@ public class ControllerCoursesUser {
      *
      * @return A list of instructors sorted by the number of courses.
      */
-    public List<Instructor> sortAllInstructorsByNumberOfCourses() {
+    public List<Integer> sortAllInstructorsByNumberOfCourses() {
         return coursesUserService.sortAllInstructorsByNumberOfCourses();
     }
 
@@ -303,7 +303,7 @@ public class ControllerCoursesUser {
      *
      * @return A list of instructors sorted by total enrollment.
      */
-    public List<Instructor> getInstructorsByTotalEnrollment() {
+    public List<Integer> getInstructorsByTotalEnrollment() {
         return coursesUserService.getInstructorsByTotalEnrollment();
     }
 
